@@ -7,19 +7,15 @@ export default function Dashboard() {
     <DashboardLayout>
       <div className="flex gap-[150px]">
         <div className="flex flex-col gap-5 p-5 rounded-lg border max-w-[441px]">
-          <CardPropertyDashboard />
-          <CardPropertyDashboard />
-          <CardPropertyDashboard />
-          <CardPropertyDashboard />
-          <CardPropertyDashboard />
+          {new Array(5).fill(null).map(() => (
+            <CardPropertyDashboard key={Math.random() + 10} />
+          ))}
         </div>
         <div className="flex gap-[150px]">
           <div className="flex flex-col gap-5 p-5 rounded-lg border max-w-[441px]">
-            <CardAdminDashboard />
-            <CardAdminDashboard />
-            <CardAdminDashboard />
-            <CardAdminDashboard />
-            <CardAdminDashboard />
+            {new Array(5).fill(null).map(() => (
+              <CardAdminDashboard key={Math.random() + 10} />
+            ))}
           </div>
         </div>
       </div>
