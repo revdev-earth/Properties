@@ -10,11 +10,11 @@ export function NavLinks() {
     <nav className="flex gap-5">
       <Link
         className={`link ${
-          pathname === "/informacion" ? "active" : ""
+          pathname === "/information" ? "active" : ""
         } py-3 px-4 bg-[#D9D9D9] rounded-full`}
-        href="/dashboard/property/informacion"
+        href="/dashboard/property/information"
       >
-        Informacion
+        Information
       </Link>
       <Link
         className={`link ${
@@ -26,51 +26,51 @@ export function NavLinks() {
       </Link>
       <Link
         className={`link ${
-          pathname === "/inquilinos" ? "active" : ""
+          pathname === "/tenats" ? "active" : ""
         } py-3 px-4 bg-[#D9D9D9] rounded-full`}
-        href="/dashboard/property/inquilinos"
+        href="/dashboard/property/tenats"
       >
-        inquilinos
+        Tenats
       </Link>
       <Link
         className={`link ${
-          pathname === "/seguros" ? "active" : ""
+          pathname === "/insurance" ? "active" : ""
         } py-3 px-4 bg-[#D9D9D9] rounded-full`}
-        href="/dashboard/property/seguros"
+        href="/dashboard/property/insurance"
       >
-        Seguros
+        Insurance
       </Link>
       <Link
         className={`link ${
-          pathname === "/servicios" ? "active" : ""
+          pathname === "/services" ? "active" : ""
         } py-3 px-4 bg-[#D9D9D9] rounded-full`}
-        href="/dashboard/property/servicios"
+        href="/dashboard/property/services"
       >
-        Servicios
+        Services
       </Link>
       <Link
         className={`link ${
-          pathname === "/mantenimiento" ? "active" : ""
+          pathname === "/maintenance" ? "active" : ""
         } py-3 px-4 bg-[#D9D9D9] rounded-full`}
-        href="/dashboard/property/mantenimiento"
+        href="/dashboard/property/maintenance"
       >
-        Mantenimineto
+        Maintenance
       </Link>
       <Link
         className={`link ${
-          pathname === "/fotos-y-planos" ? "active" : ""
+          pathname === "/photos-and-architectural" ? "active" : ""
         } py-3 px-4 bg-[#D9D9D9] rounded-full`}
-        href="/dashboard/property/fotos-y-planos"
+        href="/dashboard/property/photos-and-architectural"
       >
-        Fotos y planos
+        Photos and architectural
       </Link>
       <Link
         className={`link ${
-          pathname === "/ajustes" ? "active" : ""
+          pathname === "/settings" ? "active" : ""
         } py-3 px-4 bg-[#D9D9D9] rounded-full`}
-        href="/dashboard/property/ajustes"
+        href="/dashboard/property/settings"
       >
-        Ajustes
+        Settings
       </Link>
     </nav>
   );
