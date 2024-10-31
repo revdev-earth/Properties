@@ -62,9 +62,10 @@ model Property {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  insurances Insurance[] // Relation to multiple insurance records
-  LegalInfo  LegalInfo[]
-  Tenant     Tenant[]
+  insurances         Insurance[] // Relation to multiple insurance records
+  LegalInfo          LegalInfo[]
+  Tenant             Tenant[]
+  AdditionalDocument AdditionalDocument[] // Relación inversa en Property
 
   billingDetailsId Int // Foreign key to BillingDetails model
   billingDetails   BillingDetails @relation(fields: [billingDetailsId], references: [id])
@@ -73,7 +74,21 @@ model Property {
   amount       Float
   paymentNotes String?
 
-  BasicService BasicService[]
+  BasicService            BasicService[]
+  PreventiveMaintenance   PreventiveMaintenance[]
+  CorrectiveMaintenance   CorrectiveMaintenance[]
+  MaintenanceRequest      MaintenanceRequest[]
+  EquipmentMaintenance    EquipmentMaintenance[]
+  MaintenanceCost         MaintenanceCost[]
+  InspectionHistory       InspectionHistory[]
+  MaintenanceNotes        MaintenanceNotes[]
+  PropertyPhoto           PropertyPhoto[]
+  ArchitecturalPlan       ArchitecturalPlan[]
+  StructuralPlan          StructuralPlan[]
+  RenovationDocumentation RenovationDocumentation[]
+  LocationMap             LocationMap[]
+  CommonArea              CommonArea[]
+  PropertySettings        PropertySettings[]
 }
 
 model LegalInfo {
@@ -222,21 +237,22 @@ model AdditionalResident {
 }
 
 model Payment {
-  id       Int    @id @default(autoincrement())
+  id               Int             @id @default(autoincrement())
+  billingDetailsId Int? // Foreign key to BillingDetails model (opcional)
+  billingDetails   BillingDetails? @relation(fields: [billingDetailsId], references: [id])
+
   tenantId Int // Foreign key to Tenant model
   tenant   Tenant @relation(fields: [tenantId], references: [id])
 
-  // Payment Details
   paymentDate            DateTime
+  amount                 Float
   paymentStatus          String // Status (on-time, delayed, pending)
   paymentNotes           String? // Notes for partial or incomplete payments
   lateFees               Float? // Late fees if any
   discountsOrAdjustments String? // Adjustments if any
 
-  createdAt        DateTime        @default(now())
-  updatedAt        DateTime        @updatedAt
-  BillingDetails   BillingDetails? @relation(fields: [billingDetailsId], references: [id])
-  billingDetailsId Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Insurance {
@@ -323,7 +339,7 @@ model BasicService {
   additionalServices AdditionalService[] // Related additional services
 
   // Emergency and Support Contacts
-  emergencyContact   EmergencyContact @relation(fields: [emergencyContactId], references: [id])
+  emergencyContact   EmergencyContact? @relation(fields: [emergencyContactId], references: [id])
   emergencyContactId Int
 
   // Conditions and Specific Clauses
@@ -333,8 +349,10 @@ model BasicService {
   // Incident History
   incidentHistory Incident[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  EmergencyContact   EmergencyContact[]
+  SpecificConditions SpecificConditions[]
 }
 
 model BillingDetails {
@@ -345,10 +363,11 @@ model BillingDetails {
   averageAmount  Float? // Average monthly or bi-monthly amount
   paymentHistory Payment[] // List of previous payments
 
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  Property     Property[]
-  BasicService BasicService[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Property     Property[] // Relation to Property model
+  BasicService BasicService[] // Relation to BasicService model
 }
 
 model ConsumptionDetails {
@@ -357,9 +376,10 @@ model ConsumptionDetails {
   meterReadings      MeterReading[] // List of meter readings
   averageConsumption Float? // Average consumption for a given period
 
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  BasicService BasicService[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  BasicService BasicService[] // Relation to BasicService model
 }
 
 model MeterReading {
@@ -397,8 +417,8 @@ model EmergencyContact {
 
   emergencyNumber     String // Emergency contact number
   supportContactName  String // Name of the technical support contact
-  supportContactPhone String
-  supportContactEmail String?
+  supportContactPhone String // Support contact phone number
+  supportContactEmail String? // Optional support contact email
   supportHours        String // Customer support hours
 
   createdAt DateTime @default(now())
@@ -431,4 +451,395 @@ model Incident {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model PreventiveMaintenance {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Preventive Maintenance Tasks
+  task                String // E.g., AC cleaning, plumbing inspection
+  frequency           String // E.g., monthly, quarterly, annual
+  nextMaintenanceDate DateTime // Next scheduled date for maintenance
+  costResponsible     String // Tenant or Property owner
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CorrectiveMaintenance {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Repair History
+  repairDate      DateTime
+  repairType      String // Type of repair (e.g., water leak, window replacement)
+  location        String // Location of issue (e.g., bathroom, kitchen)
+  provider        Provider @relation(fields: [providerId], references: [id])
+  providerId      Int
+  repairCost      Float
+  costResponsible String // Tenant or Property owner
+  warranty        String? // Warranty details and duration if applicable
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MaintenanceRequest {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Maintenance Reports and Requests
+  damageDescription String // Description of the damage
+  reportDate        DateTime // Date of report
+  reportedBy        String // Who reported it (tenant, owner, admin)
+  status            String // E.g., pending, in process, completed
+  resolutionDate    DateTime? // Date when damage was fixed
+  observations      String? // Additional notes and recommendations
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EquipmentMaintenance {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Equipment Details and Maintenance
+  equipmentName        String // E.g., refrigerator, stove, AC
+  maintenanceFrequency String // E.g., monthly, annual
+  lastMaintenanceDate  DateTime // Date of last maintenance
+  warrantyPolicy       String? // Maintenance policy or warranty information
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Provider {
+  id Int @id @default(autoincrement())
+
+  // Provider Information
+  name             String
+  servicesProvided String // E.g., plumbing, electrical, painting
+  contactPhone     String
+  contactEmail     String?
+  availability     String? // E.g., weekdays only, appointment required
+  contractDetails  String? // Regular maintenance contract details, if any
+
+  correctiveMaintenance CorrectiveMaintenance[]
+  MaintenanceSchedule   MaintenanceSchedule[]
+}
+
+model MaintenanceCost {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Cost and Budget Information
+  annualBudget     Float
+  accumulatedCosts Float // Total accumulated maintenance costs
+  costDistribution String? // Breakdown of costs between owner and tenant
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model InspectionHistory {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Inspection and Audit History
+  inspectionDate     DateTime // Scheduled inspection date
+  inspectionType     String // Type of inspection (e.g., electrical, structural)
+  findings           String? // Summary of findings and observations
+  recommendedActions String? // Suggested actions for property upkeep
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MaintenanceNotes {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Additional Notes and Recommendations
+  usageRecommendations    String? // Tips for proper use and care of the property
+  specialTasks            String? // Non-periodic tasks (e.g., seasonal preparations)
+  sustainabilityPractices String? // Suggestions for sustainable practices
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PropertyPhoto {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Photo Details
+  type          String // E.g., exterior, interior, etc.
+  description   String // E.g., main facade, bedroom, kitchen
+  photoUrl      String // URL or path to the photo file
+  captureDate   DateTime // Date when the photo was taken
+  visibleDamage String? // Any visible damages if applicable
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ArchitecturalPlan {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Plan Details
+  type                    String // E.g., general layout, level-specific, installations
+  level                   Int? // Specific level for multi-level plans
+  description             String // Additional details (e.g., electrical layout)
+  fileUrl                 String // URL or path to the file (PDF, JPEG, DWG)
+  technicalSpecifications String? // Technical details (e.g., dimensions, materials)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StructuralPlan {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Structural Plan Details
+  type                    String // E.g., foundation, walls and columns
+  description             String? // Details of the structural aspect
+  fileUrl                 String // URL or path to the file (PDF, DWG)
+  technicalSpecifications String? // Technical info (e.g., materials, dimensions)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RenovationDocumentation {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Documentation of Renovations
+  beforePhotoUrl       String? // URL to the "before" photo
+  afterPhotoUrl        String? // URL to the "after" photo
+  descriptionOfChanges String // Brief description of changes made
+  renovationDate       DateTime // Date of the renovation
+  updatedPlanUrl       String? // URL or path to updated plan if applicable
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LocationMap {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Map Details
+  type        String // E.g., general location, surrounding area
+  description String? // Description of the map
+  mapUrl      String // URL or path to the map file
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CommonArea {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model (if applicable)
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Common Area Details
+  name        String // E.g., gym, pool, lobby
+  photoUrl    String? // URL or path to a photo of the common area
+  description String? // Additional details (e.g., features, size)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AdditionalDocument {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Additional Document Details
+  fileType            String // E.g., PDF, JPEG, DWG
+  resolution          String? // High quality, 300 dpi, etc.
+  fileUrl             String // URL or path to the document
+  accessInstructions  String? // Instructions for accessing or viewing the file
+  specialRequirements String? // Specific software or tools needed to view
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PropertySettings {
+  id         Int      @id @default(autoincrement())
+  propertyId Int // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Relaciones con otras configuraciones
+  notificationSettings   NotificationSettings? @relation(fields: [notificationSettingsId], references: [id])
+  notificationSettingsId Int?
+
+  accessPermissions AccessPermission[] // Permisos de acceso a usuarios
+
+  maintenanceSchedule   MaintenanceSchedule? @relation(fields: [maintenanceScheduleId], references: [id])
+  maintenanceScheduleId Int?
+
+  reportSettings   ReportSettings? @relation(fields: [reportSettingsId], references: [id])
+  reportSettingsId Int?
+
+  paymentSettings   PaymentSettings? @relation(fields: [paymentSettingsId], references: [id])
+  paymentSettingsId Int?
+
+  securityPreferences   SecurityPreferences? @relation(fields: [securityPreferencesId], references: [id])
+  securityPreferencesId Int?
+
+  leaseTerms   LeaseTerms? @relation(fields: [leaseTermsId], references: [id])
+  leaseTermsId Int?
+
+  customAlerts CustomAlert[] // Personalización de alertas
+
+  backupSettings   BackupSettings? @relation(fields: [backupSettingsId], references: [id])
+  backupSettingsId Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model NotificationSettings {
+  id                    Int     @id @default(autoincrement())
+  rentalPaymentReminder Boolean // Reminder for rental payment
+  preventiveMaintenance Boolean // Notification for preventive maintenance
+  serviceAlerts         Boolean // Alerts for service issues or interruptions
+  insuranceExpiration   Boolean // Alerts for insurance or contract renewals
+  notificationMethod    String // E.g., email, SMS, push notifications
+  notificationFrequency String // Daily, weekly, monthly, etc.
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  PropertySettings PropertySettings[]
+}
+
+model AccessPermission {
+  id                 Int              @id @default(autoincrement())
+  propertySettingsId Int // Foreign key to PropertySettings
+  propertySettings   PropertySettings @relation(fields: [propertySettingsId], references: [id])
+
+  // Access Control
+  userRole         String // Owner, Tenant, Property Manager
+  readPermission   Boolean // Permission to read
+  writePermission  Boolean // Permission to write
+  accessSection    String // Accessible section (e.g., "Insurance", "Legal")
+  invitationStatus String? // Status of invitation for temporary users
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MaintenanceSchedule {
+  id                    Int       @id @default(autoincrement())
+  preventiveMaintenance String? // Frequency of preventive maintenance tasks
+  maintenanceReminders  String? // Schedule for maintenance reminders
+  preferredProviderId   Int? // Link to preferred provider for maintenance
+  preferredProvider     Provider? @relation(fields: [preferredProviderId], references: [id])
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  PropertySettings PropertySettings[]
+}
+
+model ReportSettings {
+  id              Int      @id @default(autoincrement())
+  reportFrequency String // Monthly, quarterly, annually, etc.
+  reportTypes     String[] // List of types (financial, occupancy, maintenance)
+  reportFormat    String // PDF, Excel, etc.
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  PropertySettings PropertySettings[]
+}
+
+model PaymentSettings {
+  id                     Int      @id @default(autoincrement())
+  tenantBilledServices   String[] // List of services billed to tenant
+  acceptedPaymentMethods String[] // Bank transfer, credit card, check, etc.
+  paymentReminders       Boolean // Enable or disable payment reminders
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  PropertySettings PropertySettings[]
+}
+
+model SecurityPreferences {
+  id                  Int     @id @default(autoincrement())
+  lockChangeFrequency String? // Recommended interval for lock changes
+  passwordPolicy      String // Password length and periodic change requirements
+  alarmSystemSettings String? // Alarm and monitoring system preferences
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  PropertySettings PropertySettings[]
+}
+
+model LeaseTerms {
+  id             Int     @id @default(autoincrement())
+  leaseDuration  String // Duration and renewal settings
+  rentIncrease   Float? // Annual or periodic rent increase
+  specialClauses String? // Custom clauses for subletting, restrictions, etc.
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  PropertySettings PropertySettings[]
+}
+
+model CustomAlert {
+  id                 Int              @id @default(autoincrement())
+  propertySettingsId Int // Foreign key to PropertySettings
+  propertySettings   PropertySettings @relation(fields: [propertySettingsId], references: [id])
+
+  // Custom Alert Settings
+  alertDescription String // Description of the custom alert
+  priority         String // High, medium, low
+  alertHistory     AlertHistory[] // Link to alert history
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AlertHistory {
+  id            Int         @id @default(autoincrement())
+  customAlertId Int // Foreign key to CustomAlert model
+  customAlert   CustomAlert @relation(fields: [customAlertId], references: [id])
+
+  alertDate      DateTime
+  resolutionDate DateTime?
+  alertStatus    String // Status of the alert
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BackupSettings {
+  id                    Int      @id @default(autoincrement())
+  automaticBackup       Boolean // Enable or disable automatic backup
+  backupFrequency       String // Daily, weekly, monthly
+  exportOptions         String[] // Export formats: Excel, PDF, CSV
+  secureStorageLocation String? // Description of secure storage location
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  PropertySettings PropertySettings[]
 }
