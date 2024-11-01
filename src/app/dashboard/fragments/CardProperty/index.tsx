@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 const labels = [
-  { src: "/icons/fi_plus.svg", alt: "plus" },
-  { src: "/icons/fi_user.svg", alt: "user" },
-  { src: "/icons/fi_user.svg", alt: "dollar" },
+  { src: "/icons/plus.svg", alt: "plus" },
+  { src: "/icons/user.svg", alt: "user" },
+  { src: "/icons/user.svg", alt: "dollar" },
 ];
 
 export default function CardProperty() {
