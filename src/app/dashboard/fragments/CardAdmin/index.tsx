@@ -18,7 +18,7 @@ export default function CardAdmin() {
             alt="plus"
             width={30}
             height={30}
-            className="bg-[#D9D9D9] p-2 rounded-full fill-white"
+            className="bg-[#D9D9D9] p-1 rounded-full fill-white"
           />
         </div>
       </div>
