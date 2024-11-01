@@ -10,7 +10,6 @@ export class PropertyManager {
     this.prisma = prisma;
   }
 
-  // Crear (Create)
   async createProperty({ data }: { data: Prisma.PropertyCreateInput }) {
     try {
       const newProperty = await this.prisma.property.create({
@@ -22,7 +21,6 @@ export class PropertyManager {
     }
   }
 
-  // Leer (Read)
   async getProperties(props?: { options?: Prisma.PropertyFindManyArgs }) {
     try {
       const properties = await this.prisma.property.findMany(props?.options);
@@ -43,7 +41,6 @@ export class PropertyManager {
     }
   }
 
-  // Actualizar (Update)
   async updateProperty({
     id,
     data,
@@ -62,7 +59,6 @@ export class PropertyManager {
     }
   }
 
-  // Eliminar (Delete)
   async deleteProperty({ id }: { id: number }) {
     try {
       const deletedProperty = await this.prisma.property.delete({
