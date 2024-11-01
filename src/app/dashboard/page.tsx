@@ -1,5 +1,5 @@
-import CardAdmin from "./fragments/CardAdminn";
-import CardProperty from "./fragments/CardPropertyy";
+import CardAdmin from "./fragments/CardAdmin";
+import CardProperty from "./fragments/CardProperty";
 
 export default function Dashboard() {
   return (
