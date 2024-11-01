@@ -25,9 +25,9 @@ export function NavLinks() {
       {navLinks.map((link) => (
         <Link
           key={link.href}
-          className={`link ${
-            pathname === link.href ? "active" : ""
-          } py-3 px-4 bg-[#D9D9D9] rounded-full`}
+          className={`py-3 px-4 bg-[#D9D9D9] rounded-full transition-all
+            ${pathname === link.href ? "font-bold" : ""}
+          `}
           href={link.href}
         >
           {link.label}
