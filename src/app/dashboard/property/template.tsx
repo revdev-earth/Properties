@@ -13,7 +13,7 @@ export default function PropertyLayout({
       </div>
       <div className="flex gap-5 items-center font-semibold my-7">
         <Image
-          src="/icons/arrow-left-solid.svg"
+          src="/icons/arrow-left.svg"
           alt="plus"
           width={30}
           height={30}
