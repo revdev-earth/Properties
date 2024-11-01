@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { NavLinks } from "./navLinks";
+import { NavLinks } from "./fragments/navLinks";
 export default function PropertyLayout({
   children,
 }: {
