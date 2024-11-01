@@ -1,7 +1,3 @@
 export default function Legal() {
-  return (
-    <div>
-      <h2>LEGAL</h2>
-    </div>
-  );
+  return <h2>Legal</h2>;
 }

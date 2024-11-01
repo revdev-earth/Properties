@@ -1,6 +1,6 @@
 import Image from "next/image";
-
 import { NavLinks } from "./fragments/navLinks";
+
 export default function PropertyLayout({
   children,
 }: {
@@ -8,7 +8,6 @@ export default function PropertyLayout({
 }) {
   return (
     <section className="flex flex-col h-svh w-svw p-5">
-      {/* Include shared UI here e.g. a header or sidebar */}
       <div className="max-w-[1440px] h-[100px] bg-gray-400 relative">
         <Image src="/images/img1.png" alt="arrow left" fill={true} />
       </div>
@@ -24,7 +23,6 @@ export default function PropertyLayout({
       </div>
       <NavLinks />
       <div className="border-b mt-5 border-black" />
-
       {children}
     </section>
   );
