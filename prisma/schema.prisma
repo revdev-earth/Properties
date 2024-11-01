@@ -11,23 +11,8 @@ datasource db {
 }
 
 model Property {
-  id            Int       @id @default(autoincrement())
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  address       String
-  price         Float? // Precio de la propiedad
-  size          Int? // Tamaño en metros cuadrados
-  bedrooms      Int? // Número de dormitorios
-  bathrooms     Int? // Número de baños
-  garage        Boolean? // Si tiene garaje o no
-  garden        Boolean? // Si tiene jardín o no
-  balcony       Boolean? // Si tiene balcón o no
-  petFriendly   Boolean? // Si se permiten mascotas
-  propertyType  String? // Tipo de propiedad (ej. Casa, Apartamento)
-  yearBuilt     Int? // Año de construcción
-  description   String? // Descripción adicional
-  heatingType   String? // Tipo de calefacción (ej. Eléctrico, Gas)
-  coolingType   String? // Tipo de refrigeración (ej. Aire acondicionado, Ventilador)
-  availableFrom DateTime? // Fecha en que la propiedad está disponible
-  status        String? // Estado de la propiedad (ej. Disponible, Vendido, Alquilado)
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  address   String
 }
