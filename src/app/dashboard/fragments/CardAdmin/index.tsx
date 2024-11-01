@@ -14,7 +14,7 @@ export default function CardAdmin() {
         <p className="font-semibold">Administrador</p>
         <div className="flex gap-5">
           <Image
-            src="/icons/fi_plus.svg"
+            src="/icons/plus.svg"
             alt="plus"
             width={30}
             height={30}
