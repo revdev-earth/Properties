@@ -1,3 +1,4 @@
+import { Property } from "@prisma/client";
 import Image from "next/image";
 
 const labels = [
@@ -6,7 +7,7 @@ const labels = [
   { src: "/icons/user.svg", alt: "dollar" },
 ];
 
-export default function CardProperty() {
+export default function CardProperty({ property }: { property: Property }) {
   return (
     <div className="flex gap-5 p-[10px] border rounded-md w-[401px] h-[100px]">
       <Image
@@ -17,7 +18,7 @@ export default function CardProperty() {
         className="rounded-md"
       />
       <div className="flex flex-col gap-3">
-        <p className="font-semibold">Property address</p>
+        <p className="font-semibold">{property.address}</p>
         <div className="flex gap-5">
           {labels.map((label, index) => (
             <Image

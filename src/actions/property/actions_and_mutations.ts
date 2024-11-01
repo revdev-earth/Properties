@@ -1,9 +1,8 @@
 "use server";
 
-import { propertyManager } from "./manager"; // Asegúrate de que la ruta sea correcta
 import { Prisma } from "@prisma/client";
+import { propertyManager } from "./manager";
 
-// Crear una nueva propiedad
 export async function createProperty({
   data,
 }: {
@@ -18,7 +17,6 @@ export async function createProperty({
   }
 }
 
-// Obtener todas las propiedades
 export async function getProperties(props?: {
   options?: Prisma.PropertyFindManyArgs;
 }) {
@@ -31,7 +29,6 @@ export async function getProperties(props?: {
   }
 }
 
-// Obtener una propiedad por ID
 export async function getPropertyById({ id }: { id: number }) {
   try {
     const property = await propertyManager.getPropertyById({ id });
@@ -42,7 +39,6 @@ export async function getPropertyById({ id }: { id: number }) {
   }
 }
 
-// Actualizar una propiedad
 export async function updateProperty({
   id,
   data,
@@ -62,7 +58,6 @@ export async function updateProperty({
   }
 }
 
-// Eliminar una propiedad
 export async function deleteProperty({ id }: { id: number }) {
   try {
     const deletedProperty = await propertyManager.deleteProperty({ id });
