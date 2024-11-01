@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 const labels = [
-  { src: "/icons/plus-solid.svg", alt: "plus" },
-  { src: "/icons/user-regular.svg", alt: "user" },
-  { src: "/icons/dollar-sign-solid.svg", alt: "dollar" },
+  { src: "/icons/fi_plus.svg", alt: "plus" },
+  { src: "/icons/fi_user.svg", alt: "user" },
+  { src: "/icons/fi_user.svg", alt: "dollar" },
 ];
 
 export default function CardProperty() {
@@ -26,7 +26,7 @@ export default function CardProperty() {
               alt={label.alt}
               width={30}
               height={30}
-              className="bg-[#D9D9D9] p-2 rounded-full fill-white"
+              className="bg-[#D9D9D9] p-2 rounded-full w-[30px] h-[30px]"
             />
           ))}
         </div>
