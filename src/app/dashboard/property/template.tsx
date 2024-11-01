@@ -7,7 +7,7 @@ export default function PropertyLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex flex-col h-svh w-svw p-5">
+    <section className="flex flex-col h-vh w-vw p-5">
       <div className="max-w-[1440px] h-[100px] bg-gray-400 relative">
         <Image src="/images/img1.png" alt="arrow left" fill={true} />
       </div>
