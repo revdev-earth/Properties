@@ -20,7 +20,7 @@ export async function createProperty({
   }
 }
 
-export async function getProperties(props?: {
+export async function getInformationProperties(props?: {
   options?: Prisma.InformationPropertyFindManyArgs;
 }) {
   try {
@@ -33,7 +33,7 @@ export async function getProperties(props?: {
   }
 }
 
-export async function getPropertyById({ id }: { id: number }) {
+export async function getInformationPropertyById({ id }: { id: number }) {
   try {
     const property =
       await informationPropertyManager.getInformationPropertyById({ id });
@@ -44,7 +44,7 @@ export async function getPropertyById({ id }: { id: number }) {
   }
 }
 
-export async function updateProperty({
+export async function updateInformationProperty({
   id,
   data,
 }: {
