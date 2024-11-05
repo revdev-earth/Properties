@@ -14,5 +14,19 @@ model Property {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  address   String
+
+  addressId Int // Relation with address
+  address   Address @relation(fields: [addressId], references: [id])
+}
+
+// Dirección del inmueble (ubicación)
+model Address {
+  id             Int     @id @default(autoincrement()) // Primary key for the address
+  streetNumber   String // calle o numero
+  neighborhood   String // barrio o colonia
+  cityState      String // ciudad y estado
+  postalCode     String // codigo postal
+  gpsCoordinates String? // GPS coordemadas (optional)
+
+  properties Property[] // Relación uno a muchos con inmuebless
 }
