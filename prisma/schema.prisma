@@ -14,19 +14,59 @@ model Property {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  addressId Int // Relation with address
-  address   Address @relation(fields: [addressId], references: [id])
 }
 
-// Dirección del inmueble (ubicación)
-model Address {
-  id             Int     @id @default(autoincrement()) // Primary key for the address
-  streetNumber   String // calle o numero
-  neighborhood   String // barrio o colonia
-  cityState      String // ciudad y estado
-  postalCode     String // codigo postal
-  gpsCoordinates String? // GPS coordemadas (optional)
+model InformationProperty {
+  id       Int       @id @default(autoincrement())
+  address  Address?
+  interior Interior?
+  Features Features?
+  Exterior Exterior?
+}
 
-  properties Property[] // Relación uno a muchos con inmuebless
+model Address {
+  id             Int     @id @default(autoincrement()) // Llave primaria para la dirección
+  streetNumber   String // Calle o número
+  neighborhood   String // Barrio o colonia
+  cityState      String // Ciudad y estado
+  postalCode     String // Código postal
+  gpsCoordinates String? // Coordenadas GPS (opcional)
+
+  informationPropertyId Int                 @unique // Ahora este campo es único, asegurando la relación uno a uno
+  informationProperty   InformationProperty @relation(fields: [informationPropertyId], references: [id])
+}
+
+model Features {
+  propertyType  String // E.g., house, apartment, commercial space, etc.
+  totalLandArea Float? // In m², optional if not applicable
+  builtArea     Float // In m²
+  floors        Int // Number of floors
+  orientation   String // E.g., north, south, east, west
+  age           Int // Years since construction or last major renovation
+
+  informationPropertyId Int                 @unique // Ahora este campo es único, asegurando la relación uno a uno
+  informationProperty   InformationProperty @relation(fields: [informationPropertyId], references: [id])
+}
+
+model Interior {
+  bedrooms        Int
+  bathrooms       Int // Number of full bathrooms
+  halfBathrooms   Int? // Number of half bathrooms
+  kitchen         String // Brief description of the kitchen
+  livingAndDining String? // Description if integrated or separated
+  additionalRooms String? // E.g., office, laundry room, storage
+
+  informationPropertyId Int                 @unique // Ahora este campo es único, asegurando la relación uno a uno
+  informationProperty   InformationProperty @relation(fields: [informationPropertyId], references: [id])
+}
+
+model Exterior {
+  yardOrGarden         String? // Description of outdoor space, if available
+  parking              Int // Number of parking spots
+  parkingLocation      String? // E.g., covered, private, shared
+  balconiesAndTerraces String? // Description of balconies or terraces
+  recreationalAreas    String? // Description of recreational areas, if available
+
+  informationPropertyId Int                 @unique // Ahora este campo es único, asegurando la relación uno a uno
+  informationProperty   InformationProperty @relation(fields: [informationPropertyId], references: [id])
 }
