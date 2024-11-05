@@ -19,7 +19,7 @@ export async function createFeatures({
   }
 }
 
-export async function getFeature(props?: {
+export async function getFeatures(props?: {
   options?: Prisma.FeaturesFindManyArgs;
 }) {
   try {
