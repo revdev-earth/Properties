@@ -37,6 +37,8 @@ model Address {
 }
 
 model Features {
+  id Int @id @default(autoincrement()) // Llave primaria para la dirección
+
   propertyType  String // E.g., house, apartment, commercial space, etc.
   totalLandArea Float? // In m², optional if not applicable
   builtArea     Float // In m²
@@ -49,6 +51,7 @@ model Features {
 }
 
 model Interior {
+  id              Int     @id @default(autoincrement()) // Llave primaria para la dirección
   bedrooms        Int
   bathrooms       Int // Number of full bathrooms
   halfBathrooms   Int? // Number of half bathrooms
@@ -61,6 +64,7 @@ model Interior {
 }
 
 model Exterior {
+  id                   Int     @id @default(autoincrement()) // Llave primaria para la dirección
   yardOrGarden         String? // Description of outdoor space, if available
   parking              Int // Number of parking spots
   parkingLocation      String? // E.g., covered, private, shared
