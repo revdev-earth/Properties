@@ -32,10 +32,10 @@ export class FeaturesManager {
 
   async getFeatureById({ id }: { id: number }) {
     try {
-      const property = await this.prisma.features.findUnique({
+      const feature = await this.prisma.features.findUnique({
         where: { id },
       });
-      return property;
+      return feature;
     } catch (error) {
       throw error;
     }
