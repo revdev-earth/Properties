@@ -21,7 +21,7 @@ export class TenantManager {
     }
   }
 
-  async getProperties(props?: { options?: Prisma.TenantFindManyArgs }) {
+  async getTenants(props?: { options?: Prisma.TenantFindManyArgs }) {
     try {
       const properties = await this.prisma.tenant.findMany(props?.options);
       return properties;
