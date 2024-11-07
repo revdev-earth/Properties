@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { NavLinks } from "./fragments/NavLinks";
+import { NavLinks } from "./fragments/navLinks";
 
 export default function PropertyLayout({
   children,
@@ -15,6 +15,7 @@ export default function PropertyLayout({
             alt="Property image"
             fill
             className="object-cover"
+            priority
           />
         </div>
         <div className="flex gap-5 items-center font-semibold">
