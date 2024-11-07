@@ -17,6 +17,7 @@ model Property {
 
   informationProperty InformationProperty?
   legalInfo           LegalInfo?
+  Tenant              Tenant[]
 }
 
 model InformationProperty {
@@ -105,4 +106,99 @@ model LegalInfo {
   internalRegulations  String? // Regulations if part of a condominium or gated community
   localNorms           String? // Summary of specific local norms affecting the property
   environmentalPermits String? // Permits required if located in a protected environmental area
+}
+
+model Tenant {
+  id                     Int                  @id @default(autoincrement())
+  propertyId             Int // Foreign key to Property model
+  property               Property             @relation(fields: [propertyId], references: [id])
+  // Basic Tenant Information
+  fullName               String
+  identificationDocument String // Type and number (e.g., ID, passport)
+  birthDate              DateTime
+  phone                  String
+  email                  String
+  additionalAddress      String? // Additional postal address if applicable
+  additionalResidents    AdditionalResident[] // List of additional people residing with the tenant
+
+  // Lease Contract Details
+  leaseStartDate   DateTime
+  leaseEndDate     DateTime
+  contractDuration String // Short-term, long-term, or indefinite
+  renewalTerms     String? // Terms for renewal or notice for termination
+  securityDeposit  Float // Amount and details on refund conditions
+  specificClauses  String? // Any specific agreed clauses (e.g., pet policies)
+
+  // Financial Information and Payments
+  rentAmount             Float // Monthly or periodic rent amount
+  preferredPaymentMethod String // Payment method (e.g., bank transfer)
+  paymentHistory         Payment[] // Payment records with status
+  discountsOrAdjustments String? // Any discounts or adjustments in specific cases
+
+  // Tenant Responsibilities
+  tenantUtilities  String? // List of utilities tenant is responsible for
+  basicMaintenance String? // Basic maintenance obligations
+  reportedIssues   String? // Details on any reported issues or damages
+  pets             String? // Information about pets if allowed
+
+  // Stay History
+  moveInDate            DateTime
+  absencePeriods        String? // Temporary absences with dates if applicable
+  contractModifications String? // Record of any contract changes
+
+  // Tenant Evaluation and Comments
+  satisfactionSurveys  String? // Survey results or feedback notes
+  communicationHistory String? // Notes on important communications
+  incidents            String? // Notable incidents involving tenant
+
+  // Emergency Contacts and Trusted Persons
+  emergencyContactName     String
+  emergencyContactPhone    String
+  emergencyContactRelation String
+  trustedPerson            String? // Authorized individual for property access
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+}
+
+model AdditionalResident {
+  id                     Int       @id @default(autoincrement())
+  tenantId               Int // Foreign key to Tenant model
+  tenant                 Tenant    @relation(fields: [tenantId], references: [id])
+  // Basic Information for Each Additional Person
+  fullName               String
+  relationshipToTenant   String // Relationship to primary tenant
+  identificationDocument String? // Optional ID for verification
+  birthDate              DateTime
+  phone                  String? // Contact phone number if applicable
+  email                  String? // Contact email if needed
+  // Duration of Stay
+  stayStartDate          DateTime
+  stayEndDate            DateTime? // End date if applicable (for temporary residents)
+  stayConditions         String? // Any specific conditions for stay
+  // Responsibilities and Property Access
+  sharedResponsibilities String? // Shared responsibilities if applicable
+  propertyAccess         Boolean // Whether this person has independent access
+  specialPermissions     String? // Permissions or restrictions
+  // Pets and Associated Items
+  pets                   String? // Information on pets if they reside with this person
+  personalFurniture      String? // Details on personal furniture or equipment
+  // Incidents and Relevant Notes
+  notableIncidents       String? // Record of any incidents involving this person
+  additionalComments     String? // Additional notes for records
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+}
+
+model Payment {
+  id                     Int      @id @default(autoincrement())
+  tenantId               Int // Foreign key to Tenant model
+  tenant                 Tenant   @relation(fields: [tenantId], references: [id])
+  // Payment Details
+  paymentDate            DateTime
+  paymentStatus          String // Status (on-time, delayed, pending)
+  paymentNotes           String? // Notes for partial or incomplete payments
+  lateFees               Float? // Late fees if any
+  discountsOrAdjustments String? // Adjustments if any
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
 }
