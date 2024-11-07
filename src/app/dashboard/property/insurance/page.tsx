@@ -14,8 +14,6 @@ export default function InsuranceProperty() {
     }
     fetchInformationProperties();
   }, []);
-
-  console.log(insurances);
   return (
     <>
       <div className="">
