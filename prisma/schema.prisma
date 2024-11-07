@@ -16,6 +16,7 @@ model Property {
   updatedAt DateTime @updatedAt
 
   informationProperty InformationProperty?
+  legalInfo           LegalInfo?
 }
 
 model InformationProperty {
@@ -52,4 +53,56 @@ model InformationProperty {
   parkingLocation      String? // E.g., covered, private, shared
   balconiesAndTerraces String? // Description of balconies or terraces
   recreationalAreas    String? // Description of recreational areas, if available
+}
+
+model LegalInfo {
+  id Int @id @default(autoincrement())
+
+  propertyId Int      @unique // Ahora este campo es único, asegurando la relación uno a uno
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Property Title
+  deedNumber     String // Identification number for the deed
+  notary         String // Name of the notary, registration number, and location
+  deedDate       DateTime // Date when the deed was registered
+  publicRegistry String // Folio number or registry code in the Public Property Registry
+
+  // Registered Owner
+  ownerName    String
+  ownerID      String // Official ID of the owner (e.g., passport number, etc.)
+  ownerAddress String? // Contact address if different from the property
+  ownerContact String? // Contact number for legal or emergency issues
+
+  // Property Usage
+  zoning             String // Zoning classification (residential, commercial, etc.)
+  usageRestrictions  String? // Details of any restrictions on usage
+  permitsAndLicenses String? // Necessary permits for current usage
+  zoningHistory      String? // History of zoning changes, if any
+
+  // Active Contracts
+  leaseContract          String? // Summary or copy of the current lease agreement
+  contractDuration       String? // Contract duration, start and end date, renewal terms
+  tenantResponsibilities String? // Legal responsibilities of the tenant
+  ownerResponsibilities  String? // Legal obligations of the owner
+
+  // Legal History of the Property
+  ownershipChanges String? // History of ownership transfers with dates
+  mortgagesOrLiens String? // Information about mortgages, liens, or encumbrances
+  legalDisputes    String? // Information on past or pending legal disputes
+  auctionHistory   String? // History of auctions or bank repossessions
+
+  // Taxes and Fiscal Obligations
+  propertyTax          String // Cadastral account number and status of property tax
+  specialTaxesOrFees   String? // Additional taxes or service fees applicable
+  debtFreeCertificates String? // Documentation certifying no fiscal debts
+
+  // Property Policies and Warranties
+  constructionWarranty  String? // Construction warranty details if newly built
+  equipmentWarranties   String? // Warranties for appliances, HVAC, electrical or plumbing systems
+  structuralSafetyCerts String? // Structural safety certificates, e.g., seismic certifications
+
+  // Regulations and Norms
+  internalRegulations  String? // Regulations if part of a condominium or gated community
+  localNorms           String? // Summary of specific local norms affecting the property
+  environmentalPermits String? // Permits required if located in a protected environmental area
 }
