@@ -14,31 +14,23 @@ model Property {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  informationProperty InformationProperty?
 }
 
 model InformationProperty {
-  id       Int       @id @default(autoincrement())
-  address  Address?
-  interior Interior?
-  Features Features?
-  Exterior Exterior?
-}
+  id Int @id @default(autoincrement())
 
-model Address {
-  id             Int     @id @default(autoincrement()) // Llave primaria para la dirección
-  streetNumber   String // Calle o número
-  neighborhood   String // Barrio o colonia
-  cityState      String // Ciudad y estado
-  postalCode     String // Código postal
-  gpsCoordinates String? // Coordenadas GPS (opcional)
+  propertyId Int      @unique // Ahora este campo es único, asegurando la relación uno a uno
+  property   Property @relation(fields: [propertyId], references: [id])
 
-  informationPropertyId Int                 @unique // Ahora este campo es único, asegurando la relación uno a uno
-  informationProperty   InformationProperty @relation(fields: [informationPropertyId], references: [id])
-}
+  streetAndNumber String // direccion
+  neighborhood    String // barrio
+  cityAndState    String
+  postalCode      String
+  gpsCoordinates  String? // Optional
 
-model Features {
-  id Int @id @default(autoincrement()) // Llave primaria para la dirección
-
+  // Features
   propertyType  String // E.g., house, apartment, commercial space, etc.
   totalLandArea Float? // In m², optional if not applicable
   builtArea     Float // In m²
@@ -46,12 +38,7 @@ model Features {
   orientation   String // E.g., north, south, east, west
   age           Int // Years since construction or last major renovation
 
-  informationPropertyId Int                 @unique // Ahora este campo es único, asegurando la relación uno a uno
-  informationProperty   InformationProperty @relation(fields: [informationPropertyId], references: [id])
-}
-
-model Interior {
-  id              Int     @id @default(autoincrement()) // Llave primaria para la dirección
+  // Interior
   bedrooms        Int
   bathrooms       Int // Number of full bathrooms
   halfBathrooms   Int? // Number of half bathrooms
@@ -59,18 +46,10 @@ model Interior {
   livingAndDining String? // Description if integrated or separated
   additionalRooms String? // E.g., office, laundry room, storage
 
-  informationPropertyId Int                 @unique // Ahora este campo es único, asegurando la relación uno a uno
-  informationProperty   InformationProperty @relation(fields: [informationPropertyId], references: [id])
-}
-
-model Exterior {
-  id                   Int     @id @default(autoincrement()) // Llave primaria para la dirección
+  // Exterior
   yardOrGarden         String? // Description of outdoor space, if available
   parking              Int // Number of parking spots
   parkingLocation      String? // E.g., covered, private, shared
   balconiesAndTerraces String? // Description of balconies or terraces
   recreationalAreas    String? // Description of recreational areas, if available
-
-  informationPropertyId Int                 @unique // Ahora este campo es único, asegurando la relación uno a uno
-  informationProperty   InformationProperty @relation(fields: [informationPropertyId], references: [id])
 }
