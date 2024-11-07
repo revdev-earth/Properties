@@ -71,4 +71,4 @@ export class LegalInfoManager {
   }
 }
 
-export const legalLegalInfoManager = new LegalInfoManager(new PrismaClient());
+export const legalInfoManager = new LegalInfoManager(new PrismaClient());
