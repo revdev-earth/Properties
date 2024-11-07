@@ -132,7 +132,7 @@ model Tenant {
   // Financial Information and Payments
   rentAmount             Float // Monthly or periodic rent amount
   preferredPaymentMethod String // Payment method (e.g., bank transfer)
-  paymentHistory         Payment[] // Payment records with status
+  paymentHistory         PaymentTenant[] // Payment records with status
   discountsOrAdjustments String? // Any discounts or adjustments in specific cases
 
   // Tenant Responsibilities
@@ -189,7 +189,7 @@ model AdditionalResident {
   updatedAt              DateTime  @updatedAt
 }
 
-model Payment {
+model PaymentTenant {
   id                     Int      @id @default(autoincrement())
   tenantId               Int // Foreign key to Tenant model
   tenant                 Tenant   @relation(fields: [tenantId], references: [id])
