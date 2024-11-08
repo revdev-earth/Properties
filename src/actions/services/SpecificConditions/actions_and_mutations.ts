@@ -34,7 +34,7 @@ export async function getSpecificConditionss(props?: {
   }
 }
 
-export async function getSpecificConditionsById({ id }: { id: number }) {
+export async function getSpecificConditionsById({ id }: { id: string }) {
   try {
     const property = await specificConditionsManager.getSpecificConditionsById({
       id,
@@ -50,7 +50,7 @@ export async function updateSpecificConditions({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.SpecificConditionsUpdateInput;
 }) {
   try {
@@ -66,7 +66,7 @@ export async function updateSpecificConditions({
   }
 }
 
-export async function deleteSpecificConditions({ id }: { id: number }) {
+export async function deleteSpecificConditions({ id }: { id: string }) {
   try {
     const deletedSpecificConditions =
       await specificConditionsManager.deleteSpecificConditions({ id });

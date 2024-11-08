@@ -38,7 +38,7 @@ export class BillingDetailsManager {
     }
   }
 
-  async getBillingDetailsById({ id }: { id: number }) {
+  async getBillingDetailsById({ id }: { id: string }) {
     try {
       const billingDetails = await this.prisma.billingDetails.findUnique({
         where: { id },
@@ -53,7 +53,7 @@ export class BillingDetailsManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.BillingDetailsUpdateInput;
   }) {
     try {
@@ -67,7 +67,7 @@ export class BillingDetailsManager {
     }
   }
 
-  async deleteBillingDetails({ id }: { id: number }) {
+  async deleteBillingDetails({ id }: { id: string }) {
     try {
       const deletedBillingDetails = await this.prisma.billingDetails.delete({
         where: { id },

@@ -34,7 +34,7 @@ export async function getConsumptionDetailss(props?: {
   }
 }
 
-export async function getConsumptionDetailsById({ id }: { id: number }) {
+export async function getConsumptionDetailsById({ id }: { id: string }) {
   try {
     const property = await consumptionDetailsManager.getConsumptionDetailsById({
       id,
@@ -50,7 +50,7 @@ export async function updateConsumptionDetails({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.ConsumptionDetailsUpdateInput;
 }) {
   try {
@@ -66,7 +66,7 @@ export async function updateConsumptionDetails({
   }
 }
 
-export async function deleteConsumptionDetails({ id }: { id: number }) {
+export async function deleteConsumptionDetails({ id }: { id: string }) {
   try {
     const deletedConsumptionDetails =
       await consumptionDetailsManager.deleteConsumptionDetails({ id });

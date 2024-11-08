@@ -38,7 +38,7 @@ export class PaymentTenantManager {
     }
   }
 
-  async getPaymentTenantById({ id }: { id: number }) {
+  async getPaymentTenantById({ id }: { id: string }) {
     try {
       const paymentTenant = await this.prisma.paymentTenant.findUnique({
         where: { id },
@@ -53,7 +53,7 @@ export class PaymentTenantManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.PaymentTenantUpdateInput;
   }) {
     try {
@@ -67,7 +67,7 @@ export class PaymentTenantManager {
     }
   }
 
-  async deletePaymentTenant({ id }: { id: number }) {
+  async deletePaymentTenant({ id }: { id: string }) {
     try {
       const deletedPaymentTenant = await this.prisma.paymentTenant.delete({
         where: { id },

@@ -9,8 +9,7 @@ export async function createProperty({
   data: Prisma.PropertyCreateInput;
 }) {
   try {
-    const newProperty = await propertyManager.createProperty({ data });
-    return newProperty;
+    return await propertyManager.createProperty({ data });
   } catch (error) {
     console.error("Error creating property:", error);
     throw error;
@@ -21,18 +20,22 @@ export async function getProperties(props?: {
   options?: Prisma.PropertyFindManyArgs;
 }) {
   try {
-    const properties = await propertyManager.getProperties(props);
-    return properties;
+    return await propertyManager.getProperties(props);
   } catch (error) {
     console.error("Error fetching properties:", error);
     throw error;
   }
 }
 
-export async function getPropertyById({ id }: { id: number }) {
+export async function getPropertyById({
+  id,
+  options,
+}: {
+  id: string;
+  options?: Prisma.PropertyFindUniqueArgs;
+}) {
   try {
-    const property = await propertyManager.getPropertyById({ id });
-    return property;
+    return propertyManager.getPropertyById({ id, options });
   } catch (error) {
     console.error("Error fetching property by ID:", error);
     throw error;
@@ -43,25 +46,23 @@ export async function updateProperty({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.PropertyUpdateInput;
 }) {
   try {
-    const updatedProperty = await propertyManager.updateProperty({
+    return await propertyManager.updateProperty({
       id,
       data,
     });
-    return updatedProperty;
   } catch (error) {
     console.error("Error updating property:", error);
     throw error;
   }
 }
 
-export async function deleteProperty({ id }: { id: number }) {
+export async function deleteProperty({ id }: { id: string }) {
   try {
-    const deletedProperty = await propertyManager.deleteProperty({ id });
-    return deletedProperty;
+    return await propertyManager.deleteProperty({ id });
   } catch (error) {
     console.error("Error deleting property:", error);
     throw error;

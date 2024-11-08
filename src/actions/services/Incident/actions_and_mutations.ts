@@ -29,7 +29,7 @@ export async function getIncidents(props?: {
   }
 }
 
-export async function getIncidentById({ id }: { id: number }) {
+export async function getIncidentById({ id }: { id: string }) {
   try {
     const property = await incidentManager.getIncidentById({ id });
     return property;
@@ -43,7 +43,7 @@ export async function updateIncident({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.IncidentUpdateInput;
 }) {
   try {
@@ -58,7 +58,7 @@ export async function updateIncident({
   }
 }
 
-export async function deleteIncident({ id }: { id: number }) {
+export async function deleteIncident({ id }: { id: string }) {
   try {
     const deletedIncident = await incidentManager.deleteIncident({ id });
     return deletedIncident;

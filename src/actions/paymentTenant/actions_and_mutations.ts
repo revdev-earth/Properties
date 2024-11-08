@@ -31,7 +31,7 @@ export async function getPaymentTenants(props?: {
   }
 }
 
-export async function getPaymentTenantById({ id }: { id: number }) {
+export async function getPaymentTenantById({ id }: { id: string }) {
   try {
     const property = await paymentTenantManager.getPaymentTenantById({
       id,
@@ -47,7 +47,7 @@ export async function updatePaymentTenant({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.PaymentTenantUpdateInput;
 }) {
   try {
@@ -64,7 +64,7 @@ export async function updatePaymentTenant({
   }
 }
 
-export async function deletePaymentTenant({ id }: { id: number }) {
+export async function deletePaymentTenant({ id }: { id: string }) {
   try {
     const deletedPaymentTenant = await paymentTenantManager.deletePaymentTenant(
       {

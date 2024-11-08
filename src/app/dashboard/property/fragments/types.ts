@@ -23,9 +23,9 @@ export interface Property {
 }
 
 export interface PropertyWithId extends Property {
-  id: number;
+  id: string;
 }
 
 export interface PropertyWithIdPrisma extends Prisma.PropertyCreateInput {
-  id: number;
+  id: string;
 }

@@ -38,7 +38,7 @@ export class AdditionalServiceManager {
     }
   }
 
-  async getAdditionalServiceById({ id }: { id: number }) {
+  async getAdditionalServiceById({ id }: { id: string }) {
     try {
       const additionalService = await this.prisma.additionalService.findUnique({
         where: { id },
@@ -53,7 +53,7 @@ export class AdditionalServiceManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.AdditionalServiceUpdateInput;
   }) {
     try {
@@ -68,7 +68,7 @@ export class AdditionalServiceManager {
     }
   }
 
-  async deleteAdditionalService({ id }: { id: number }) {
+  async deleteAdditionalService({ id }: { id: string }) {
     try {
       const deletedAdditionalService =
         await this.prisma.additionalService.delete({

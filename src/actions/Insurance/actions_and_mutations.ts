@@ -29,7 +29,7 @@ export async function getInsurances(props?: {
   }
 }
 
-export async function getInsuranceById({ id }: { id: number }) {
+export async function getInsuranceById({ id }: { id: string }) {
   try {
     const property = await insuranceManager.getInsuranceById({ id });
     return property;
@@ -43,7 +43,7 @@ export async function updateInsurance({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.InsuranceUpdateInput;
 }) {
   try {
@@ -58,7 +58,7 @@ export async function updateInsurance({
   }
 }
 
-export async function deleteInsurance({ id }: { id: number }) {
+export async function deleteInsurance({ id }: { id: string }) {
   try {
     const deletedInsurance = await insuranceManager.deleteInsurance({ id });
     return deletedInsurance;

@@ -40,7 +40,7 @@ export class SpecificConditionsManager {
     }
   }
 
-  async getSpecificConditionsById({ id }: { id: number }) {
+  async getSpecificConditionsById({ id }: { id: string }) {
     try {
       const specificConditions =
         await this.prisma.specificConditions.findUnique({
@@ -56,7 +56,7 @@ export class SpecificConditionsManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.SpecificConditionsUpdateInput;
   }) {
     try {
@@ -71,7 +71,7 @@ export class SpecificConditionsManager {
     }
   }
 
-  async deleteSpecificConditions({ id }: { id: number }) {
+  async deleteSpecificConditions({ id }: { id: string }) {
     try {
       const deletedSpecificConditions =
         await this.prisma.specificConditions.delete({

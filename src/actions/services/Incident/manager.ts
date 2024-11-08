@@ -30,7 +30,7 @@ export class Incidentanager {
     }
   }
 
-  async getIncidentById({ id }: { id: number }) {
+  async getIncidentById({ id }: { id: string }) {
     try {
       const incident = await this.prisma.incident.findUnique({
         where: { id },
@@ -45,7 +45,7 @@ export class Incidentanager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.IncidentUpdateInput;
   }) {
     try {
@@ -59,7 +59,7 @@ export class Incidentanager {
     }
   }
 
-  async deleteIncident({ id }: { id: number }) {
+  async deleteIncident({ id }: { id: string }) {
     try {
       const deletedIncident = await this.prisma.incident.delete({
         where: { id },

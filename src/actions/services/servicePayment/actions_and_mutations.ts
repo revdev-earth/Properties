@@ -31,7 +31,7 @@ export async function getServicePayments(props?: {
   }
 }
 
-export async function getServicePaymentById({ id }: { id: number }) {
+export async function getServicePaymentById({ id }: { id: string }) {
   try {
     const property = await servicePaymentManager.getServicePaymentById({ id });
     return property;
@@ -45,7 +45,7 @@ export async function updateServicePayment({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.ServicePaymentUpdateInput;
 }) {
   try {
@@ -61,7 +61,7 @@ export async function updateServicePayment({
   }
 }
 
-export async function deleteServicePayment({ id }: { id: number }) {
+export async function deleteServicePayment({ id }: { id: string }) {
   try {
     const deletedServicePayment =
       await servicePaymentManager.deleteServicePayment({

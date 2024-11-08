@@ -34,7 +34,7 @@ export class MeterReadingManager {
     }
   }
 
-  async getMeterReadingById({ id }: { id: number }) {
+  async getMeterReadingById({ id }: { id: string }) {
     try {
       const meterReading = await this.prisma.meterReading.findUnique({
         where: { id },
@@ -49,7 +49,7 @@ export class MeterReadingManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.MeterReadingUpdateInput;
   }) {
     try {
@@ -63,7 +63,7 @@ export class MeterReadingManager {
     }
   }
 
-  async deleteMeterReading({ id }: { id: number }) {
+  async deleteMeterReading({ id }: { id: string }) {
     try {
       const deletedMeterReading = await this.prisma.meterReading.delete({
         where: { id },

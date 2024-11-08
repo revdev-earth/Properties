@@ -34,7 +34,7 @@ export async function getAdditionalServices(props?: {
   }
 }
 
-export async function getAdditionalServiceById({ id }: { id: number }) {
+export async function getAdditionalServiceById({ id }: { id: string }) {
   try {
     const property = await additionalServiceManager.getAdditionalServiceById({
       id,
@@ -50,7 +50,7 @@ export async function updateAdditionalService({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.AdditionalServiceUpdateInput;
 }) {
   try {
@@ -66,7 +66,7 @@ export async function updateAdditionalService({
   }
 }
 
-export async function deleteAdditionalService({ id }: { id: number }) {
+export async function deleteAdditionalService({ id }: { id: string }) {
   try {
     const deletedAdditionalService =
       await additionalServiceManager.deleteAdditionalService({ id });

@@ -31,7 +31,7 @@ export async function getBasicServices(props?: {
   }
 }
 
-export async function getBasicServiceById({ id }: { id: number }) {
+export async function getBasicServiceById({ id }: { id: string }) {
   try {
     const property = await basicServiceManager.getBasicServiceById({ id });
     return property;
@@ -45,7 +45,7 @@ export async function updateBasicService({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.BasicServiceUpdateInput;
 }) {
   try {
@@ -60,7 +60,7 @@ export async function updateBasicService({
   }
 }
 
-export async function deleteBasicService({ id }: { id: number }) {
+export async function deleteBasicService({ id }: { id: string }) {
   try {
     const deletedBasicService = await basicServiceManager.deleteBasicService({
       id,

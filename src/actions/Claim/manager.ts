@@ -30,7 +30,7 @@ export class ClaimManager {
     }
   }
 
-  async getClaimById({ id }: { id: number }) {
+  async getClaimById({ id }: { id: string }) {
     try {
       const claim = await this.prisma.claim.findUnique({
         where: { id },
@@ -45,7 +45,7 @@ export class ClaimManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.ClaimUpdateInput;
   }) {
     try {
@@ -59,7 +59,7 @@ export class ClaimManager {
     }
   }
 
-  async deleteClaim({ id }: { id: number }) {
+  async deleteClaim({ id }: { id: string }) {
     try {
       const deletedClaim = await this.prisma.claim.delete({
         where: { id },

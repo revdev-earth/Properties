@@ -31,7 +31,7 @@ export async function getMeterReadings(props?: {
   }
 }
 
-export async function getMeterReadingById({ id }: { id: number }) {
+export async function getMeterReadingById({ id }: { id: string }) {
   try {
     const property = await meterReadingManager.getMeterReadingById({ id });
     return property;
@@ -45,7 +45,7 @@ export async function updateMeterReading({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.MeterReadingUpdateInput;
 }) {
   try {
@@ -60,7 +60,7 @@ export async function updateMeterReading({
   }
 }
 
-export async function deleteMeterReading({ id }: { id: number }) {
+export async function deleteMeterReading({ id }: { id: string }) {
   try {
     const deletedMeterReading = await meterReadingManager.deleteMeterReading({
       id,

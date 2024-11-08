@@ -30,7 +30,7 @@ export class TenantManager {
     }
   }
 
-  async getTenantById({ id }: { id: number }) {
+  async getTenantById({ id }: { id: string }) {
     try {
       const tenant = await this.prisma.tenant.findUnique({
         where: { id },
@@ -45,7 +45,7 @@ export class TenantManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.TenantUpdateInput;
   }) {
     try {
@@ -59,7 +59,7 @@ export class TenantManager {
     }
   }
 
-  async deleteTenant({ id }: { id: number }) {
+  async deleteTenant({ id }: { id: string }) {
     try {
       const deletedTenant = await this.prisma.tenant.delete({
         where: { id },

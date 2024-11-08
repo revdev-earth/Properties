@@ -29,7 +29,7 @@ export async function getTenants(props?: {
   }
 }
 
-export async function getTenantById({ id }: { id: number }) {
+export async function getTenantById({ id }: { id: string }) {
   try {
     const property = await tenantManager.getTenantById({ id });
     return property;
@@ -43,7 +43,7 @@ export async function updateTenant({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.TenantUpdateInput;
 }) {
   try {
@@ -58,7 +58,7 @@ export async function updateTenant({
   }
 }
 
-export async function deleteTenant({ id }: { id: number }) {
+export async function deleteTenant({ id }: { id: string }) {
   try {
     const deletedTenant = await tenantManager.deleteTenant({ id });
     return deletedTenant;

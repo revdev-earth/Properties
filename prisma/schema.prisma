@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Property {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -25,7 +25,7 @@ model Property {
 model InformationProperty {
   id Int @id @default(autoincrement())
 
-  propertyId Int      @unique // Ahora este campo es único, asegurando la relación uno a uno
+  propertyId String   @unique // Ahora este campo es único, asegurando la relación uno a uno
   property   Property @relation(fields: [propertyId], references: [id])
 
   streetAndNumber String // direccion
@@ -61,7 +61,7 @@ model InformationProperty {
 model LegalInfo {
   id Int @id @default(autoincrement())
 
-  propertyId Int      @unique // Ahora este campo es único, asegurando la relación uno a uno
+  propertyId String   @unique // Ahora este campo es único, asegurando la relación uno a uno
   property   Property @relation(fields: [propertyId], references: [id])
 
   // Property Title
@@ -112,7 +112,7 @@ model LegalInfo {
 
 model Tenant {
   id                     Int                  @id @default(autoincrement())
-  propertyId             Int // Foreign key to Property model
+  propertyId             String // Foreign key to Property model
   property               Property             @relation(fields: [propertyId], references: [id])
   // Basic Tenant Information
   fullName               String
@@ -195,7 +195,7 @@ model AdditionalResident {
 }
 
 model PaymentTenant {
-  id                     Int      @id @default(autoincrement())
+  id                     String   @id @default(uuid())
   tenantId               Int // Foreign key to Tenant model
   tenant                 Tenant   @relation(fields: [tenantId], references: [id])
   // Payment Details
@@ -212,7 +212,7 @@ model Insurance {
   id Int @id @default(autoincrement())
 
   // Relation to Property
-  propertyId Int? // Optional foreign key for property insurance
+  propertyId String? // Optional foreign key for property insurance
   property   Property? @relation(fields: [propertyId], references: [id])
 
   // Relation to Tenant
@@ -269,8 +269,8 @@ model Claim {
 }
 
 model BasicService {
-  id         Int      @id @default(autoincrement())
-  propertyId Int // Foreign key to Property model
+  id         String   @id @default(uuid())
+  propertyId String // Foreign key to Property model
   property   Property @relation(fields: [propertyId], references: [id])
 
   // Service Information
@@ -311,7 +311,7 @@ model BillingDetails {
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
 
-  basicServiceId Int          @unique
+  basicServiceId String       @unique
   BasicService   BasicService @relation(fields: [basicServiceId], references: [id])
 }
 
@@ -351,7 +351,7 @@ model MeterReading {
 
 model AdditionalService {
   id                 Int          @id @default(autoincrement())
-  basicServiceId     Int // Foreign key to BasicService model
+  basicServiceId     String // Foreign key to BasicService model
   basicService       BasicService @relation(fields: [basicServiceId], references: [id])
   serviceType        String // E.g., cleaning, gardening, pool maintenance
   provider           String // Name of provider
@@ -364,7 +364,7 @@ model AdditionalService {
 
 model EmergencyContact {
   id                  Int          @id @default(autoincrement())
-  basicServiceId      Int          @unique
+  basicServiceId      String       @unique
   BasicService        BasicService @relation(fields: [basicServiceId], references: [id])
   emergencyNumber     String // Emergency contact number
   supportContactName  String // Name of the technical support contact
@@ -377,7 +377,7 @@ model EmergencyContact {
 
 model SpecificConditions {
   id                     Int          @id @default(autoincrement())
-  basicServiceId         Int          @unique
+  basicServiceId         String       @unique
   BasicService           BasicService @relation(fields: [basicServiceId], references: [id])
   disconnectionClause    String? // Details about disconnection/reconnection terms
   contractConditions     String? // Contract terms, penalties for early cancellation
@@ -388,7 +388,7 @@ model SpecificConditions {
 
 model Incident {
   id                  Int          @id @default(autoincrement())
-  basicServiceId      Int // Foreign key to BasicService model
+  basicServiceId      String // Foreign key to BasicService model
   basicService        BasicService @relation(fields: [basicServiceId], references: [id])
   incidentDate        DateTime
   incidentDescription String // Description of the service interruption

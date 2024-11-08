@@ -40,7 +40,7 @@ export class ConsumptionDetailsManager {
     }
   }
 
-  async getConsumptionDetailsById({ id }: { id: number }) {
+  async getConsumptionDetailsById({ id }: { id: string }) {
     try {
       const consumptionDetails =
         await this.prisma.consumptionDetails.findUnique({
@@ -56,7 +56,7 @@ export class ConsumptionDetailsManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.ConsumptionDetailsUpdateInput;
   }) {
     try {
@@ -71,7 +71,7 @@ export class ConsumptionDetailsManager {
     }
   }
 
-  async deleteConsumptionDetails({ id }: { id: number }) {
+  async deleteConsumptionDetails({ id }: { id: string }) {
     try {
       const deletedConsumptionDetails =
         await this.prisma.consumptionDetails.delete({

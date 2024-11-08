@@ -31,7 +31,7 @@ export async function getBillingDetailss(props?: {
   }
 }
 
-export async function getBillingDetailsById({ id }: { id: number }) {
+export async function getBillingDetailsById({ id }: { id: string }) {
   try {
     const property = await billingDetailsManager.getBillingDetailsById({ id });
     return property;
@@ -45,7 +45,7 @@ export async function updateBillingDetails({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.BillingDetailsUpdateInput;
 }) {
   try {
@@ -61,7 +61,7 @@ export async function updateBillingDetails({
   }
 }
 
-export async function deleteBillingDetails({ id }: { id: number }) {
+export async function deleteBillingDetails({ id }: { id: string }) {
   try {
     const deletedBillingDetails =
       await billingDetailsManager.deleteBillingDetails({

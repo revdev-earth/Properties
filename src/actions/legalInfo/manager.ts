@@ -30,7 +30,7 @@ export class LegalInfoManager {
     }
   }
 
-  async getLegalInfoById({ id }: { id: number }) {
+  async getLegalInfoById({ id }: { id: string }) {
     try {
       const legalInfo = await this.prisma.legalInfo.findUnique({
         where: { id },
@@ -45,7 +45,7 @@ export class LegalInfoManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.LegalInfoUpdateInput;
   }) {
     try {
@@ -59,7 +59,7 @@ export class LegalInfoManager {
     }
   }
 
-  async deleteLegalInfo({ id }: { id: number }) {
+  async deleteLegalInfo({ id }: { id: string }) {
     try {
       const deletedLegalInfo = await this.prisma.legalInfo.delete({
         where: { id },

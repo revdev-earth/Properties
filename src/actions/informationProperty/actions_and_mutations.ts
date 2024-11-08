@@ -33,7 +33,7 @@ export async function getInformationProperties(props?: {
   }
 }
 
-export async function getInformationPropertyById({ id }: { id: number }) {
+export async function getInformationPropertyById({ id }: { id: string }) {
   try {
     const property =
       await informationPropertyManager.getInformationPropertyById({ id });
@@ -48,7 +48,7 @@ export async function updateInformationProperty({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.InformationPropertyUpdateInput;
 }) {
   try {
@@ -64,7 +64,7 @@ export async function updateInformationProperty({
   }
 }
 
-export async function deleteProperty({ id }: { id: number }) {
+export async function deleteProperty({ id }: { id: string }) {
   try {
     const deletedProperty =
       await informationPropertyManager.deleteInformationProperty({

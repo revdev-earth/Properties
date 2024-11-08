@@ -25,7 +25,7 @@ export async function getClaims(props?: {
   }
 }
 
-export async function getClaimById({ id }: { id: number }) {
+export async function getClaimById({ id }: { id: string }) {
   try {
     const property = await claimManager.getClaimById({ id });
     return property;
@@ -39,7 +39,7 @@ export async function updateClaim({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.ClaimUpdateInput;
 }) {
   try {
@@ -54,7 +54,7 @@ export async function updateClaim({
   }
 }
 
-export async function deleteClaim({ id }: { id: number }) {
+export async function deleteClaim({ id }: { id: string }) {
   try {
     const deletedClaim = await claimManager.deleteClaim({ id });
     return deletedClaim;

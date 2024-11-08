@@ -34,7 +34,7 @@ export async function getEmergencyContacts(props?: {
   }
 }
 
-export async function getEmergencyContactById({ id }: { id: number }) {
+export async function getEmergencyContactById({ id }: { id: string }) {
   try {
     const property = await emergencyContactManager.getEmergencyContactById({
       id,
@@ -50,7 +50,7 @@ export async function updateEmergencyContact({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.EmergencyContactUpdateInput;
 }) {
   try {
@@ -66,7 +66,7 @@ export async function updateEmergencyContact({
   }
 }
 
-export async function deleteEmergencyContact({ id }: { id: number }) {
+export async function deleteEmergencyContact({ id }: { id: string }) {
   try {
     const deletedEmergencyContact =
       await emergencyContactManager.deleteEmergencyContact({

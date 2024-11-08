@@ -12,10 +12,9 @@ export class PropertyManager {
 
   async createProperty({ data }: { data: Prisma.PropertyCreateInput }) {
     try {
-      const newProperty = await this.prisma.property.create({
+      return await this.prisma.property.create({
         data: data,
       });
-      return newProperty;
     } catch (error) {
       throw error;
     }
@@ -23,19 +22,24 @@ export class PropertyManager {
 
   async getProperties(props?: { options?: Prisma.PropertyFindManyArgs }) {
     try {
-      const properties = await this.prisma.property.findMany(props?.options);
-      return properties;
+      return await this.prisma.property.findMany(props?.options);
     } catch (error) {
       throw error;
     }
   }
 
-  async getPropertyById({ id }: { id: number }) {
+  async getPropertyById({
+    id,
+    options,
+  }: {
+    id: string;
+    options?: Prisma.PropertyFindUniqueArgs;
+  }) {
     try {
-      const property = await this.prisma.property.findUnique({
+      return await this.prisma.property.findUnique({
         where: { id },
+        ...options,
       });
-      return property;
     } catch (error) {
       throw error;
     }
@@ -45,7 +49,7 @@ export class PropertyManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.PropertyUpdateInput;
   }) {
     try {
@@ -59,12 +63,11 @@ export class PropertyManager {
     }
   }
 
-  async deleteProperty({ id }: { id: number }) {
+  async deleteProperty({ id }: { id: string }) {
     try {
-      const deletedProperty = await this.prisma.property.delete({
+      return await this.prisma.property.delete({
         where: { id },
       });
-      return deletedProperty;
     } catch (error) {
       throw error;
     }

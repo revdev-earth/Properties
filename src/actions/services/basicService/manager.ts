@@ -34,7 +34,7 @@ export class BasicServiceManager {
     }
   }
 
-  async getBasicServiceById({ id }: { id: number }) {
+  async getBasicServiceById({ id }: { id: string }) {
     try {
       const basicService = await this.prisma.basicService.findUnique({
         where: { id },
@@ -49,7 +49,7 @@ export class BasicServiceManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.BasicServiceUpdateInput;
   }) {
     try {
@@ -63,7 +63,7 @@ export class BasicServiceManager {
     }
   }
 
-  async deleteBasicService({ id }: { id: number }) {
+  async deleteBasicService({ id }: { id: string }) {
     try {
       const deletedBasicService = await this.prisma.basicService.delete({
         where: { id },

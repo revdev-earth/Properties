@@ -30,7 +30,7 @@ export class InsuranceManager {
     }
   }
 
-  async getInsuranceById({ id }: { id: number }) {
+  async getInsuranceById({ id }: { id: string }) {
     try {
       const insurance = await this.prisma.insurance.findUnique({
         where: { id },
@@ -45,7 +45,7 @@ export class InsuranceManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.InsuranceUpdateInput;
   }) {
     try {
@@ -59,7 +59,7 @@ export class InsuranceManager {
     }
   }
 
-  async deleteInsurance({ id }: { id: number }) {
+  async deleteInsurance({ id }: { id: string }) {
     try {
       const deletedInsurance = await this.prisma.insurance.delete({
         where: { id },

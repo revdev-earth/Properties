@@ -38,7 +38,7 @@ export class EmergencyContactManager {
     }
   }
 
-  async getEmergencyContactById({ id }: { id: number }) {
+  async getEmergencyContactById({ id }: { id: string }) {
     try {
       const emergencyContact = await this.prisma.emergencyContact.findUnique({
         where: { id },
@@ -53,7 +53,7 @@ export class EmergencyContactManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.EmergencyContactUpdateInput;
   }) {
     try {
@@ -69,7 +69,7 @@ export class EmergencyContactManager {
     }
   }
 
-  async deleteEmergencyContact({ id }: { id: number }) {
+  async deleteEmergencyContact({ id }: { id: string }) {
     try {
       const deletedEmergencyContact = await this.prisma.emergencyContact.delete(
         {

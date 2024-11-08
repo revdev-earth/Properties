@@ -38,7 +38,7 @@ export class InformationPropertyManager {
     }
   }
 
-  async getInformationPropertyById({ id }: { id: number }) {
+  async getInformationPropertyById({ id }: { id: string }) {
     try {
       const property = await this.prisma.informationProperty.findUnique({
         where: { id },
@@ -53,7 +53,7 @@ export class InformationPropertyManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.InformationPropertyUpdateInput;
   }) {
     try {
@@ -67,7 +67,7 @@ export class InformationPropertyManager {
     }
   }
 
-  async deleteInformationProperty({ id }: { id: number }) {
+  async deleteInformationProperty({ id }: { id: string }) {
     try {
       const deletedProperty = await this.prisma.informationProperty.delete({
         where: { id },

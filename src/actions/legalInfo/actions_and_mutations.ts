@@ -29,7 +29,7 @@ export async function getProperties(props?: {
   }
 }
 
-export async function getLegalInfoById({ id }: { id: number }) {
+export async function getLegalInfoById({ id }: { id: string }) {
   try {
     const property = await legalInfoManager.getLegalInfoById({ id });
     return property;
@@ -43,7 +43,7 @@ export async function updateLegalInfo({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.LegalInfoUpdateInput;
 }) {
   try {
@@ -58,7 +58,7 @@ export async function updateLegalInfo({
   }
 }
 
-export async function deleteLegalInfo({ id }: { id: number }) {
+export async function deleteLegalInfo({ id }: { id: string }) {
   try {
     const deletedLegalInfo = await legalInfoManager.deleteLegalInfo({ id });
     return deletedLegalInfo;

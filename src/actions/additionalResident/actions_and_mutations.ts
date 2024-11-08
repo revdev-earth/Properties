@@ -34,7 +34,7 @@ export async function getAdditionalResidents(props?: {
   }
 }
 
-export async function getAdditionalResidentById({ id }: { id: number }) {
+export async function getAdditionalResidentById({ id }: { id: string }) {
   try {
     const property = await additionalResidentManager.getAdditionalResidentById({
       id,
@@ -50,7 +50,7 @@ export async function updateAdditionalResident({
   id,
   data,
 }: {
-  id: number;
+  id: string;
   data: Prisma.AdditionalResidentUpdateInput;
 }) {
   try {
@@ -66,7 +66,7 @@ export async function updateAdditionalResident({
   }
 }
 
-export async function deleteAdditionalResident({ id }: { id: number }) {
+export async function deleteAdditionalResident({ id }: { id: string }) {
   try {
     const deletedAdditionalResident =
       await additionalResidentManager.deleteAdditionalResident({ id });

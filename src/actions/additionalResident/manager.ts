@@ -40,7 +40,7 @@ export class AdditionalResidentManager {
     }
   }
 
-  async getAdditionalResidentById({ id }: { id: number }) {
+  async getAdditionalResidentById({ id }: { id: string }) {
     try {
       const additionalResident =
         await this.prisma.additionalResident.findUnique({
@@ -56,7 +56,7 @@ export class AdditionalResidentManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.AdditionalResidentUpdateInput;
   }) {
     try {
@@ -71,7 +71,7 @@ export class AdditionalResidentManager {
     }
   }
 
-  async deleteAdditionalResident({ id }: { id: number }) {
+  async deleteAdditionalResident({ id }: { id: string }) {
     try {
       const deletedAdditionalResident =
         await this.prisma.additionalResident.delete({

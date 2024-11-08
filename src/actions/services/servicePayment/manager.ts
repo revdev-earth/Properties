@@ -38,7 +38,7 @@ export class ServicePaymentManager {
     }
   }
 
-  async getServicePaymentById({ id }: { id: number }) {
+  async getServicePaymentById({ id }: { id: string }) {
     try {
       const servicePayment = await this.prisma.servicePayment.findUnique({
         where: { id },
@@ -53,7 +53,7 @@ export class ServicePaymentManager {
     id,
     data,
   }: {
-    id: number;
+    id: string;
     data: Prisma.ServicePaymentUpdateInput;
   }) {
     try {
@@ -67,7 +67,7 @@ export class ServicePaymentManager {
     }
   }
 
-  async deleteServicePayment({ id }: { id: number }) {
+  async deleteServicePayment({ id }: { id: string }) {
     try {
       const deletedServicePayment = await this.prisma.servicePayment.delete({
         where: { id },
