@@ -4,31 +4,31 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const navLinks = [
-  { href: "/dashboard/property/information", label: "Information" },
-  { href: "/dashboard/property/legal", label: "Legal" },
-  { href: "/dashboard/property/tenats", label: "Tenats" },
-  { href: "/dashboard/property/insurance", label: "Insurance" },
-  { href: "/dashboard/property/services", label: "Services" },
-  { href: "/dashboard/property/maintenance", label: "Maintenance" },
-  {
-    href: "/dashboard/property/photos-and-architectural",
-    label: "Photos and architectural",
-  },
-  { href: "/dashboard/property/settings", label: "Settings" },
+  { path: "information", label: "Information" },
+  { path: "legal", label: "Legal" },
+  { path: "tenats", label: "Tenats" },
+  { path: "insurance", label: "Insurance" },
+  { path: "services", label: "Services" },
+  { path: "maintenance", label: "Maintenance" },
+  { path: "photos-and-architectural", label: "Photos and architectural" },
+  { path: "settings", label: "Settings" },
 ];
 
 export function NavLinks() {
   const pathname = usePathname();
 
+  const pathParts = pathname.split("/"); // Split the current path by '/' and retrieve the property ID from the correct position
+  const propertyId = pathParts[3]; // The property ID is assumed to be in the 4th position
+
   return (
     <nav className="flex gap-5">
       {navLinks.map((link) => (
         <Link
-          key={link.href}
+          key={link.path}
           className={`py-3 px-4 bg-[#D9D9D9] rounded-full transition-all
-            ${pathname === link.href ? "font-bold" : ""}
+            ${pathname.includes(link.path) ? "font-bold" : ""}
           `}
-          href={link.href}
+          href={`/dashboard/property/${propertyId}/${link.path}`}
         >
           {link.label}
         </Link>

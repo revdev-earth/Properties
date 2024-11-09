@@ -53,11 +53,10 @@ export class PropertyManager {
     data: Prisma.PropertyUpdateInput;
   }) {
     try {
-      const updatedProperty = await this.prisma.property.update({
+      return await this.prisma.property.update({
         where: { id },
         data: data,
       });
-      return updatedProperty;
     } catch (error) {
       throw error;
     }
@@ -67,6 +66,46 @@ export class PropertyManager {
     try {
       return await this.prisma.property.delete({
         where: { id },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getPropertiesWithAddress() {
+    try {
+      return await this.prisma.property.findMany({
+        include: {
+          propertyInformation: {
+            select: {
+              streetAndNumber: true,
+              neighborhood: true,
+              cityAndState: true,
+            },
+          },
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getPropertyInformationByPropertyId({ id }: { id: string }) {
+    try {
+      return await this.prisma.property.findUnique({
+        where: { id },
+        include: { propertyInformation: true },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getPropertyLegalByPropertyId({ id }: { id: string }) {
+    try {
+      return await this.prisma.property.findUnique({
+        where: { id },
+        include: { propertyLegal: true },
       });
     } catch (error) {
       throw error;

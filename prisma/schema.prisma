@@ -15,24 +15,25 @@ model Property {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  informationProperty InformationProperty?
-  legalInfo           LegalInfo?
-  Tenant              Tenant[]
-  Insurance           Insurance[]
-  BasicService        BasicService[]
+  propertyInformation PropertyInformation?
+  propertyLegal       PropertyLegal?
+
+  tenant       Tenant[]
+  insurance    Insurance[]
+  basicService BasicService[]
 }
 
-model InformationProperty {
+model PropertyInformation {
   id Int @id @default(autoincrement())
 
   propertyId String   @unique // Ahora este campo es único, asegurando la relación uno a uno
   property   Property @relation(fields: [propertyId], references: [id])
 
-  streetAndNumber String // direccion
-  neighborhood    String // barrio
+  streetAndNumber String
+  neighborhood    String
   cityAndState    String
   postalCode      String
-  gpsCoordinates  String? // Optional
+  gpsCoordinates  String?
 
   // Features
   propertyType  String // E.g., house, apartment, commercial space, etc.
@@ -58,7 +59,7 @@ model InformationProperty {
   recreationalAreas    String? // Description of recreational areas, if available
 }
 
-model LegalInfo {
+model PropertyLegal {
   id Int @id @default(autoincrement())
 
   propertyId String   @unique // Ahora este campo es único, asegurando la relación uno a uno

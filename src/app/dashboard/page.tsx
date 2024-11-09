@@ -5,26 +5,14 @@ import { useEffect, useState } from "react";
 import CardAdmin from "./fragments/CardAdmin";
 import CardProperty, { PropertyWithAddress } from "./fragments/CardProperty";
 
-import { getProperties } from " +/actions/property/actions_and_mutations";
+import { getPropertiesWithAddress } from " +/actions/property/actions_and_mutations";
 
 export default function Dashboard() {
   const [properties, setProperties] = useState<PropertyWithAddress[]>([]);
 
   useEffect(() => {
     async function fetchProperties() {
-      const properties = (await getProperties({
-        options: {
-          include: {
-            informationProperty: {
-              select: {
-                streetAndNumber: true,
-                neighborhood: true,
-                cityAndState: true,
-              },
-            },
-          },
-        },
-      })) as PropertyWithAddress[];
+      const properties = await getPropertiesWithAddress();
       setProperties(properties);
     }
     fetchProperties();

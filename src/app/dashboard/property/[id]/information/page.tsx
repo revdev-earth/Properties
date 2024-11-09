@@ -1,20 +1,17 @@
 "use client";
-import { getInformationPropertyById } from " +/actions/informationProperty/actions_and_mutations";
-import { getPropertyById } from " +/actions/property/actions_and_mutations";
-import { InformationProperty } from "@prisma/client";
+
 import { useEffect, useState } from "react";
+import { PropertyInformation } from "@prisma/client";
 
-type Params = {
-  id: string;
-};
+import { PropsJustParams } from "../types";
+import { getPropertyInformationByPropertyId } from " +/actions/property/actions_and_mutations";
 
-export default function Information({ params }: { params: Promise<Params> }) {
+export default function Information({ params }: PropsJustParams) {
   const [id, setId] = useState<string | null>(null);
-  const [info, setInformationProperty] = useState<InformationProperty | null>(
+  const [info, setInformationProperty] = useState<PropertyInformation | null>(
     null
   );
 
-  // Resolver `params` y obtener el `id`
   useEffect(() => {
     async function resolveParams() {
       const resolvedParams = await params;
@@ -23,21 +20,16 @@ export default function Information({ params }: { params: Promise<Params> }) {
     resolveParams();
   }, [params]);
 
-  // Obtener la información de la propiedad una vez que `id` esté disponible
   useEffect(() => {
     if (id) {
       async function fetchInformationProperty() {
-        const { informationProperty } = ((await getPropertyById({
-          id,
-          options: {
-            include: {
-              informationProperty: true,
-            },
-          },
-        })) as { informationProperty: InformationProperty } | null) || {
-          informationProperty: null,
-        };
-        setInformationProperty(informationProperty);
+        if (id !== null) {
+          const { propertyInformation } =
+            (await getPropertyInformationByPropertyId({ id })) || {
+              propertyInformation: null,
+            };
+          setInformationProperty(propertyInformation);
+        }
       }
       fetchInformationProperty();
     }

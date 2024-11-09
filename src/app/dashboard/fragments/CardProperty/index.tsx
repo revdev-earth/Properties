@@ -10,10 +10,10 @@ const labels = [
 
 export interface PropertyWithAddress extends Property {
   informationProperty: {
-    streetAndNumber?: string;
-    neighborhood?: string;
-    cityAndState?: string;
-  };
+    streetAndNumber: string;
+    neighborhood: string;
+    cityAndState: string;
+  } | null;
 }
 
 interface Props {

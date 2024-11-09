@@ -68,3 +68,37 @@ export async function deleteProperty({ id }: { id: string }) {
     throw error;
   }
 }
+
+// Dashboard
+export async function getPropertiesWithAddress() {
+  try {
+    return await propertyManager.getPropertiesWithAddress();
+  } catch (error) {
+    console.error("Error fetching properties with address:", error);
+    throw error;
+  }
+}
+
+// PropertyInformation
+export async function getPropertyInformationByPropertyId({
+  id,
+}: {
+  id: string;
+}) {
+  try {
+    return await propertyManager.getPropertyInformationByPropertyId({ id });
+  } catch (error) {
+    console.error("Error fetching properties with address:", error);
+    throw error;
+  }
+}
+
+// PropertyLegal
+export async function getPropertyLegalByPropertyId({ id }: { id: string }) {
+  try {
+    return await propertyManager.getPropertyLegalByPropertyId({ id });
+  } catch (error) {
+    console.error("Error fetching properties with address:", error);
+    throw error;
+  }
+}
