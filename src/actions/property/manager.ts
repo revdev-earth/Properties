@@ -122,6 +122,16 @@ export class PropertyManager {
       throw error;
     }
   }
+  async getPropertyTenantByPropertyId({ id }: { id: string }) {
+    try {
+      return await this.prisma.property.findUnique({
+        where: { id },
+        include: { tenant: true },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export const propertyManager = new PropertyManager(new PrismaClient());

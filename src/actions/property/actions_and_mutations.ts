@@ -109,3 +109,12 @@ export async function getPropertyInsuranceByPropertyId({ id }: { id: string }) {
     throw error;
   }
 }
+
+export async function getPropertyTenantByPropertyId({ id }: { id: string }) {
+  try {
+    return await propertyManager.getPropertyTenantByPropertyId({ id });
+  } catch (error) {
+    console.error("Error fetching properties with address:", error);
+    throw error;
+  }
+}
