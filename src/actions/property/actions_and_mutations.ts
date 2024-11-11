@@ -79,7 +79,6 @@ export async function getPropertiesWithAddress() {
   }
 }
 
-// PropertyInformation
 export async function getPropertyInformationByPropertyId({
   id,
 }: {
@@ -93,7 +92,6 @@ export async function getPropertyInformationByPropertyId({
   }
 }
 
-// PropertyLegal
 export async function getPropertyLegalByPropertyId({ id }: { id: string }) {
   try {
     return await propertyManager.getPropertyLegalByPropertyId({ id });
@@ -103,7 +101,6 @@ export async function getPropertyLegalByPropertyId({ id }: { id: string }) {
   }
 }
 
-// PropertyInsurance
 export async function getPropertyInsuranceByPropertyId({ id }: { id: string }) {
   try {
     return await propertyManager.getPropertyInsuranceByPropertyId({ id });
