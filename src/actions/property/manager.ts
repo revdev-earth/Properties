@@ -116,7 +116,7 @@ export class PropertyManager {
     try {
       return await this.prisma.property.findUnique({
         where: { id },
-        include: { insurance: true },
+        include: { propertyInsurance: true },
       });
     } catch (error) {
       throw error;
@@ -126,7 +126,7 @@ export class PropertyManager {
     try {
       return await this.prisma.property.findUnique({
         where: { id },
-        include: { tenant: true },
+        include: { propertyTenant: true },
       });
     } catch (error) {
       throw error;

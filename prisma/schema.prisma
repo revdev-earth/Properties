@@ -18,10 +18,10 @@ model Property {
   propertyInformation PropertyInformation?
   propertyLegal       PropertyLegal?
 
-  tenant            PaymentTenant[]
-  basicService      PropertyBasicService[]
-  PropertyTenant    PropertyTenant[]
-  PropertyInsurance PropertyInsurance[]
+  tenant            PaymentTenant?
+  basicService      PropertyBasicService?
+  propertyTenant    PropertyTenant?
+  propertyInsurance PropertyInsurance?
 }
 
 model PropertyInformation {
@@ -113,9 +113,9 @@ model PropertyLegal {
 }
 
 model PropertyTenant {
-  id                     Int                          @id @default(autoincrement())
-  propertyId             String // Foreign key to Property model
-  property               Property                     @relation(fields: [propertyId], references: [id])
+  id                     Int      @id @default(autoincrement())
+  propertyId             String   @unique // Ahora este campo es único, asegurando la relación uno a uno
+  property               Property @relation(fields: [propertyId], references: [id])
   // Basic Tenant Information
   fullName               String
   identificationDocument String // Type and number (e.g., ID, passport)
@@ -123,7 +123,7 @@ model PropertyTenant {
   phone                  String
   email                  String
   additionalAddress      String? // Additional postal address if applicable
-  additionalResidents    PropertyAdditionalResident[] // List of additional people residing with the tenant
+  // additionalResidents    PropertyAdditionalResident[] // List of additional people residing with the tenant
 
   // Lease Contract Details
   leaseStartDate   DateTime
@@ -136,7 +136,7 @@ model PropertyTenant {
   // Financial Information and Payments
   rentAmount             Float // Monthly or periodic rent amount
   preferredPaymentMethod String // Payment method (e.g., bank transfer)
-  paymentHistory         PaymentTenant[] // Payment records with status
+  // paymentHistory         PaymentTenant[] // Payment records with status
   discountsOrAdjustments String? // Any discounts or adjustments in specific cases
 
   // Tenant Responsibilities
@@ -168,9 +168,9 @@ model PropertyTenant {
 }
 
 model PropertyAdditionalResident {
-  id                     Int            @id @default(autoincrement())
-  tenantId               Int // Foreign key to Tenant model
-  tenant                 PropertyTenant @relation(fields: [tenantId], references: [id])
+  id                     Int       @id @default(autoincrement())
+  // tenantId               Int // Foreign key to Tenant model
+  // tenant                 PropertyTenant @relation(fields: [tenantId], references: [id])
   // Basic Information for Each Additional Person
   fullName               String
   relationshipToTenant   String // Relationship to primary tenant
@@ -192,32 +192,32 @@ model PropertyAdditionalResident {
   // Incidents and Relevant Notes
   notableIncidents       String? // Record of any incidents involving this person
   additionalComments     String? // Additional notes for records
-  createdAt              DateTime       @default(now())
-  updatedAt              DateTime       @updatedAt
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
 }
 
 model PaymentTenant {
-  id                     String         @id @default(uuid())
-  tenantId               Int // Foreign key to Tenant model
-  tenant                 PropertyTenant @relation(fields: [tenantId], references: [id])
+  id                     String   @id @default(uuid())
+  // tenantId               Int // Foreign key to Tenant model
+  // tenant                 PropertyTenant @relation(fields: [tenantId], references: [id])
   // Payment Details
   paymentDate            DateTime
   paymentStatus          String // Status (on-time, delayed, pending)
   paymentNotes           String? // Notes for partial or incomplete payments
   lateFees               Float? // Late fees if any
   discountsOrAdjustments String? // Adjustments if any
-  createdAt              DateTime       @default(now())
-  updatedAt              DateTime       @updatedAt
-  Property               Property?      @relation(fields: [propertyId], references: [id])
-  propertyId             String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  propertyId             String   @unique // Ahora este campo es único, asegurando la relación uno a uno
+  property               Property @relation(fields: [propertyId], references: [id])
 }
 
 model PropertyInsurance {
   id Int @id @default(autoincrement())
 
   // Relation to Property
-  propertyId String? // Optional foreign key for property insurance
-  property   Property? @relation(fields: [propertyId], references: [id])
+  propertyId String   @unique // Ahora este campo es único, asegurando la relación uno a uno
+  property   Property @relation(fields: [propertyId], references: [id])
 
   // Relation to Tenant
   tenantId Int? // Optional foreign key for tenant insurance
@@ -246,22 +246,23 @@ model PropertyInsurance {
   claimProcedures       String? // Summary of claim procedures
 
   // Claims History
-  claims PropertyBasicService[] // Relation to the Claim model for claim records
+  // claims PropertyBasicService[] // Relation to the Claim model for claim records
 
   // Renewal and Special Conditions
   renewalConditions String? // Renewal terms (automatic or manual)
   coverageReviews   String? // Information on periodic coverage reviews or inspections
   specialClauses    String? // Special clauses impacting coverage
 
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  PropertyClaim PropertyClaim[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // PropertyClaim        PropertyClaim[]
+  // PropertyBasicService PropertyBasicService[]
 }
 
 model PropertyClaim {
-  id                Int               @id @default(autoincrement())
-  insuranceId       Int // Foreign key to Insurance model
-  insurance         PropertyInsurance @relation(fields: [insuranceId], references: [id])
+  id                Int      @id @default(autoincrement())
+  // insuranceId       Int // Foreign key to Insurance model
+  // insurance         PropertyInsurance @relation(fields: [insuranceId], references: [id])
   // Claim Details
   claimDate         DateTime // Date of the claim
   claimReason       String // Reason for the claim (e.g., water damage)
@@ -275,7 +276,7 @@ model PropertyClaim {
 
 model PropertyBasicService {
   id         String   @id @default(uuid())
-  propertyId String // Foreign key to Property model
+  propertyId String   @unique // Foreign key to Property model
   property   Property @relation(fields: [propertyId], references: [id])
 
   // Service Information
@@ -300,12 +301,12 @@ model PropertyBasicService {
 
   // Incident History
   incidentHistory      Incident[]
-  createdAt            DateTime           @default(now())
-  updatedAt            DateTime           @updatedAt
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
   billingDetailsId     Int?
   consumptionDetailsId Int?
-  PropertyInsurance    PropertyInsurance? @relation(fields: [propertyInsuranceId], references: [id])
-  propertyInsuranceId  Int?
+  // PropertyInsurance    PropertyInsurance? @relation(fields: [propertyInsuranceId], references: [id])
+  // propertyInsuranceId  Int?
 }
 
 model BillingDetails {

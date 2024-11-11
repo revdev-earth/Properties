@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Insurance } from "@prisma/client";
+import { PropertyInsurance } from "@prisma/client";
 
 import { PropsJustParams } from "../types";
 import { getPropertyInsuranceByPropertyId } from " +/actions/property/actions_and_mutations";
 
 export default function Information({ params }: PropsJustParams) {
   const [id, setId] = useState<string | null>(null);
-  const [insurance, setInsuranceProperty] = useState<Insurance | null>(null);
+  const [insurance, setInsuranceProperty] = useState<PropertyInsurance | null>(
+    null
+  );
 
   useEffect(() => {
     async function resolveParams() {
@@ -22,12 +24,14 @@ export default function Information({ params }: PropsJustParams) {
     if (id) {
       async function fetchInsuranceProperty() {
         if (id !== null) {
-          const { insurance } = (await getPropertyInsuranceByPropertyId({
-            id,
-          })) || {
-            insurance: null,
+          const { propertyInsurance } = (await getPropertyInsuranceByPropertyId(
+            {
+              id,
+            }
+          )) || {
+            propertyInsurance: null,
           };
-          setInsuranceProperty(insurance);
+          setInsuranceProperty(propertyInsurance);
         }
       }
       fetchInsuranceProperty();
