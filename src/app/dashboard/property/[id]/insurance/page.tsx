@@ -25,9 +25,7 @@ export default function Information({ params }: PropsJustParams) {
       async function fetchInsuranceProperty() {
         if (id !== null) {
           const { propertyInsurance } = (await getPropertyInsuranceByPropertyId(
-            {
-              id,
-            }
+            { id }
           )) || {
             propertyInsurance: null,
           };

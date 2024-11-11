@@ -17,11 +17,11 @@ model Property {
 
   propertyInformation PropertyInformation?
   propertyLegal       PropertyLegal?
+  propertyTenant      PropertyTenant?
+  propertyInsurance   PropertyInsurance?
 
-  tenant            PaymentTenant?
-  basicService      PropertyBasicService?
-  propertyTenant    PropertyTenant?
-  propertyInsurance PropertyInsurance?
+  basicService  PropertyBasicService?
+  paymentTenant PaymentTenant?
 }
 
 model PropertyInformation {
