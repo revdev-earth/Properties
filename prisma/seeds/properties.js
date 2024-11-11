@@ -1,5 +1,6 @@
 // seed.js
 const { PrismaClient } = require("@prisma/client");
+const { tenant1, tenant2 } = require("./tenants");
 const prisma = new PrismaClient();
 
 async function main() {
@@ -74,6 +75,9 @@ async function main() {
           environmentalPermits: null,
         },
       },
+      propertyTenant: {
+        create: tenant1,
+      },
     },
   });
 
@@ -142,6 +146,9 @@ async function main() {
           localNorms: "Compliance with SF historic property laws",
           environmentalPermits: "Required due to proximity to protected park",
         },
+      },
+      propertyTenant: {
+        create: tenant2,
       },
     },
   });

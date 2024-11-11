@@ -32,6 +32,7 @@ export default function Tenant({ params }: PropsJustParams) {
     }
   }, [id]);
 
+  console.table(tenant);
   if (!tenant) {
     return <div>Loading...</div>;
   }
