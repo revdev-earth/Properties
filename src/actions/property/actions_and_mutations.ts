@@ -102,3 +102,13 @@ export async function getPropertyLegalByPropertyId({ id }: { id: string }) {
     throw error;
   }
 }
+
+// PropertyInsurance
+export async function getPropertyInsuranceByPropertyId({ id }: { id: string }) {
+  try {
+    return await propertyManager.getPropertyInsuranceByPropertyId({ id });
+  } catch (error) {
+    console.error("Error fetching properties with address:", error);
+    throw error;
+  }
+}

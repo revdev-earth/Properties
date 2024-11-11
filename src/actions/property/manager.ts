@@ -111,6 +111,17 @@ export class PropertyManager {
       throw error;
     }
   }
+
+  async getPropertyInsuranceByPropertyId({ id }: { id: string }) {
+    try {
+      return await this.prisma.property.findUnique({
+        where: { id },
+        include: { insurance: true },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export const propertyManager = new PropertyManager(new PrismaClient());
