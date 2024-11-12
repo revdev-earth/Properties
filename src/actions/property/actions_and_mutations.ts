@@ -157,3 +157,15 @@ export async function getPropertyCorrectiveMaintenanceByPropertyId({
     throw error;
   }
 }
+
+export async function getMaintenanceRequestByPropertyId({
+  id,
+}: {
+  id: string;
+}) {
+  try {
+    return await propertyManager.getMaintenanceRequestByPropertyId({ id });
+  } catch (error) {
+    throw error;
+  }
+}
