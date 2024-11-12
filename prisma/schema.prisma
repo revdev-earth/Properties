@@ -435,13 +435,15 @@ model CorrectiveMaintenance {
   repairDate      DateTime
   repairType      String // Type of repair (e.g., water leak, window replacement)
   location        String // Location of issue (e.g., bathroom, kitchen)
-  provider        Provider @relation(fields: [providerId], references: [id])
-  providerId      Int
+  // provider        Provider @relation(fields: [providerId], references: [id])
+  // providerId      Int
   repairCost      Float
   costResponsible String // Tenant or Property owner
   warranty        String? // Warranty details and duration if applicable
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  Provider        Provider? @relation(fields: [providerId], references: [id])
+  providerId      Int?
 }
 
 model MaintenanceRequest {
