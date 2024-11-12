@@ -6,6 +6,7 @@ const { legal1, legal2 } = require("./legal");
 const { propertyInsurance1, propertyInsurance2 } = require("./insurance");
 const { service1, service2 } = require("./services");
 const { preventive1, preventive2 } = require("./maintenance/preventive");
+const { corrective1, corrective2 } = require("./maintenance/corrective");
 const prisma = new PrismaClient();
 
 async function main() {
@@ -35,6 +36,9 @@ async function main() {
       preventiveMaintenance: {
         create: preventive1,
       },
+      correctiveMaintenance: {
+        create: corrective1,
+      },
     },
   });
 
@@ -60,6 +64,9 @@ async function main() {
       },
       preventiveMaintenance: {
         create: preventive2,
+      },
+      correctiveMaintenance: {
+        create: corrective2,
       },
     },
   });
