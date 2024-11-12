@@ -181,3 +181,11 @@ export async function getMaintenanceHistoryByPropertyId({
     throw error;
   }
 }
+
+export async function getMaintenanceNotesByPropertyId({ id }: { id: string }) {
+  try {
+    return await propertyManager.getMaintenanceNotesByPropertyId({ id });
+  } catch (error) {
+    throw error;
+  }
+}
