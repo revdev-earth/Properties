@@ -142,3 +142,18 @@ export async function getPropertyPreventiveMaintenanceByPropertyId({
     throw error;
   }
 }
+
+export async function getPropertyCorrectiveMaintenanceByPropertyId({
+  id,
+}: {
+  id: string;
+}) {
+  try {
+    return await propertyManager.getPropertyCorrectiveMaintenanceByPropertyId({
+      id,
+    });
+  } catch (error) {
+    console.error("Error fetching properties with address:", error);
+    throw error;
+  }
+}
