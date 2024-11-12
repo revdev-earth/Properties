@@ -154,6 +154,17 @@ export class PropertyManager {
       throw error;
     }
   }
+
+  async getPropertyCorrectiveMaintenanceByPropertyId({ id }: { id: string }) {
+    try {
+      return await this.prisma.property.findUnique({
+        where: { id },
+        include: { correctiveMaintenance: true },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export const propertyManager = new PropertyManager(new PrismaClient());
