@@ -8,6 +8,7 @@ const { service1, service2 } = require("./services");
 const { preventive1, preventive2 } = require("./maintenance/preventive");
 const { corrective1, corrective2 } = require("./maintenance/corrective");
 const { request1, request2 } = require("./maintenance/resquest");
+const { inspectionHistory2 } = require("./maintenance/inspectionHistory");
 const prisma = new PrismaClient();
 
 async function main() {
@@ -43,6 +44,9 @@ async function main() {
       maintenanceRequest: {
         create: request1,
       },
+      inspectionHistory: {
+        create: inspectionHistory1,
+      },
     },
   });
 
@@ -74,6 +78,9 @@ async function main() {
       },
       maintenanceRequest: {
         create: request2,
+      },
+      inspectionHistory: {
+        create: inspectionHistory2,
       },
     },
   });
