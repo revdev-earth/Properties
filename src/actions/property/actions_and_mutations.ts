@@ -169,3 +169,15 @@ export async function getMaintenanceRequestByPropertyId({
     throw error;
   }
 }
+
+export async function getMaintenanceHistoryByPropertyId({
+  id,
+}: {
+  id: string;
+}) {
+  try {
+    return await propertyManager.getMaintenanceHistoryByPropertyId({ id });
+  } catch (error) {
+    throw error;
+  }
+}
