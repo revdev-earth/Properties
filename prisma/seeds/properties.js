@@ -32,7 +32,7 @@ async function main() {
       basicService: {
         create: service1,
       },
-      PreventiveMaintenance: {
+      preventiveMaintenance: {
         create: preventive1,
       },
     },
@@ -58,7 +58,7 @@ async function main() {
       basicService: {
         create: service2,
       },
-      PreventiveMaintenance: {
+      preventiveMaintenance: {
         create: preventive2,
       },
     },

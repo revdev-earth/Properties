@@ -20,8 +20,15 @@ model Property {
   propertyTenant      PropertyTenant?
   propertyInsurance   PropertyInsurance?
 
-  basicService  PropertyBasicService?
-  paymentTenant PaymentTenant?
+  basicService          PropertyBasicService?
+  paymentTenant         PaymentTenant?
+  preventiveMaintenance PreventiveMaintenance?
+  correctiveMaintenance CorrectiveMaintenance?
+  maintenanceRequest    MaintenanceRequest?
+  equipmentMaintenance  EquipmentMaintenance?
+  maintenanceCost       MaintenanceCost?
+  inspectionHistory     InspectionHistory?
+  maintenanceNotes      MaintenanceNotes?
 }
 
 model PropertyInformation {
@@ -404,4 +411,119 @@ model Incident {
   compensationNotes   String?
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
+}
+
+model PreventiveMaintenance {
+  id                  Int      @id @default(autoincrement())
+  propertyId          String   @unique // Foreign key to Property model
+  property            Property @relation(fields: [propertyId], references: [id])
+  // Preventive Maintenance Tasks
+  task                String // E.g., AC cleaning, plumbing inspection
+  frequency           String // E.g., monthly, quarterly, annual
+  nextMaintenanceDate DateTime // Next scheduled date for maintenance
+  costResponsible     String // Tenant or Property owner
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model CorrectiveMaintenance {
+  id         Int      @id @default(autoincrement())
+  propertyId String   @unique // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Repair History
+  repairDate      DateTime
+  repairType      String // Type of repair (e.g., water leak, window replacement)
+  location        String // Location of issue (e.g., bathroom, kitchen)
+  provider        Provider @relation(fields: [providerId], references: [id])
+  providerId      Int
+  repairCost      Float
+  costResponsible String // Tenant or Property owner
+  warranty        String? // Warranty details and duration if applicable
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model MaintenanceRequest {
+  id         Int      @id @default(autoincrement())
+  propertyId String   @unique // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Maintenance Reports and Requests
+  damageDescription String // Description of the damage
+  reportDate        DateTime // Date of report
+  reportedBy        String // Who reported it (tenant, owner, admin)
+  status            String // E.g., pending, in process, completed
+  resolutionDate    DateTime? // Date when damage was fixed
+  observations      String? // Additional notes and recommendations
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EquipmentMaintenance {
+  id         Int      @id @default(autoincrement())
+  propertyId String   @unique // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Equipment Details and Maintenance
+  equipmentName        String // E.g., refrigerator, stove, AC
+  maintenanceFrequency String // E.g., monthly, annual
+  lastMaintenanceDate  DateTime // Date of last maintenance
+  warrantyPolicy       String? // Maintenance policy or warranty information
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model Provider {
+  id Int @id @default(autoincrement())
+
+  // Provider Information
+  name                  String
+  servicesProvided      String // E.g., plumbing, electrical, painting
+  contactPhone          String
+  contactEmail          String?
+  availability          String? // E.g., weekdays only, appointment required
+  contractDetails       String? // Regular maintenance contract details, if any
+  correctiveMaintenance CorrectiveMaintenance[]
+}
+
+model MaintenanceCost {
+  id               Int      @id @default(autoincrement())
+  propertyId       String   @unique // Foreign key to Property model
+  property         Property @relation(fields: [propertyId], references: [id])
+  // Cost and Budget Information
+  annualBudget     Float
+  accumulatedCosts Float // Total accumulated maintenance costs
+  costDistribution String? // Breakdown of costs between owner and tenant
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model InspectionHistory {
+  id         Int      @id @default(autoincrement())
+  propertyId String   @unique // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Inspection and Audit History
+  inspectionDate     DateTime // Scheduled inspection date
+  inspectionType     String // Type of inspection (e.g., electrical, structural)
+  findings           String? // Summary of findings and observations
+  recommendedActions String? // Suggested actions for property upkeep
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model MaintenanceNotes {
+  id         Int      @id @default(autoincrement())
+  propertyId String   @unique // Foreign key to Property model
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  // Additional Notes and Recommendations
+  usageRecommendations    String? // Tips for proper use and care of the property
+  specialTasks            String? // Non-periodic tasks (e.g., seasonal preparations)
+  sustainabilityPractices String? // Suggestions for sustainable practices
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

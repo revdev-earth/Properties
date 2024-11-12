@@ -148,7 +148,7 @@ export class PropertyManager {
     try {
       return await this.prisma.property.findUnique({
         where: { id },
-        include: { PreventiveMaintenance: true },
+        include: { preventiveMaintenance: true },
       });
     } catch (error) {
       throw error;
