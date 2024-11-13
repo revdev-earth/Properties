@@ -114,10 +114,12 @@ export class PropertyManager {
 
   async getPropertyInsuranceByPropertyId({ id }: { id: string }) {
     try {
-      return await this.prisma.property.findUnique({
+      const property = await this.prisma.property.findUnique({
         where: { id },
         include: { propertyInsurance: true },
       });
+      debugger;
+      return property;
     } catch (error) {
       throw error;
     }

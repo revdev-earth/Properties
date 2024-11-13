@@ -43,7 +43,47 @@ const propertyInsurance2 = {
   specialClauses: "Property must be inspected annually for eligibility",
 };
 
+const propertyInsurance3 = {
+  insuranceType: "Home",
+  insuranceCompany: "Company A",
+  policyNumber: "POL123456",
+  startDate: new Date("2024-01-01"),
+  expirationDate: new Date("2025-01-01"),
+  insuredAmount: 100000,
+  premiumCost: 500,
+  mainCoverage: "Fire, Theft",
+  thirdPartyCoverage: "Yes",
+  equipmentCoverage: "Appliances, HVAC",
+  coverageExclusions: "Natural disasters",
+  applicableDeductibles: "$1000",
+  emergencyContact: "123-456-7890",
+  insuranceAgentName: "Agent A",
+  insuranceAgentContact: "agentA@insurance.com",
+  claimProcedures: "Call emergency number",
+  renewalConditions: "Automatic renewal",
+  coverageReviews: "Annual",
+  specialClauses: "Excludes flood damage",
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
+
+const propertyInsurance4 = {
+  insuranceType: "Flood",
+  insuranceCompany: "Company B",
+  policyNumber: "POL654321",
+  startDate: new Date("2024-06-01"),
+  expirationDate: new Date("2025-06-01"),
+  insuredAmount: 50000,
+  premiumCost: 300,
+  mainCoverage: "Flood",
+  coverageExclusions: "Non-flood events",
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
+
 module.exports = {
   propertyInsurance1,
   propertyInsurance2,
+  propertyInsurance3,
+  propertyInsurance4,
 };

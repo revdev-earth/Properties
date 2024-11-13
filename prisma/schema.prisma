@@ -18,7 +18,8 @@ model Property {
   propertyInformation PropertyInformation?
   propertyLegal       PropertyLegal?
   propertyTenant      PropertyTenant?
-  propertyInsurance   PropertyInsurance?
+
+  propertyInsurance PropertyInsurance[]
 
   basicService          PropertyBasicService?
   paymentTenant         PaymentTenant?
@@ -170,8 +171,7 @@ model PropertyTenant {
   createdAt                DateTime @default(now())
   updatedAt                DateTime @updatedAt
 
-  // Insurance
-  Insurance PropertyInsurance[]
+  PropertyInsurance PropertyInsurance[]
 }
 
 model PropertyAdditionalResident {
@@ -222,43 +222,43 @@ model PaymentTenant {
 model PropertyInsurance {
   id Int @id @default(autoincrement())
 
-  // Relation to Property
-  propertyId String   @unique // Ahora este campo es único, asegurando la relación uno a uno
+  // Clave externa sin restricción @unique para permitir varios registros relacionados con un solo Property
+  propertyId String // Campo de relación para la clave externa
   property   Property @relation(fields: [propertyId], references: [id])
 
-  // Relation to Tenant
-  tenantId Int? // Optional foreign key for tenant insurance
+  // Relación con Tenant
+  tenantId Int? // Clave externa opcional para seguro de inquilino
   tenant   PropertyTenant? @relation(fields: [tenantId], references: [id])
 
-  // Basic Insurance Information
-  insuranceType    String // Type of insurance (e.g., home, fire, disaster)
-  insuranceCompany String // Insurance provider's name
-  policyNumber     String // Policy ID or code
-  startDate        DateTime // Insurance start date
-  expirationDate   DateTime // Insurance expiration date
-  insuredAmount    Float // Insured value or maximum indemnity
-  premiumCost      Float // Premium cost (e.g., annual or periodic)
+  // Información básica del seguro
+  insuranceType    String // Tipo de seguro (ej. hogar, incendio, desastre)
+  insuranceCompany String // Nombre del proveedor del seguro
+  policyNumber     String // ID o código de póliza
+  startDate        DateTime // Fecha de inicio del seguro
+  expirationDate   DateTime // Fecha de vencimiento del seguro
+  insuredAmount    Float // Valor asegurado o indemnización máxima
+  premiumCost      Float // Costo de la prima (ej. anual o periódico)
 
-  // Coverage and Exclusions
-  mainCoverage          String // Main coverage items (e.g., fire, theft)
-  thirdPartyCoverage    String? // Third-party liability coverage
-  equipmentCoverage     String? // Coverage for appliances, HVAC, electrical, etc.
-  coverageExclusions    String? // List of coverage exclusions
-  applicableDeductibles String? // Deductibles per type of risk
+  // Cobertura y exclusiones
+  mainCoverage          String // Principales coberturas (ej. incendio, robo)
+  thirdPartyCoverage    String? // Cobertura de responsabilidad civil a terceros
+  equipmentCoverage     String? // Cobertura para electrodomésticos, HVAC, etc.
+  coverageExclusions    String? // Lista de exclusiones de cobertura
+  applicableDeductibles String? // Deducibles según tipo de riesgo
 
-  // Emergency Contact Information
-  emergencyContact      String? // Emergency or claims contact number
-  insuranceAgentName    String? // Name of the insurance agent
-  insuranceAgentContact String? // Agent's contact info (phone, email)
-  claimProcedures       String? // Summary of claim procedures
+  // Información de contacto de emergencia
+  emergencyContact      String? // Contacto de emergencia o de siniestros
+  insuranceAgentName    String? // Nombre del agente de seguros
+  insuranceAgentContact String? // Información de contacto del agente (teléfono, correo)
+  claimProcedures       String? // Resumen de procedimientos de siniestro
 
-  // Claims History
-  // claims PropertyBasicService[] // Relation to the Claim model for claim records
+  // Historial de siniestros
+  // claims PropertyBasicService[] // Relación con el modelo Claim para registros de siniestros
 
-  // Renewal and Special Conditions
-  renewalConditions String? // Renewal terms (automatic or manual)
-  coverageReviews   String? // Information on periodic coverage reviews or inspections
-  specialClauses    String? // Special clauses impacting coverage
+  // Renovación y condiciones especiales
+  renewalConditions String? // Términos de renovación (automática o manual)
+  coverageReviews   String? // Información sobre revisiones o inspecciones periódicas de cobertura
+  specialClauses    String? // Cláusulas especiales que impactan la cobertura
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
