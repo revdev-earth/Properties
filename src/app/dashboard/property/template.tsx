@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { NavLinks } from "./fragments/navLinks";
+import BackButton from "../fragments/BackButton";
 
 export default function PropertyLayout({
   children,
@@ -19,13 +20,7 @@ export default function PropertyLayout({
           />
         </div>
         <div className="flex gap-5 items-center font-semibold">
-          <Image
-            src="/icons/arrow-left.svg"
-            alt="plus"
-            width={30}
-            height={30}
-            className="bg-[#D9D9D9] p-1 rounded-full fill-white"
-          />
+          <BackButton />
           <p>Property address</p>
         </div>
         <NavLinks />
