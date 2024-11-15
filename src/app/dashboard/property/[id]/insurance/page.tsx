@@ -25,11 +25,8 @@ export default function Information({ params }: PropsJustParams) {
     if (id) {
       async function fetchInsuranceProperty() {
         if (id !== null) {
-          const { propertyInsurance } = (await getPropertyInsuranceByPropertyId(
-            { id }
-          )) || {
-            propertyInsurance: null,
-          };
+          const property = await getPropertyInsuranceByPropertyId({ id });
+          const { propertyInsurance } = property || { propertyInsurance: null };
           setInsurances(propertyInsurance);
         }
       }

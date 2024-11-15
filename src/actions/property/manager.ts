@@ -114,12 +114,10 @@ export class PropertyManager {
 
   async getPropertyInsuranceByPropertyId({ id }: { id: string }) {
     try {
-      const property = await this.prisma.property.findUnique({
+      return await this.prisma.property.findUnique({
         where: { id },
         include: { propertyInsurance: true },
       });
-      debugger;
-      return property;
     } catch (error) {
       throw error;
     }
@@ -137,12 +135,16 @@ export class PropertyManager {
 
   async getPropertyServicesByPropertyId({ id }: { id: string }) {
     try {
-      const property = await this.prisma.property.findUnique({
+      return await this.prisma.property.findUnique({
         where: { id },
-        include: { basicService: true },
+        include: {
+          basicService: {
+            include: {
+              servicePayment: true,
+            },
+          },
+        },
       });
-      debugger;
-      return property;
     } catch (error) {
       throw error;
     }

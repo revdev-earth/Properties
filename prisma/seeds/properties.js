@@ -54,17 +54,36 @@ async function main() {
       },
       basicService: {
         create: [
-          /*           {
-            service1,
+          {
+            ...service1,
             servicePayment: {
               create: [pay1Service1],
             },
-          }, */
-          service1,
-          service2,
-          service3,
-          service4,
-          service5,
+          },
+          {
+            ...service2,
+            servicePayment: {
+              create: [pay1Service1],
+            },
+          },
+          {
+            ...service3,
+            servicePayment: {
+              create: [pay1Service1],
+            },
+          },
+          {
+            ...service4,
+            servicePayment: {
+              create: [pay1Service1],
+            },
+          },
+          {
+            ...service5,
+            servicePayment: {
+              create: [pay1Service1],
+            },
+          },
         ],
       },
       preventiveMaintenance: {
@@ -124,11 +143,6 @@ async function main() {
         create: noteMaintenance4,
       },
     },
-  });
-
-  console.log("Created properties with legal information:", {
-    property1,
-    property2,
   });
 }
 

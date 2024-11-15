@@ -24,10 +24,10 @@ export default function Information({ params }: PropsJustParams) {
     if (id) {
       async function fetchInformationProperty() {
         if (id !== null) {
-          const { propertyInformation } =
-            (await getPropertyInformationByPropertyId({ id })) || {
-              propertyInformation: null,
-            };
+          const property = await getPropertyInformationByPropertyId({ id });
+          const { propertyInformation } = property || {
+            propertyInformation: null,
+          };
           setInformationProperty(propertyInformation);
         }
       }

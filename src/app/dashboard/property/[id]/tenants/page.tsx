@@ -22,9 +22,8 @@ export default function Tenant({ params }: PropsJustParams) {
     if (id) {
       async function fetchInformationProperty() {
         if (id !== null) {
-          const { propertyTenant } = (await getPropertyTenantByPropertyId({
-            id,
-          })) || { propertyTenant: null };
+          const property = await getPropertyTenantByPropertyId({ id });
+          const { propertyTenant } = property || { propertyTenant: null };
           setTenant(propertyTenant);
         }
       }

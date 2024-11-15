@@ -22,9 +22,8 @@ export default function Information({ params }: PropsJustParams) {
     if (id) {
       async function fetchInformationProperty() {
         if (id !== null) {
-          const { propertyLegal } = (await getPropertyLegalByPropertyId({
-            id,
-          })) || { propertyLegal: null };
+          const property = await getPropertyLegalByPropertyId({ id });
+          const { propertyLegal } = property || { propertyLegal: null };
           setLegal(propertyLegal);
         }
       }

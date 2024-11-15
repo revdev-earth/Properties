@@ -9,7 +9,7 @@ import Service from "./Service";
 
 export default function Services({ params }: PropsJustParams) {
   const [id, setId] = useState<string | null>(null);
-  const [services, setServices] = useState<PropertyBasicService | null>(null);
+  const [services, setServices] = useState<PropertyBasicService[] | null>(null);
 
   useEffect(() => {
     async function resolveParams() {
@@ -23,17 +23,14 @@ export default function Services({ params }: PropsJustParams) {
     if (id) {
       async function fetchServicesProperty() {
         if (id !== null) {
-          const { basicService } = (await getPropertyServicesByPropertyId({
-            id,
-          })) || { basicService: null };
+          const property = await getPropertyServicesByPropertyId({ id });
+          const { basicService } = property || { basicService: null };
           setServices(basicService);
         }
       }
       fetchServicesProperty();
     }
   }, [id]);
-
-  console.log("services  ::", services);
 
   if (!services) {
     return <div>Loading...</div>;
