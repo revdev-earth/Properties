@@ -137,10 +137,12 @@ export class PropertyManager {
 
   async getPropertyServicesByPropertyId({ id }: { id: string }) {
     try {
-      return await this.prisma.property.findUnique({
+      const property = await this.prisma.property.findUnique({
         where: { id },
         include: { basicService: true },
       });
+      debugger;
+      return property;
     } catch (error) {
       throw error;
     }

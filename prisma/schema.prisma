@@ -20,8 +20,8 @@ model Property {
   propertyTenant      PropertyTenant?
 
   propertyInsurance PropertyInsurance[]
+  basicService      PropertyBasicService[]
 
-  basicService          PropertyBasicService?
   paymentTenant         PaymentTenant?
   preventiveMaintenance PreventiveMaintenance?
   correctiveMaintenance CorrectiveMaintenance?
@@ -283,7 +283,7 @@ model PropertyClaim {
 
 model PropertyBasicService {
   id         String   @id @default(uuid())
-  propertyId String   @unique // Foreign key to Property model
+  propertyId String // Foreign key to Property model
   property   Property @relation(fields: [propertyId], references: [id])
 
   // Service Information
@@ -291,116 +291,51 @@ model PropertyBasicService {
   provider           String // Name of the service provider
   accountNumber      String // Unique service identifier (e.g., meter number)
   paymentResponsible String // Tenant or Property owner
-  // Billing and Payment Details
-  billingDetails     BillingDetails?
-
-  // Consumption and Measurement
-  consumptionDetailsId Int?
-  consumptionDetails   ConsumptionDetails? @relation(fields: [consumptionDetailsId], references: [id])
-
-  // Additional and Optional Services
-  additionalServices AdditionalService[] // Related additional services
 
   // Emergency and Support Contacts
-  emergencyContact EmergencyContact?
-
-  // Conditions and Specific Clauses
-  specificConditions SpecificConditions?
-
-  // Incident History
-  incidentHistory Incident[]
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
-  // PropertyInsurance    PropertyInsurance? @relation(fields: [propertyInsuranceId], references: [id])
-  // propertyInsuranceId  Int?
-}
-
-model BillingDetails {
-  id             Int              @id @default(autoincrement())
-  billingDate    DateTime // Date when the invoice is issued
-  dueDate        DateTime // Payment due date
-  paymentStatus  String // Status (e.g., paid, pending, in process)
-  averageAmount  Float? // Average monthly or bi-monthly amount
-  paymentHistory ServicePayment[] // List of previous payments
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-
-  basicServiceId String               @unique
-  BasicService   PropertyBasicService @relation(fields: [basicServiceId], references: [id])
-}
-
-model ServicePayment {
-  id               Int            @id @default(autoincrement())
-  billingDetailsId Int // Foreign key to BillingDetails model
-  billingDetails   BillingDetails @relation(fields: [billingDetailsId], references: [id])
-
-  paymentDate  DateTime
-  amount       Float
-  paymentNotes String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model ConsumptionDetails {
-  id                 Int                    @id @default(autoincrement())
-  measurementMethod  String? // E.g., water meter, electricity in kWh, gas tank
-  meterReadings      MeterReading[] // List of meter readings
-  averageConsumption Float? // Average consumption for a given period
-  createdAt          DateTime               @default(now())
-  updatedAt          DateTime               @updatedAt
-  BasicService       PropertyBasicService[]
-}
-
-model MeterReading {
-  id                   Int                @id @default(autoincrement())
-  consumptionDetailsId Int // Foreign key to ConsumptionDetails model
-  consumptionDetails   ConsumptionDetails @relation(fields: [consumptionDetailsId], references: [id])
-  readingDate          DateTime
-  readingValue         Float
-  readingNotes         String?
-  createdAt            DateTime           @default(now())
-  updatedAt            DateTime           @updatedAt
-}
-
-model AdditionalService {
-  id                 Int                  @id @default(autoincrement())
-  basicServiceId     String // Foreign key to BasicService model
-  basicService       PropertyBasicService @relation(fields: [basicServiceId], references: [id])
-  serviceType        String // E.g., cleaning, gardening, pool maintenance
-  provider           String // Name of provider
-  serviceFrequency   String // E.g., weekly, bi-weekly, monthly
-  paymentResponsible String // Tenant or Property owner
-  serviceCost        Float
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-}
-
-model EmergencyContact {
-  id                  Int                  @id @default(autoincrement())
-  basicServiceId      String               @unique
-  BasicService        PropertyBasicService @relation(fields: [basicServiceId], references: [id])
   emergencyNumber     String // Emergency contact number
   supportContactName  String // Name of the technical support contact
   supportContactPhone String
   supportContactEmail String?
   supportHours        String // Customer support hours
-  createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
-}
 
-model SpecificConditions {
-  id                     Int                  @id @default(autoincrement())
-  basicServiceId         String               @unique
-  BasicService           PropertyBasicService @relation(fields: [basicServiceId], references: [id])
+  // Conditions and Specific Clauses
   disconnectionClause    String? // Details about disconnection/reconnection terms
   contractConditions     String? // Contract terms, penalties for early cancellation
   sharedResponsibilities String? // Shared responsibilities between tenant and owner
-  createdAt              DateTime             @default(now())
-  updatedAt              DateTime             @updatedAt
+
+  // Incident History
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  // PropertyInsurance    PropertyInsurance? @relation(fields: [propertyInsuranceId], references: [id])
+  // propertyInsuranceId  Int?
+  incident       IncidentService[]
+  servicePayment ServicePayment[]
 }
 
-model Incident {
+model ServicePayment {
+  id             String               @id @default(uuid())
+  basicServiceId String // Foreign key to BasicService model
+  basicService   PropertyBasicService @relation(fields: [basicServiceId], references: [id])
+  // Billing and Payment Details
+  dueDate        DateTime // Payment due date
+  paymentStatus  String // Status (e.g., paid, pending, in process)
+  averageAmount  Float? // Average monthly or bi-monthly amount
+
+  // payments
+  paymentDate  DateTime
+  amount       Float
+  paymentNotes String?
+
+  // Consumption and Measurement
+  measurementMethod  String? // E.g., water meter, electricity in kWh, gas tank
+  readingDate        DateTime
+  readingValue       Float
+  readingNotes       String?
+  averageConsumption Float? // Average consumption for a given period
+}
+
+model IncidentService {
   id                  Int                  @id @default(autoincrement())
   basicServiceId      String // Foreign key to BasicService model
   basicService        PropertyBasicService @relation(fields: [basicServiceId], references: [id])

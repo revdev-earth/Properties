@@ -9,7 +9,18 @@ const {
   propertyInsurance3,
   propertyInsurance4,
 } = require("./insurance");
-const { service1, service2 } = require("./services");
+const {
+  service1,
+  service2,
+  service3,
+  service4,
+  service5,
+  service6,
+  service7,
+  service8,
+  service9,
+  service10,
+} = require("./services/services");
 const { preventive1, preventive2 } = require("./maintenance/preventive");
 const { corrective1, corrective2 } = require("./maintenance/corrective");
 const { request1, request2 } = require("./maintenance/resquest");
@@ -20,6 +31,7 @@ const {
   noteMaintenance4,
   noteMaintenance3,
 } = require("./maintenance/notes");
+const { pay1Service1 } = require("./services/paymentServices");
 const prisma = new PrismaClient();
 
 async function main() {
@@ -37,14 +49,23 @@ async function main() {
       propertyTenant: {
         create: tenant1,
       },
-      propertyTenant: {
-        create: tenant1,
-      },
       propertyInsurance: {
         create: [propertyInsurance1, propertyInsurance2],
       },
       basicService: {
-        create: service1,
+        create: [
+          /*           {
+            service1,
+            servicePayment: {
+              create: [pay1Service1],
+            },
+          }, */
+          service1,
+          service2,
+          service3,
+          service4,
+          service5,
+        ],
       },
       preventiveMaintenance: {
         create: preventive1,
@@ -78,14 +99,11 @@ async function main() {
       propertyTenant: {
         create: tenant2,
       },
-      propertyTenant: {
-        create: tenant2,
-      },
       propertyInsurance: {
         create: [propertyInsurance3, propertyInsurance4],
       },
       basicService: {
-        create: service2,
+        create: [service6, service7, service8, service9, service10],
       },
       preventiveMaintenance: {
         create: preventive2,
