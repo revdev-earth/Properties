@@ -252,13 +252,13 @@ model PropertyInsurance {
   insuranceAgentContact String? // Información de contacto del agente (teléfono, correo)
   claimProcedures       String? // Resumen de procedimientos de siniestro
 
-  // Historial de siniestros
-  // claims PropertyBasicService[] // Relación con el modelo Claim para registros de siniestros
-
   // Renovación y condiciones especiales
   renewalConditions String? // Términos de renovación (automática o manual)
   coverageReviews   String? // Información sobre revisiones o inspecciones periódicas de cobertura
   specialClauses    String? // Cláusulas especiales que impactan la cobertura
+
+  // Historial de siniestros
+  claims PropertyBasicService[] // Relación con el modelo Claim para registros de siniestros
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -305,12 +305,14 @@ model PropertyBasicService {
   sharedResponsibilities String? // Shared responsibilities between tenant and owner
 
   // Incident History
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
   // PropertyInsurance    PropertyInsurance? @relation(fields: [propertyInsuranceId], references: [id])
   // propertyInsuranceId  Int?
-  incident       IncidentService[]
-  servicePayment ServicePayment[]
+  incident            IncidentService[]
+  servicePayment      ServicePayment[]
+  PropertyInsurance   PropertyInsurance? @relation(fields: [propertyInsuranceId], references: [id])
+  propertyInsuranceId Int?
 }
 
 model ServicePayment {

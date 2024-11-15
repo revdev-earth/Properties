@@ -5,7 +5,7 @@ import { PropertyInsurance } from "@prisma/client";
 
 import { PropsJustParams } from "../types";
 import { getPropertyInsuranceByPropertyId } from " +/actions/property/actions_and_mutations";
-import Insurance from "./Insurance";
+import Insurance from "./features/Insurance";
 
 export default function Information({ params }: PropsJustParams) {
   const [id, setId] = useState<string | null>(null);

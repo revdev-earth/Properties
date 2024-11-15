@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { PropertyBasicService } from "@prisma/client";
 
-import { PropsJustParams } from "../types";
-import { getPropertyServicesByPropertyId } from " +/actions/property/actions_and_mutations";
-import CardService from "./features/cardService";
+import { PropsJustParams } from "./types";
+import { getPropertyBasicServiceById } from " +/actions/services/actions_and_mutations";
 
 export default function Services({ params }: PropsJustParams) {
   const [id, setId] = useState<string | null>(null);
@@ -14,7 +13,7 @@ export default function Services({ params }: PropsJustParams) {
   useEffect(() => {
     async function resolveParams() {
       const resolvedParams = await params;
-      setId(resolvedParams.id);
+      setId(resolvedParams.serviceId);
     }
     resolveParams();
   }, [params]);
@@ -23,7 +22,7 @@ export default function Services({ params }: PropsJustParams) {
     if (id) {
       async function fetchServicesProperty() {
         if (id !== null) {
-          const property = await getPropertyServicesByPropertyId({ id });
+          const property = await getPropertyBasicServiceById({ id });
           const { basicService } = property || { basicService: null };
           setServices(basicService);
         }
@@ -32,15 +31,11 @@ export default function Services({ params }: PropsJustParams) {
     }
   }, [id]);
 
+  console.log(" service :: ", services);
   if (!services) {
     return <div>Loading...</div>;
   }
+  // const service = services.find((service) => service.id === id);
 
-  return (
-    <div className="flex  gap-5 flex-wrap">
-      {services.map((service) => (
-        <CardService key={service.id} service={service} />
-      ))}
-    </div>
-  );
+  return <div>service</div>;
 }
