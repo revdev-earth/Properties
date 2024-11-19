@@ -128,64 +128,11 @@ export async function getPropertyServicesByPropertyId({ id }: { id: string }) {
   }
 }
 
-export async function getPropertyPreventiveMaintenanceByPropertyId({
-  id,
-}: {
-  id: string;
-}) {
+export async function getMAintenanceInfoByPropertyId({ id }: { id: string }) {
   try {
-    return await propertyManager.getPropertyPreventiveMaintenanceByPropertyId({
-      id,
-    });
+    return await propertyManager.getMAintenanceInfoByPropertyId({ id });
   } catch (error) {
     console.error("Error fetching properties with address:", error);
-    throw error;
-  }
-}
-
-export async function getPropertyCorrectiveMaintenanceByPropertyId({
-  id,
-}: {
-  id: string;
-}) {
-  try {
-    return await propertyManager.getPropertyCorrectiveMaintenanceByPropertyId({
-      id,
-    });
-  } catch (error) {
-    console.error("Error fetching properties with address:", error);
-    throw error;
-  }
-}
-
-export async function getMaintenanceRequestByPropertyId({
-  id,
-}: {
-  id: string;
-}) {
-  try {
-    return await propertyManager.getMaintenanceRequestByPropertyId({ id });
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function getMaintenanceHistoryByPropertyId({
-  id,
-}: {
-  id: string;
-}) {
-  try {
-    return await propertyManager.getMaintenanceHistoryByPropertyId({ id });
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function getMaintenanceNotesByPropertyId({ id }: { id: string }) {
-  try {
-    return await propertyManager.getMaintenanceNotesByPropertyId({ id });
-  } catch (error) {
     throw error;
   }
 }

@@ -150,54 +150,17 @@ export class PropertyManager {
     }
   }
 
-  async getPropertyPreventiveMaintenanceByPropertyId({ id }: { id: string }) {
+  async getMAintenanceInfoByPropertyId({ id }: { id: string }) {
     try {
       return await this.prisma.property.findUnique({
         where: { id },
-        include: { preventiveMaintenance: true },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getPropertyCorrectiveMaintenanceByPropertyId({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findUnique({
-        where: { id },
-        include: { correctiveMaintenance: true },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getMaintenanceRequestByPropertyId({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findUnique({
-        where: { id },
-        include: { maintenanceRequest: true },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-  async getMaintenanceHistoryByPropertyId({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findUnique({
-        where: { id },
-        include: { inspectionHistory: true },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getMaintenanceNotesByPropertyId({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findUnique({
-        where: { id },
-        include: { maintenanceNotes: true },
+        include: {
+          maintenanceInfoProperty: {
+            include: {
+              maintenance: true,
+            },
+          },
+        },
       });
     } catch (error) {
       throw error;
