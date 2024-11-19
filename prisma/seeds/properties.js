@@ -161,7 +161,7 @@ async function createProperties() {
           },
         ],
       },
-      maintenanceProperty: {
+      maintenanceInfoProperty: {
         create: maintenanceProperty2,
       },
     },
