@@ -1,4 +1,4 @@
-provedor1 = {
+provider1 = {
   name: "Climas S.A.", // Provider name
   servicesProvided: "Air conditioning installation and maintenance", // Services provided
   contactPhone: "555-1234", // Contact phone number
@@ -8,7 +8,7 @@ provedor1 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-provedor2 = {
+provider2 = {
   name: "Global Refrigeration S.A.",
   servicesProvided: "Refrigerator installation and repair",
   contactPhone: "555-2345",
@@ -18,7 +18,7 @@ provedor2 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-provedor3 = {
+provider3 = {
   name: "Heating Services S.A.",
   servicesProvided: "Water heater installation and maintenance",
   contactPhone: "555-3456",
@@ -28,7 +28,7 @@ provedor3 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-provedor4 = {
+provider4 = {
   name: "Quick Appliances",
   servicesProvided: "General appliance repair and maintenance",
   contactPhone: "555-4567",
@@ -38,7 +38,7 @@ provedor4 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-provedor5 = {
+provider5 = {
   name: "Appliance Repairs Inc.",
   servicesProvided: "Microwave, oven, and washer repairs",
   contactPhone: "555-5678",
@@ -48,7 +48,7 @@ provedor5 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-provedor6 = {
+provider6 = {
   name: "General Repair Services",
   servicesProvided: "Fan and small appliance repairs",
   contactPhone: "555-6789",
@@ -58,7 +58,7 @@ provedor6 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-provedor7 = {
+provider7 = {
   name: "Climafix",
   servicesProvided: "Air conditioning and heating maintenance",
   contactPhone: "555-7890",
@@ -68,7 +68,7 @@ provedor7 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-provedor8 = {
+provider8 = {
   name: "Home Repairs S.A.",
   servicesProvided: "Home appliance maintenance and repair",
   contactPhone: "555-8901",
@@ -78,7 +78,7 @@ provedor8 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-provedor9 = {
+provider9 = {
   name: "Plomería Rápida S.A.",
   servicesProvided: "Plumbing services, leak repairs, and pipe installations",
   contactPhone: "555-9012",
@@ -88,7 +88,7 @@ provedor9 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-provedor10 = {
+provider10 = {
   name: "Servicios de Impermeabilización S.A.",
   servicesProvided: "Waterproofing services for homes and buildings",
   contactPhone: "555-0123",
@@ -100,14 +100,14 @@ provedor10 = {
 };
 
 module.exports = {
-  provedor1,
-  provedor2,
-  provedor3,
-  provedor4,
-  provedor5,
-  provedor6,
-  provedor7,
-  provedor8,
-  provedor9,
-  provedor10,
+  provider1,
+  provider2,
+  provider3,
+  provider4,
+  provider5,
+  provider6,
+  provider7,
+  provider8,
+  provider9,
+  provider10,
 };

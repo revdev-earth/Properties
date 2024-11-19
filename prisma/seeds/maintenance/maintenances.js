@@ -1,4 +1,4 @@
-const maintenance1 = {
+maintenance1 = {
   type: "preventive", // Type of maintenance: preventive
   task: "Roof inspection and cleaning", // Task description
   frequency: "annual", // Frequency: annual
@@ -14,7 +14,7 @@ const maintenance1 = {
   updatedAt: new Date(), // Set the current date
 };
 
-const maintenance2 = {
+maintenance2 = {
   type: "corrective", // Type of maintenance: corrective
   task: "Repair of water leak in the master bathroom", // Task description
   frequency: null, // No frequency for corrective maintenance
@@ -30,7 +30,7 @@ const maintenance2 = {
   updatedAt: new Date(), // Set the current date
 };
 
-const maintenance3 = {
+maintenance3 = {
   type: "request", // Type of maintenance: request
   task: "Painting of exterior walls", // Task description
   frequency: null, // No frequency for request maintenance
@@ -47,7 +47,7 @@ const maintenance3 = {
   updatedAt: new Date(), // Set the current date
 };
 
-const maintenance4 = {
+maintenance4 = {
   type: "preventive", // Type of maintenance: preventive
   task: "Cleaning and checking of rain gutters", // Task description
   frequency: "quarterly", // Frequency: quarterly
@@ -64,7 +64,7 @@ const maintenance4 = {
   updatedAt: new Date(), // Set the current date
 };
 
-const maintenance5 = {
+maintenance5 = {
   type: "corrective", // Type of maintenance: corrective
   task: "Repair of water infiltration in the basement", // Task description
   frequency: null, // No frequency for corrective maintenance
@@ -80,7 +80,7 @@ const maintenance5 = {
   updatedAt: new Date(), // Set the current date
 };
 
-const maintenance6 = {
+maintenance6 = {
   type: "preventive", // Type of maintenance: preventive
   task: "Heating system check", // Task description
   frequency: "annual", // Frequency: annual
@@ -97,7 +97,7 @@ const maintenance6 = {
   updatedAt: new Date(), // Set the current date
 };
 
-const maintenance7 = {
+maintenance7 = {
   type: "corrective", // Type of maintenance: corrective
   task: "Replacement of broken window", // Task description
   maintenanceDate: new Date("2024-08-10"), // Maintenance date
@@ -112,7 +112,7 @@ const maintenance7 = {
   updatedAt: new Date(), // Set the current date
 };
 
-const maintenance8 = {
+maintenance8 = {
   type: "request", // Type of maintenance: request
   task: "Repair of leak in garden irrigation pipe", // Task description
   maintenanceDate: new Date("2024-09-05"), // Maintenance date

@@ -1,7 +1,96 @@
+pay1Service1 = {
+  dueDate: new Date("2024-03-10"),
+  paymentStatus: "paid",
+  averageAmount: 85.0,
+  paymentDate: new Date("2024-03-09"),
+  amount: 85.0,
+  paymentNotes: "Pago completo por el servicio de electricidad, mes de marzo",
+  measurementMethod: "Medidor de electricidad (kWh)",
+  readingDate: new Date("2024-03-05"),
+  readingValue: 270.0,
+  readingNotes: "Lectura mensual del medidor de electricidad",
+  averageConsumption: 260.0,
+};
+
+// Pago 2 - Electricidad (abril 2024)
+pay2Service1 = {
+  dueDate: new Date("2024-04-10"),
+  paymentStatus: "paid",
+  averageAmount: 85.0,
+  paymentDate: new Date("2024-04-09"),
+  amount: 85.0,
+  paymentNotes: "Pago completo por el servicio de electricidad, mes de abril",
+  measurementMethod: "Medidor de electricidad (kWh)",
+  readingDate: new Date("2024-04-05"),
+  readingValue: 280.0,
+  readingNotes: "Lectura mensual del medidor de electricidad",
+  averageConsumption: 275.0,
+};
+
+// Pago 3 - Electricidad (mayo 2024)
+pay3Service1 = {
+  dueDate: new Date("2024-05-10"),
+  paymentStatus: "paid", // Cambio a "paid" para llenar el paymentDate
+  averageAmount: 85.0,
+  paymentDate: new Date("2024-05-09"),
+  amount: 85.0,
+  paymentNotes: "Pago completo por el servicio de electricidad, mes de mayo",
+  measurementMethod: "Medidor de electricidad (kWh)",
+  readingDate: new Date("2024-05-05"),
+  readingValue: 300.0,
+  readingNotes: "Lectura mensual del medidor de electricidad",
+  averageConsumption: 290.0,
+};
+
+// Pago 1 - Internet (marzo 2024)
+pay1Service2 = {
+  dueDate: new Date("2024-03-05"),
+  paymentStatus: "paid",
+  averageAmount: 45.0,
+  paymentDate: new Date("2024-03-04"),
+  amount: 45.0,
+  paymentNotes: "Pago completo por el servicio de internet, mes de marzo",
+  measurementMethod: "Servicio de internet",
+  readingDate: new Date("2024-03-01"),
+  readingValue: 1.0,
+  readingNotes: "Sin incidencias en el servicio de internet",
+  averageConsumption: 45.0,
+};
+
+// Pago 2 - Internet (abril 2024)
+pay2Service2 = {
+  dueDate: new Date("2024-04-05"),
+  paymentStatus: "paid",
+  averageAmount: 45.0,
+  paymentDate: new Date("2024-04-04"),
+  amount: 45.0,
+  paymentNotes: "Pago completo por el servicio de internet, mes de abril",
+  measurementMethod: "Servicio de internet",
+  readingDate: new Date("2024-04-01"),
+  readingValue: 1.0,
+  readingNotes: "Sin incidencias en el servicio de internet",
+  averageConsumption: 45.0,
+};
+
+// Pago 3 - Internet (mayo 2024)
+pay3Service2 = {
+  dueDate: new Date("2024-05-05"),
+  paymentStatus: "paid", // Cambio a "paid" para llenar el paymentDate
+  averageAmount: 45.0,
+  paymentDate: new Date("2024-05-04"),
+  amount: 45.0,
+  paymentNotes: "Pago completo por el servicio de internet, mes de mayo",
+  measurementMethod: "Servicio de internet",
+  readingDate: new Date("2024-05-01"),
+  readingValue: 1.0,
+  readingNotes: "Sin incidencias en el servicio de internet",
+  averageConsumption: 45.0,
+};
+
 pay1Service3 = {
   dueDate: new Date("2024-03-15"),
   paymentStatus: "paid",
-  averageAmount: 55.0, // Monto promedio mensual
+  averageAmount: 55.0,
   paymentDate: new Date("2024-03-14"),
   amount: 55.0,
   paymentNotes: "Pago completo por el servicio de agua, mes de marzo",
@@ -15,80 +104,38 @@ pay1Service3 = {
 // Pago 2 - Agua (abril 2024)
 pay2Service3 = {
   dueDate: new Date("2024-04-15"),
-  paymentStatus: "pending",
-  averageAmount: 55.0, // Monto promedio mensual
-  paymentDate: null, // Aún no se ha pagado
-  amount: 0.0,
-  paymentNotes: "Pago pendiente para el servicio de agua, mes de abril",
+  paymentStatus: "paid", // Cambio a "paid" para llenar el paymentDate
+  averageAmount: 55.0,
+  paymentDate: new Date("2024-04-14"),
+  amount: 55.0,
+  paymentNotes: "Pago completo para el servicio de agua, mes de abril",
   measurementMethod: "Medidor de agua",
   readingDate: new Date("2024-04-10"),
   readingValue: 160.0,
   readingNotes: "Lectura mensual del medidor de agua",
   averageConsumption: 155.0,
 };
+
 // Pago 3 - Agua (mayo 2024)
 pay3Service3 = {
   dueDate: new Date("2024-05-15"),
-  paymentStatus: "in process",
-  averageAmount: 55.0, // Monto promedio mensual
-  paymentDate: null, // Aún no se ha pagado
-  amount: 0.0,
-  paymentNotes: "Pago en proceso para el servicio de agua, mes de mayo",
+  paymentStatus: "paid", // Cambio a "paid" para llenar el paymentDate
+  averageAmount: 55.0,
+  paymentDate: new Date("2024-05-14"),
+  amount: 55.0,
+  paymentNotes: "Pago completo para el servicio de agua, mes de mayo",
   measurementMethod: "Medidor de agua",
   readingDate: new Date("2024-05-10"),
   readingValue: 170.0,
   readingNotes: "Lectura en proceso para el medidor de agua",
   averageConsumption: 160.0,
 };
-// Últimos tres pagos - Electricidad
-// Pago 1 - Electricidad (marzo 2024)
-pay1Service1 = {
-  dueDate: new Date("2024-03-10"),
-  paymentStatus: "paid",
-  averageAmount: 85.0, // Monto promedio mensual
-  paymentDate: new Date("2024-03-09"),
-  amount: 85.0,
-  paymentNotes: "Pago completo por el servicio de electricidad, mes de marzo",
-  measurementMethod: "Medidor de electricidad (kWh)",
-  readingDate: new Date("2024-03-05"),
-  readingValue: 270.0,
-  readingNotes: "Lectura mensual del medidor de electricidad",
-  averageConsumption: 260.0,
-};
-// Pago 2 - Electricidad (abril 2024)
-pay2Service1 = {
-  dueDate: new Date("2024-04-10"),
-  paymentStatus: "paid",
-  averageAmount: 85.0, // Monto promedio mensual
-  paymentDate: new Date("2024-04-09"),
-  amount: 85.0,
-  paymentNotes: "Pago completo por el servicio de electricidad, mes de abril",
-  measurementMethod: "Medidor de electricidad (kWh)",
-  readingDate: new Date("2024-04-05"),
-  readingValue: 280.0,
-  readingNotes: "Lectura mensual del medidor de electricidad",
-  averageConsumption: 275.0,
-};
-// Pago 3 - Electricidad (mayo 2024)
-pay3Service1 = {
-  dueDate: new Date("2024-05-10"),
-  paymentStatus: "pending",
-  averageAmount: 85.0, // Monto promedio mensual
-  paymentDate: null, // Aún no se ha pagado
-  amount: 0.0,
-  paymentNotes: "Pago pendiente por el servicio de electricidad, mes de mayo",
-  measurementMethod: "Medidor de electricidad (kWh)",
-  readingDate: new Date("2024-05-05"),
-  readingValue: 300.0,
-  readingNotes: "Lectura mensual del medidor de electricidad",
-  averageConsumption: 290.0,
-};
-// Últimos tres pagos - Gas
+
 // Pago 1 - Gas (marzo 2024)
 pay1Service4 = {
   dueDate: new Date("2024-03-25"),
   paymentStatus: "paid",
-  averageAmount: 40.0, // Monto promedio mensual
+  averageAmount: 40.0,
   paymentDate: new Date("2024-03-24"),
   amount: 40.0,
   paymentNotes: "Pago completo por el servicio de gas, mes de marzo",
@@ -98,11 +145,12 @@ pay1Service4 = {
   readingNotes: "Lectura del tanque de gas",
   averageConsumption: 55.0,
 };
+
 // Pago 2 - Gas (abril 2024)
 pay2Service4 = {
   dueDate: new Date("2024-04-25"),
   paymentStatus: "paid",
-  averageAmount: 40.0, // Monto promedio mensual
+  averageAmount: 40.0,
   paymentDate: new Date("2024-04-24"),
   amount: 40.0,
   paymentNotes: "Pago completo por el servicio de gas, mes de abril",
@@ -112,106 +160,65 @@ pay2Service4 = {
   readingNotes: "Lectura del tanque de gas",
   averageConsumption: 60.0,
 };
+
 // Pago 3 - Gas (mayo 2024)
 pay3Service4 = {
   dueDate: new Date("2024-05-25"),
-  paymentStatus: "pending",
-  averageAmount: 40.0, // Monto promedio mensual
-  paymentDate: null, // Aún no se ha pagado
-  amount: 0.0,
-  paymentNotes: "Pago pendiente por el servicio de gas, mes de mayo",
+  paymentStatus: "paid", // Cambio a "paid" para llenar el paymentDate
+  averageAmount: 40.0,
+  paymentDate: new Date("2024-05-24"),
+  amount: 40.0,
+  paymentNotes: "Pago completo por el servicio de gas, mes de mayo",
   measurementMethod: "Tanque de gas",
   readingDate: new Date("2024-05-20"),
   readingValue: 70.0,
   readingNotes: "Lectura del tanque de gas",
   averageConsumption: 65.0,
 };
-// Últimos tres pagos - Internet
-// Pago 1 - Internet (marzo 2024)
-pay1Service2 = {
-  dueDate: new Date("2024-03-05"),
-  paymentStatus: "paid",
-  averageAmount: 45.0, // Monto promedio mensual
-  paymentDate: new Date("2024-03-04"),
-  amount: 45.0,
-  paymentNotes: "Pago completo por el servicio de internet, mes de marzo",
-  measurementMethod: "Servicio de internet",
-  readingDate: new Date("2024-03-01"),
-  readingValue: 1.0, // Medido como conexión activa
-  readingNotes: "Sin incidencias en el servicio de internet",
-  averageConsumption: 45.0,
-};
-// Pago 2 - Internet (abril 2024)
-pay2Service2 = {
-  dueDate: new Date("2024-04-05"),
-  paymentStatus: "paid",
-  averageAmount: 45.0, // Monto promedio mensual
-  paymentDate: new Date("2024-04-04"),
-  amount: 45.0,
-  paymentNotes: "Pago completo por el servicio de internet, mes de abril",
-  measurementMethod: "Servicio de internet",
-  readingDate: new Date("2024-04-01"),
-  readingValue: 1.0, // Medido como conexión activa
-  readingNotes: "Sin incidencias en el servicio de internet",
-  averageConsumption: 45.0,
-};
-// Pago 3 - Internet (mayo 2024)
-pay3Service2 = {
-  dueDate: new Date("2024-05-05"),
-  paymentStatus: "in process",
-  averageAmount: 45.0, // Monto promedio mensual
-  paymentDate: null, // Aún no se ha pagado
-  amount: 0.0,
-  paymentNotes: "Pago en proceso para el servicio de internet, mes de mayo",
-  measurementMethod: "Servicio de internet",
-  readingDate: new Date("2024-05-01"),
-  readingValue: 1.0, // Medido como conexión activa
-  readingNotes: "Sin incidencias en el servicio de internet",
-  averageConsumption: 45.0,
-};
-
+// Pago 1 - Teléfono móvil (mayo 2024)
 pay1Service5 = {
-  dueDate: new Date("2024-05-15"),
+  dueDate: new Date("2024-05-25"),
   paymentStatus: "paid",
   averageAmount: 30.0, // Monto promedio mensual
-  paymentDate: new Date("2024-05-14"),
+  paymentDate: new Date("2024-05-24"),
   amount: 30.0,
-  paymentNotes: "Pago completo por el servicio de Cable TV, mes de mayo",
-  measurementMethod: "Servicio de televisión por cable",
-  readingDate: new Date("2024-05-10"),
-  readingValue: 0, // No aplica en este servicio, ya que es por suscripción
-  readingNotes: "Pago por el servicio de Cable TV del mes de mayo",
-  averageConsumption: 0, // No se mide consumo específico
+  paymentNotes: "Pago completo por el servicio de teléfono móvil, mes de mayo",
+  measurementMethod: "Plan de datos y llamadas",
+  readingDate: new Date("2024-05-20"),
+  readingValue: 1.0, // Se considera un pago único por el plan
+  readingNotes: "Sin incidencias en el plan de teléfono móvil",
+  averageConsumption: 30.0,
 };
 
+// Pago 2 - Teléfono móvil (abril 2024)
 pay2Service5 = {
-  dueDate: new Date("2024-04-15"),
+  dueDate: new Date("2024-04-25"),
   paymentStatus: "paid",
   averageAmount: 30.0, // Monto promedio mensual
-  paymentDate: new Date("2024-04-14"),
+  paymentDate: new Date("2024-04-24"),
   amount: 30.0,
-  paymentNotes: "Pago completo por el servicio de Cable TV, mes de abril",
-  measurementMethod: "Servicio de televisión por cable",
-  readingDate: new Date("2024-04-10"),
-  readingValue: 0, // No aplica en este servicio, ya que es por suscripción
-  readingNotes: "Pago por el servicio de Cable TV del mes de abril",
-  averageConsumption: 0, // No se mide consumo específico
+  paymentNotes: "Pago completo por el servicio de teléfono móvil, mes de abril",
+  measurementMethod: "Plan de datos y llamadas",
+  readingDate: new Date("2024-04-20"),
+  readingValue: 1.0, // Se considera un pago único por el plan
+  readingNotes: "Sin incidencias en el plan de teléfono móvil",
+  averageConsumption: 30.0,
 };
 
+// Pago 3 - Teléfono móvil (marzo 2024)
 pay3Service5 = {
-  dueDate: new Date("2024-03-15"),
+  dueDate: new Date("2024-03-25"),
   paymentStatus: "paid",
   averageAmount: 30.0, // Monto promedio mensual
-  paymentDate: new Date("2024-03-14"),
+  paymentDate: new Date("2024-03-24"),
   amount: 30.0,
-  paymentNotes: "Pago completo por el servicio de Cable TV, mes de marzo",
-  measurementMethod: "Servicio de televisión por cable",
-  readingDate: new Date("2024-03-10"),
-  readingValue: 0, // No aplica en este servicio, ya que es por suscripción
-  readingNotes: "Pago por el servicio de Cable TV del mes de marzo",
-  averageConsumption: 0, // No se mide consumo específico
+  paymentNotes: "Pago completo por el servicio de teléfono móvil, mes de marzo",
+  measurementMethod: "Plan de datos y llamadas",
+  readingDate: new Date("2024-03-20"),
+  readingValue: 1.0, // Se considera un pago único por el plan
+  readingNotes: "Sin incidencias en el plan de teléfono móvil",
+  averageConsumption: 30.0,
 };
-
 // Pago 1 - Electricidad (mayo 2024)
 pay1Service6 = {
   dueDate: new Date("2024-05-10"),
@@ -391,51 +398,51 @@ pay3Service9 = {
   readingNotes: "Lectura mensual del tanque de gas",
   averageConsumption: 60.0,
 };
-
-// Pago 1 - Cable TV (mayo 2024)
+// Pago 1 - TV por cable (mayo 2024)
 pay1Service10 = {
-  dueDate: new Date("2024-05-15"),
+  dueDate: new Date("2024-05-20"),
   paymentStatus: "paid",
-  averageAmount: 30.0, // Monto promedio mensual
-  paymentDate: new Date("2024-05-14"),
-  amount: 30.0,
-  paymentNotes: "Pago completo por el servicio de Cable TV, mes de mayo",
-  measurementMethod: "Servicio de televisión por cable",
-  readingDate: new Date("2024-05-10"),
-  readingValue: 0, // No aplica en este servicio, ya que es por suscripción
-  readingNotes: "Pago por el servicio de Cable TV del mes de mayo",
-  averageConsumption: 0, // No se mide consumo específico
+  averageAmount: 60.0, // Monto promedio mensual
+  paymentDate: new Date("2024-05-19"),
+  amount: 60.0,
+  paymentNotes: "Pago completo por el servicio de TV por cable, mes de mayo",
+  measurementMethod: "Plan de televisión por cable",
+  readingDate: new Date("2024-05-15"),
+  readingValue: 1.0, // Se considera el acceso completo a los canales
+  readingNotes: "Sin incidencias en el servicio de TV por cable",
+  averageConsumption: 60.0,
 };
 
-// Pago 2 - Cable TV (abril 2024)
+// Pago 2 - TV por cable (abril 2024)
 pay2Service10 = {
-  dueDate: new Date("2024-04-15"),
+  dueDate: new Date("2024-04-20"),
   paymentStatus: "paid",
-  averageAmount: 30.0, // Monto promedio mensual
-  paymentDate: new Date("2024-04-14"),
-  amount: 30.0,
-  paymentNotes: "Pago completo por el servicio de Cable TV, mes de abril",
-  measurementMethod: "Servicio de televisión por cable",
-  readingDate: new Date("2024-04-10"),
-  readingValue: 0, // No aplica en este servicio, ya que es por suscripción
-  readingNotes: "Pago por el servicio de Cable TV del mes de abril",
-  averageConsumption: 0, // No se mide consumo específico
+  averageAmount: 60.0, // Monto promedio mensual
+  paymentDate: new Date("2024-04-19"),
+  amount: 60.0,
+  paymentNotes: "Pago completo por el servicio de TV por cable, mes de abril",
+  measurementMethod: "Plan de televisión por cable",
+  readingDate: new Date("2024-04-15"),
+  readingValue: 1.0, // Se considera el acceso completo a los canales
+  readingNotes: "Sin incidencias en el servicio de TV por cable",
+  averageConsumption: 60.0,
 };
 
-// Pago 3 - Cable TV (marzo 2024)
+// Pago 3 - TV por cable (marzo 2024)
 pay3Service10 = {
-  dueDate: new Date("2024-03-15"),
+  dueDate: new Date("2024-03-20"),
   paymentStatus: "paid",
-  averageAmount: 30.0, // Monto promedio mensual
-  paymentDate: new Date("2024-03-14"),
-  amount: 30.0,
-  paymentNotes: "Pago completo por el servicio de Cable TV, mes de marzo",
-  measurementMethod: "Servicio de televisión por cable",
-  readingDate: new Date("2024-03-10"),
-  readingValue: 0, // No aplica en este servicio, ya que es por suscripción
-  readingNotes: "Pago por el servicio de Cable TV del mes de marzo",
-  averageConsumption: 0, // No se mide consumo específico
+  averageAmount: 60.0, // Monto promedio mensual
+  paymentDate: new Date("2024-03-19"),
+  amount: 60.0,
+  paymentNotes: "Pago completo por el servicio de TV por cable, mes de marzo",
+  measurementMethod: "Plan de televisión por cable",
+  readingDate: new Date("2024-03-15"),
+  readingValue: 1.0, // Se considera el acceso completo a los canales
+  readingNotes: "Sin incidencias en el servicio de TV por cable",
+  averageConsumption: 60.0,
 };
+
 module.exports = {
   pay1Service1,
   pay2Service1,

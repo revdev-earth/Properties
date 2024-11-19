@@ -1,4 +1,4 @@
-noteMaintenance1 = {
+maintenanceNote1 = {
   usageRecommendations:
     "To ensure the longevity of your appliances, always unplug them when not in use.",
   specialTasks: "Winterize outdoor faucets before the first frost.",
@@ -7,7 +7,7 @@ noteMaintenance1 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-noteMaintenance2 = {
+maintenanceNote2 = {
   usageRecommendations:
     "Clean the air filters regularly to maintain optimal air quality.",
   specialTasks: "Inspect roof shingles before the rainy season.",
@@ -16,7 +16,7 @@ noteMaintenance2 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-noteMaintenance3 = {
+maintenanceNote3 = {
   usageRecommendations:
     "Ensure to properly dispose of hazardous waste by following local guidelines.",
   specialTasks: null, // Sin tareas especiales asignadas
@@ -25,7 +25,7 @@ noteMaintenance3 = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-noteMaintenance4 = {
+maintenanceNote4 = {
   usageRecommendations:
     "Make sure to turn off lights when not in use to conserve electricity.",
   specialTasks:
@@ -37,8 +37,8 @@ noteMaintenance4 = {
 };
 
 module.exports = {
-  noteMaintenance1,
-  noteMaintenance2,
-  noteMaintenance3,
-  noteMaintenance4,
+  maintenanceNote1,
+  maintenanceNote2,
+  maintenanceNote3,
+  maintenanceNote4,
 };

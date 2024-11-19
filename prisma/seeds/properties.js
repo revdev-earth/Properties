@@ -23,17 +23,26 @@ const {
   service9,
   service10,
 } = require("./services/services");
-const { preventive1, preventive2 } = require("./maintenance/preventive");
-const { corrective1, corrective2 } = require("./maintenance/corrective");
-const { request1, request2 } = require("./maintenance/resquest");
-const { inspectionHistory2 } = require("./maintenance/inspectionHistory");
+
 const {
-  noteMaintenance1,
-  noteMaintenance2,
-  noteMaintenance4,
-  noteMaintenance3,
-} = require("./maintenance/notes");
-const { pay1Service1 } = require("./services/paymentServices");
+  pay1Service1,
+  pay1Service2,
+  pay1Service3,
+  pay3Service4,
+  pay1Service5,
+  pay1Service6,
+  pay3Service7,
+  pay1Service8,
+  pay3Service9,
+  pay1Service10,
+} = require("./services/paymentServices");
+const { maintenance1, maintenance2 } = require("./maintenance/maintenances");
+const {
+  maintenanceProperty1,
+  maintenanceProperty2,
+} = require("./maintenance/maintenanceProperty");
+const { provider1, provider2 } = require("./maintenance/provider");
+const { maintenanceNote1, maintenanceNote2 } = require("./maintenance/notes");
 const prisma = new PrismaClient();
 
 async function createProperties() {
@@ -45,19 +54,57 @@ async function createProperties() {
       propertyInsurance: { create: [propertyInsurance1, propertyInsurance2] },
       basicService: {
         create: [
-          { ...service1, servicePayment: { create: [pay1Service1] } },
-          { ...service2, servicePayment: { create: [pay1Service1] } },
-          { ...service3, servicePayment: { create: [pay1Service1] } },
-          { ...service4, servicePayment: { create: [pay1Service1] } },
-          { ...service5, servicePayment: { create: [pay1Service1] } },
+          {
+            ...service1,
+            servicePayment: {
+              create: [pay1Service1, pay2Service1, pay3Service1],
+            },
+          },
+          {
+            ...service2,
+            servicePayment: {
+              create: [pay1Service2, pay2Service2, pay3Service2],
+            },
+          },
+          {
+            ...service3,
+            servicePayment: {
+              create: [pay1Service3, pay2Service3, pay3Service3],
+            },
+          },
+          {
+            ...service4,
+            servicePayment: {
+              create: [pay1Service4, pay2Service4, pay3Service4],
+            },
+          },
+          {
+            ...service5,
+            servicePayment: {
+              create: [pay1Service5, pay2Service5, pay3Service5],
+            },
+          },
         ],
       },
-      preventiveMaintenance: { create: preventive1 },
-      correctiveMaintenance: { create: corrective1 },
-      maintenanceRequest: { create: request1 },
-      inspectionHistory: { create: inspectionHistory1 },
-      maintenanceNotes: { create: noteMaintenance1 },
-      maintenanceNotes: { create: noteMaintenance2 },
+      maintenanceProperty: {
+        create: {
+          ...maintenanceProperty1,
+          maintenance: {
+            create: [
+              {
+                ...maintenance1,
+                provider: { create: provider1 },
+                maintenanceNotes: { create: maintenanceNote1 },
+              },
+              /*               {
+                ...maintenance2,
+                provider: { create: provider2 },
+                maintenanceNotes: { create: maintenanceNote2 },
+              }, */
+            ],
+          },
+        },
+      },
     },
   });
 
@@ -68,14 +115,42 @@ async function createProperties() {
       propertyTenant: { create: tenant2 },
       propertyInsurance: { create: [propertyInsurance3, propertyInsurance4] },
       basicService: {
-        create: [service6, service7, service8, service9, service10],
+        create: [
+          {
+            ...service6,
+            servicePayment: {
+              create: [pay1Service6, pay2Service6, pay3Service6],
+            },
+          },
+          {
+            ...service7,
+            servicePayment: {
+              create: [pay1Service7, pay2Service7, pay3Service7],
+            },
+          },
+          {
+            ...service8,
+            servicePayment: {
+              create: [pay1Service8, pay2Service8, pay3Service8],
+            },
+          },
+          {
+            ...service9,
+            servicePayment: {
+              create: [pay1Service9, pay2Service9, pay3Service9],
+            },
+          },
+          {
+            ...service10,
+            servicePayment: {
+              create: [pay1Service10, pay2Service10, pay3Service10],
+            },
+          },
+        ],
       },
-      preventiveMaintenance: { create: preventive2 },
-      correctiveMaintenance: { create: corrective2 },
-      maintenanceRequest: { create: request2 },
-      inspectionHistory: { create: inspectionHistory2 },
-      maintenanceNotes: { create: noteMaintenance3 },
-      maintenanceNotes: { create: noteMaintenance4 },
+      maintenanceProperty: {
+        create: maintenanceProperty2,
+      },
     },
   });
 }
