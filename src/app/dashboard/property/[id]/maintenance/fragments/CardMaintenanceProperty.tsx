@@ -1,4 +1,8 @@
-export default function CardMaintenanceProperty(maintenance: any) {
+export default function CardMaintenanceProperty({
+  maintenance,
+}: {
+  maintenance: any;
+}) {
   return (
     <div className="border p-5 ">
       <p>Type of Maintenance: {maintenance.type}</p>

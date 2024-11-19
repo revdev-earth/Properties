@@ -35,6 +35,7 @@ const {
   pay1Service8,
   pay3Service9,
   pay1Service10,
+  pay3Service5,
 } = require("./services/paymentServices");
 const {
   maintenance1,
@@ -45,12 +46,19 @@ const {
   maintenanceProperty1,
   maintenanceProperty2,
 } = require("./maintenance/maintenanceProperty");
-const { provider1, provider2, provider3 } = require("./maintenance/provider");
+const {
+  provider1,
+  provider2,
+  provider3,
+  provider4,
+} = require("./maintenance/provider");
 const {
   maintenanceNote1,
   maintenanceNote2,
   maintenanceNote3,
+  maintenanceNote4,
 } = require("./maintenance/notes");
+const { equipmentMaintenance1 } = require("./maintenance/equipament");
 const prisma = new PrismaClient();
 
 async function createProperties() {
@@ -113,6 +121,15 @@ async function createProperties() {
                 ...maintenance3,
                 provider: { create: provider3 },
                 maintenanceNotes: { create: maintenanceNote3 },
+              },
+            ],
+          },
+          equipmentMaintenance: {
+            create: [
+              {
+                ...equipmentMaintenance1,
+                provider: { create: provider4 },
+                maintenanceNotes: { create: maintenanceNote4 },
               },
             ],
           },

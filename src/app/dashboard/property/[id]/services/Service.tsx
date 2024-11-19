@@ -32,7 +32,7 @@ export default function Service({
           <p>Support Contact Name: {service.supportContactName}</p>
           <p>Support Contact Phone: {service.supportContactPhone}</p>
           <p>
-            Support Contact Email:{" "}
+            Support Contact Email:
             {service.supportContactEmail || "No email provided"}
           </p>
           <p>Support Hours: {service.supportHours}</p>
@@ -40,15 +40,15 @@ export default function Service({
 
         <div className="p-5 rounded-lg border">
           <p>
-            Disconnection Clause:{" "}
+            Disconnection Clause:
             {service.disconnectionClause || "No disconnection clause provided"}
           </p>
           <p>
-            Contract Conditions:{" "}
+            Contract Conditions:
             {service.contractConditions || "No contract conditions provided"}
           </p>
           <p>
-            Shared Responsibilities:{" "}
+            Shared Responsibilities:
             {service.sharedResponsibilities ||
               "No shared responsibilities provided"}
           </p>

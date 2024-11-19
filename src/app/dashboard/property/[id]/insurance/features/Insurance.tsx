@@ -26,7 +26,7 @@ export default function Insurance({
             Start Date: {new Date(insurance.startDate).toLocaleDateString()}
           </p>
           <p>
-            Expiration Date:{" "}
+            Expiration Date:
             {new Date(insurance.expirationDate).toLocaleDateString()}
           </p>
           <p>Insured Amount: ${insurance.insuredAmount}</p>

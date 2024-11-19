@@ -158,6 +158,7 @@ export class PropertyManager {
           maintenanceInfoProperty: {
             include: {
               maintenance: true,
+              equipmentMaintenance: true,
             },
           },
         },

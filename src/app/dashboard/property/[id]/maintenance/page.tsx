@@ -6,6 +6,7 @@ import { MaintenanceInfoProperty } from "@prisma/client";
 import { PropsJustParams } from "../types";
 import { getMAintenanceInfoByPropertyId } from " +/actions/property/actions_and_mutations";
 import CardMaintenanceProperty from "./fragments/CardMaintenanceProperty";
+import CardMaintenanceEquipamentProperty from "./fragments/CardMaintenanceEquipamentProperty";
 
 export default function Services({ params }: PropsJustParams) {
   const [id, setId] = useState<string | null>(null);
@@ -41,18 +42,26 @@ export default function Services({ params }: PropsJustParams) {
   }
   return (
     <div>
-      <h2 className="">Maintenance Information for Property</h2>
-      <div className="flex  gap-5 flex-wrap">
+      <h2 className="text-center">Maintenance Information for Property</h2>
+      <div className="flex  gap-5 flex-wrap p-5 items-center justify-center">
         <p>Annual Budget: {infoMAintenance.annualBudget}</p>
         <p>Accumulated Costs: {infoMAintenance.accumulatedCosts}</p>
         <p>Cost Distribution: {infoMAintenance.costDistribution}</p>
       </div>
 
-      <div>
+      <div className="flex gap-5 justify-center">
         <div className="flex flex-col gap-5 flex-wrap border p-5 max-w-[400px]">
-          <h3 className="text-center">Maintenances</h3>
+          <h3 className="text-center">Maintenances Property</h3>
           {infoMAintenance.maintenance.map((m) => {
             return <CardMaintenanceProperty key={m.id} maintenance={m} />;
+          })}
+        </div>
+        <div className="flex flex-col gap-5 flex-wrap border p-5 max-w-[400px]">
+          <h3 className="text-center">Maintenances Equipament Property</h3>
+          {infoMAintenance.equipmentMaintenance.map((e) => {
+            return (
+              <CardMaintenanceEquipamentProperty key={e.id} equipament={e} />
+            );
           })}
         </div>
       </div>

@@ -57,7 +57,7 @@ export default function Tenant({ params }: PropsJustParams) {
 
         <div className="p-5 rounded-lg border">
           <p>
-            Lease Start Date:{" "}
+            Lease Start Date:
             {new Date(tenant.leaseStartDate).toLocaleDateString()}
           </p>
           <p>
