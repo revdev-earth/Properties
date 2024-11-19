@@ -19,10 +19,10 @@ model Property {
   propertyLegal       PropertyLegal?
   propertyTenant      PropertyTenant?
 
-  propertyInsurance   PropertyInsurance[]
-  basicService        PropertyBasicService[]
-  PaymentTenant       PaymentTenant?
-  maintenanceProperty MaintenanceProperty?
+  propertyInsurance       PropertyInsurance[]
+  basicService            PropertyBasicService[]
+  PaymentTenant           PaymentTenant?
+  maintenanceInfoProperty MaintenanceInfoProperty?
 }
 
 model PropertyInformation {
@@ -343,7 +343,7 @@ model IncidentService {
   updatedAt           DateTime             @updatedAt
 }
 
-model MaintenanceProperty {
+model MaintenanceInfoProperty {
   id         Int      @id @default(autoincrement())
   propertyId String   @unique // Foreign key to Property model
   property   Property @relation(fields: [propertyId], references: [id])
@@ -357,9 +357,9 @@ model MaintenanceProperty {
 }
 
 model Maintenance {
-  id            Int                 @id @default(autoincrement())
-  maintenanceId Int                 @unique // Clave foránea al modelo Property
-  maintenance   MaintenanceProperty @relation(fields: [maintenanceId], references: [id])
+  id                        Int                     @id @default(autoincrement())
+  maintenanceInfoPropertyId Int // Clave foránea al modelo Property
+  maintenanceInfoProperty   MaintenanceInfoProperty @relation(fields: [maintenanceInfoPropertyId], references: [id])
 
   providerId         Int?                 @unique
   provider           MaintenanceProvider? @relation(fields: [providerId], references: [id])
@@ -386,9 +386,9 @@ model Maintenance {
 }
 
 model MaintenanceEquipment {
-  id            Int                 @id @default(autoincrement())
-  maintenanceId Int                 @unique // Clave foránea al modelo Property
-  maintenance   MaintenanceProperty @relation(fields: [maintenanceId], references: [id])
+  id                        Int                     @id @default(autoincrement())
+  maintenanceInfoPropertyId Int // Clave foránea al modelo Property
+  maintenanceInfoProperty   MaintenanceInfoProperty @relation(fields: [maintenanceInfoPropertyId], references: [id])
 
   providerId         Int?                 @unique
   provider           MaintenanceProvider? @relation(fields: [providerId], references: [id])
