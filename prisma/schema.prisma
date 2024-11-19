@@ -361,6 +361,11 @@ model Maintenance {
   maintenanceId Int                 @unique // Clave foránea al modelo Property
   maintenance   MaintenanceProperty @relation(fields: [maintenanceId], references: [id])
 
+  providerId         Int?                 @unique
+  provider           MaintenanceProvider? @relation(fields: [providerId], references: [id])
+  maintenanceNotesId Int?                 @unique
+  maintenanceNotes   MaintenanceNotes?    @relation(fields: [maintenanceNotesId], references: [id])
+
   // Información de mantenimiento
   type                String // Tipo de mantenimiento: "preventive", "corrective", "request"
   task                String // Descripción de la tarea (por ejemplo, "Limpieza de AC", "Reemplazo de ventana")
@@ -373,25 +378,22 @@ model Maintenance {
   status            String? // Estado de la solicitud (pendiente, en proceso, completado)
   repairCost        Float? // Costo de la reparación (solo para mantenimiento correctivo)
   costResponsible   String // Inquilino o propietario, quien es responsable del costo
-
-  providerId          Int?                          @unique
-  provider            MaintenanceProvider?          @relation(fields: [providerId], references: [id])
-  inspectionHistoryId Int?                          @unique
-  inspectionHistory   MaintenanceInspectionHistory? @relation(fields: [inspectionHistoryId], references: [id])
-  maintenanceNotesId  Int?                          @unique
-  maintenanceNotes    MaintenanceNotes?             @relation(fields: [maintenanceNotesId], references: [id])
-
   // Información adicional
-  warranty     String? // Detalles de la garantía si aplica (solo para reparaciones)
-  observations String? // Notas adicionales sobre el mantenimiento
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  warranty          String? // Detalles de la garantía si aplica (solo para reparaciones)
+  observations      String? // Notas adicionales sobre el mantenimiento
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model MaintenanceEquipment {
   id            Int                 @id @default(autoincrement())
   maintenanceId Int                 @unique // Clave foránea al modelo Property
   maintenance   MaintenanceProperty @relation(fields: [maintenanceId], references: [id])
+
+  providerId         Int?                 @unique
+  provider           MaintenanceProvider? @relation(fields: [providerId], references: [id])
+  maintenanceNotesId Int?                 @unique
+  maintenanceNotes   MaintenanceNotes?    @relation(fields: [maintenanceNotesId], references: [id])
 
   // Detalles de mantenimiento de equipos
   equipmentName        String // Nombre del equipo (por ejemplo, refrigerador, aire acondicionado)
@@ -401,20 +403,14 @@ model MaintenanceEquipment {
   warrantyPolicy       String? // Política de garantía para el equipo (si aplica)
   maintenanceCost      Float? // Costo estimado para el mantenimiento del equipo
   costResponsible      String // Quien es responsable del costo: inquilino o propietario
-
-  providerId          Int?                          @unique
-  provider            MaintenanceProvider?          @relation(fields: [providerId], references: [id])
-  inspectionHistoryId Int?                          @unique
-  inspectionHistory   MaintenanceInspectionHistory? @relation(fields: [inspectionHistoryId], references: [id])
-  maintenanceNotesId  Int?                          @unique
-  maintenanceNotes    MaintenanceNotes?             @relation(fields: [maintenanceNotesId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 }
 
 model MaintenanceProvider {
-  id Int @id @default(autoincrement())
+  id                   Int                    @id @default(autoincrement())
+  maintenance          Maintenance[]
+  equipmentMaintenance MaintenanceEquipment[]
 
   // Información del proveedor
   name             String // Nombre del proveedor
@@ -423,37 +419,17 @@ model MaintenanceProvider {
   contactEmail     String? // Correo electrónico de contacto
   availability     String? // Disponibilidad del proveedor (por ejemplo, solo días laborales, cita requerida)
   contractDetails  String? // Detalles del contrato de mantenimiento, si aplica
-
-  maintenance          Maintenance[]
-  equipmentMaintenance MaintenanceEquipment[]
-}
-
-model MaintenanceInspectionHistory {
-  id Int @id @default(autoincrement())
-
-  // Inspection and Audit History
-  inspectionDate     DateTime // Scheduled inspection date
-  inspectionType     String // Type of inspection (e.g., electrical, structural)
-  findings           String? // Summary of findings and observations
-  recommendedActions String? // Suggested actions for property upkeep
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-
-  maintenance          Maintenance[]
-  equipmentMaintenance MaintenanceEquipment[]
 }
 
 model MaintenanceNotes {
-  id Int @id @default(autoincrement())
+  id                   Int                    @id @default(autoincrement())
+  maintenance          Maintenance[]
+  equipmentMaintenance MaintenanceEquipment[]
 
   // Additional Notes and Recommendations
   usageRecommendations    String? // Tips for proper use and care of the property
   specialTasks            String? // Non-periodic tasks (e.g., seasonal preparations)
   sustainabilityPractices String? // Suggestions for sustainable practices
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  maintenance          Maintenance[]
-  equipmentMaintenance MaintenanceEquipment[]
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
 }
