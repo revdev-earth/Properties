@@ -141,6 +141,7 @@ export class PropertyManager {
           basicService: {
             include: {
               servicePayment: true,
+              incident: true,
             },
           },
         },
