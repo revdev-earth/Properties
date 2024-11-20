@@ -36,6 +36,7 @@ const {
   pay3Service9,
   pay1Service10,
   pay3Service5,
+  pay2Service8,
 } = require("./services/paymentServices");
 const {
   maintenance1,
@@ -59,6 +60,15 @@ const {
   maintenanceNote4,
 } = require("./maintenance/notes");
 const { equipmentMaintenance1 } = require("./maintenance/equipament");
+const {
+  incidentService1,
+  incidentService2,
+  incidentService3,
+  incidentService4,
+  incidentService8,
+  incidentService10,
+  incidentService9,
+} = require("./services/incidentService");
 const prisma = new PrismaClient();
 
 async function createProperties() {
@@ -75,11 +85,17 @@ async function createProperties() {
             servicePayment: {
               create: [pay1Service1, pay2Service1, pay3Service1],
             },
+            incident: {
+              create: [incidentService9, incidentService10],
+            },
           },
           {
             ...service2,
             servicePayment: {
               create: [pay1Service2, pay2Service2, pay3Service2],
+            },
+            incident: {
+              create: [incidentService1],
             },
           },
           {
@@ -87,17 +103,26 @@ async function createProperties() {
             servicePayment: {
               create: [pay1Service3, pay2Service3, pay3Service3],
             },
+            incident: {
+              create: [incidentService2],
+            },
           },
           {
             ...service4,
             servicePayment: {
               create: [pay1Service4, pay2Service4, pay3Service4],
             },
+            incident: {
+              create: [incidentService3],
+            },
           },
           {
             ...service5,
             servicePayment: {
               create: [pay1Service5, pay2Service5, pay3Service5],
+            },
+            incident: {
+              create: [incidentService4],
             },
           },
         ],
@@ -151,11 +176,17 @@ async function createProperties() {
             servicePayment: {
               create: [pay1Service6, pay2Service6, pay3Service6],
             },
+            incident: {
+              create: [incidentService5],
+            },
           },
           {
             ...service7,
             servicePayment: {
               create: [pay1Service7, pay2Service7, pay3Service7],
+            },
+            incident: {
+              create: [incidentService6],
             },
           },
           {
@@ -163,11 +194,17 @@ async function createProperties() {
             servicePayment: {
               create: [pay1Service8, pay2Service8, pay3Service8],
             },
+            incident: {
+              create: [incidentService7],
+            },
           },
           {
             ...service9,
             servicePayment: {
               create: [pay1Service9, pay2Service9, pay3Service9],
+            },
+            incident: {
+              create: [incidentService8],
             },
           },
           {
