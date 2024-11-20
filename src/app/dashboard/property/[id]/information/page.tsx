@@ -42,12 +42,11 @@ export default function Information({ params }: PropsJustParams) {
   return (
     <>
       <div className="">
-        <div className="flex gap-5 h-fit">
-          <div className="flex flex-col gap-1 border-b rounded-lg p-5 bg-slate-100">
-            <h3 className="font-bold text-xl mb-3">
-              Property {info.id} Information
-            </h3>
-
+        <div className="flex flex-col gap-5 h-fit">
+          <h3 className="font-bold text-xl mb-3">
+            Property {info.id} Information
+          </h3>
+          <div className="flex flex-wrap gap-1 border-b rounded-lg p-5 bg-slate-100">
             <div className="p-5 rounded-lg border">
               <p>Address number: {info.streetAndNumber}</p>
               <p>Neighborhood: {info.neighborhood}</p>

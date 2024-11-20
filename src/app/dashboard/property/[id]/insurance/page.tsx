@@ -38,7 +38,11 @@ export default function Information({ params }: PropsJustParams) {
     return <div>Loading...</div>;
   }
 
-  return insurances.map((insurance) => (
-    <Insurance key={insurance.id} insurance={insurance} />
-  ));
+  return (
+    <div className="flex gap-5 flex-wrap justify-center items-center">
+      {insurances.map((insurance) => (
+        <Insurance key={insurance.id} insurance={insurance} />
+      ))}
+    </div>
+  );
 }
