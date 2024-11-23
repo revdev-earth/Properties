@@ -1,13 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function BackButton() {
-  const router = useRouter();
-
   return (
-    <button className="text-[0px]" onClick={() => router.back()}>
+    <Link className="text-[0px]" href={`/dashboard`}>
       <Image
         src="/icons/arrow-left.svg"
         alt="plus"
@@ -16,6 +14,6 @@ export default function BackButton() {
         className="bg-[#D9D9D9] p-1 rounded-full fill-white"
       />
       Volver Atrás
-    </button>
+    </Link>
   );
 }
