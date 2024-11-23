@@ -39,7 +39,7 @@ export default function Information({ params }: PropsJustParams) {
   }
 
   return (
-    <div className="flex gap-5 flex-wrap justify-center items-center">
+    <div className="flex flex-col gap-5">
       {insurances.map((insurance) => (
         <Insurance key={insurance.id} insurance={insurance} />
       ))}

@@ -37,7 +37,7 @@ export default function Services({ params }: PropsJustParams) {
   }
 
   return (
-    <div className="flex  gap-5 flex-wrap">
+    <div className="flex flex-col gap-5">
       {services.map((service) => (
         <CardService key={service.id} service={service} />
       ))}
