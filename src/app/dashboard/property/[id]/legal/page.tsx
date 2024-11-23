@@ -36,10 +36,10 @@ export default function Information({ params }: PropsJustParams) {
   }
 
   return (
-    <div className="flex gap-5   h-fit">
+    <div className="flex gap-5">
       <div
         key={legal.id}
-        className="flex flex-col gap-1 border-b rounded-lg p-5  bg-slate-100"
+        className="flex flex-col gap-5 border-b rounded-lg p-5"
       >
         <h3 className="font-bold text-xl mb-3">
           Property {legal.id} Legal Information
