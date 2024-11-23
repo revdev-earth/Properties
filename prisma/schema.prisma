@@ -454,11 +454,6 @@ model PropertySettings {
   security             ConfigSecurityPreferences?
   leaseTerms           ConfigLeaseTerms?
   customAlerts         ConfigCustomAlert[]
-
-  configReportSettingsId      Int
-  configPaymentSettingsId     Int
-  configSecurityPreferencesId Int
-  configLeaseTermsId          Int
 }
 
 model ConfigNotificationSettings {
