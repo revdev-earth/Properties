@@ -1,0 +1,14 @@
+model Property {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    propertyInformation     PropertyInformation?
+    propertyLegal           PropertyLegal?
+    propertyTenant          PropertyTenant?
+    propertyInsurance       PropertyInsurance[]
+    basicService            PropertyBasicService[]
+    PaymentTenant           PaymentTenant?
+    maintenanceInfoProperty MaintenanceInfoProperty?
+    settings                PropertySettings?
+}

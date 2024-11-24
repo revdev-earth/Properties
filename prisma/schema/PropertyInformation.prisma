@@ -1,0 +1,35 @@
+model PropertyInformation {
+    id Int @id @default(autoincrement())
+
+    propertyId String   @unique
+    property   Property @relation(fields: [propertyId], references: [id])
+
+    streetAndNumber String
+    neighborhood    String
+    cityAndState    String
+    postalCode      String
+    gpsCoordinates  String?
+
+    // Features
+    propertyType  String // E.g., house, apartment, commercial space, etc.
+    totalLandArea Float? // In m², optional if not applicable
+    builtArea     Float // In m²
+    floors        Int // Number of floors
+    orientation   String // E.g., north, south, east, west
+    age           Int // Years since construction or last major renovation
+
+    // Interior
+    bedrooms        Int
+    bathrooms       Int // Number of full bathrooms
+    halfBathrooms   Int? // Number of half bathrooms
+    kitchen         String // Brief description of the kitchen
+    livingAndDining String? // Description if integrated or separated
+    additionalRooms String? // E.g., office, laundry room, storage
+
+    // Exterior
+    yardOrGarden         String? // Description of outdoor space, if available
+    parking              Int // Number of parking spots
+    parkingLocation      String? // E.g., covered, private, shared
+    balconiesAndTerraces String? // Description of balconies or terraces
+    recreationalAreas    String? // Description of recreational areas, if available
+}

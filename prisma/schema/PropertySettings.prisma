@@ -1,0 +1,171 @@
+model PropertySettings {
+    id         Int      @id @default(autoincrement())
+    propertyId String   @unique // Ahora este campo es único, asegurando la relación uno a uno
+    property   Property @relation(fields: [propertyId], references: [id])
+
+    // Combined configuration settings
+    notificationSettings ConfigNotificationSettings?
+    accessPermissions    ConfigAccessPermission[]
+    maintenance          ConfigMaintenance?
+    reports              ConfigReportSettings?
+    payments             ConfigPaymentSettings?
+    security             ConfigSecurityPreferences?
+    leaseTerms           ConfigLeaseTerms?
+    customAlerts         ConfigCustomAlert[]
+}
+
+model ConfigNotificationSettings {
+    id                 Int              @id @default(autoincrement())
+    propertySettingsId Int              @unique
+    propertySettings   PropertySettings @relation(fields: [propertySettingsId], references: [id])
+
+    rentalPaymentReminder Boolean // Reminder for rental payment
+    preventiveMaintenance Boolean // Notification for preventive maintenance
+    serviceAlerts         Boolean // Alerts for service issues or interruptions
+    insuranceExpiration   Boolean // Alerts for insurance or contract renewals
+    notificationMethod    String // E.g., email, SMS, push notifications
+    notificationFrequency String // Daily, weekly, monthly, etc.
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ConfigAccessPermission {
+    id                 Int              @id @default(autoincrement())
+    propertySettingsId Int // Foreign key to PropertySettings
+    propertySettings   PropertySettings @relation(fields: [propertySettingsId], references: [id])
+
+    // Access Control
+    userRole          String // Owner, Tenant, Property Manager
+    readPermission    Boolean // Permission to read
+    writePermission   Boolean // Permission to write
+    accessibleSection String // Accessible section (e.g., "Insurance", "Legal")
+    invitationStatus  String? // Invitation status for temporary users
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ConfigMaintenance {
+    id                 Int              @id @default(autoincrement())
+    propertySettingsId Int              @unique
+    propertySettings   PropertySettings @relation(fields: [propertySettingsId], references: [id])
+
+    preventiveMaintenance String? // Frequency of preventive maintenance tasks
+    reminders             String? // Schedule for maintenance reminders
+    preferredProviderId   Int? // Link to preferred maintenance provider
+    preferredProvider     ConfigProvider? @relation(fields: [preferredProviderId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ConfigReportSettings {
+    id                 Int              @id @default(autoincrement())
+    propertySettingsId Int              @unique
+    propertySettings   PropertySettings @relation(fields: [propertySettingsId], references: [id])
+
+    reportFrequency String // Monthly, quarterly, annually, etc.
+    reportType      String // List of types (financial, occupancy, maintenance)
+    reportFormat    String // PDF, Excel, etc.
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ConfigPaymentSettings {
+    id                 Int              @id @default(autoincrement())
+    propertySettingsId Int              @unique
+    propertySettings   PropertySettings @relation(fields: [propertySettingsId], references: [id])
+
+    paymentReminders Boolean // Enable or disable payment reminders
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    TenantBilledService   ConfigTenantBilledService[]
+    AcceptedPaymentMethod ConfigAcceptedPaymentMethod[]
+}
+
+model ConfigTenantBilledService {
+    id                Int                   @id @default(autoincrement())
+    paymentSettingsId Int // Foreign key to PaymentSettings
+    paymentSettings   ConfigPaymentSettings @relation(fields: [paymentSettingsId], references: [id])
+    serviceName       String // Service billed to tenant
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ConfigAcceptedPaymentMethod {
+    id                Int                   @id @default(autoincrement())
+    paymentSettingsId Int // Foreign key to PaymentSettings
+    paymentSettings   ConfigPaymentSettings @relation(fields: [paymentSettingsId], references: [id])
+    method            String // Accepted payment method (e.g., bank transfer, credit card)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ConfigSecurityPreferences {
+    id                 Int              @id @default(autoincrement())
+    propertySettingsId Int              @unique
+    propertySettings   PropertySettings @relation(fields: [propertySettingsId], references: [id])
+
+    lockChangeFrequency String? // Recommended interval for lock changes
+    passwordPolicy      String // Password length and periodic change requirements
+    alarmSystemSettings String? // Alarm and monitoring system preferences
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ConfigLeaseTerms {
+    id                 Int              @id @default(autoincrement())
+    propertySettingsId Int              @unique
+    propertySettings   PropertySettings @relation(fields: [propertySettingsId], references: [id])
+
+    leaseDuration  String // Duration and renewal settings
+    rentIncrease   Float? // Annual or periodic rent increase
+    specialClauses String? // Custom clauses for subletting, restrictions, etc.
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ConfigCustomAlert {
+    id                 Int              @id @default(autoincrement())
+    propertySettingsId Int // Foreign key to PropertySettings
+    propertySettings   PropertySettings @relation(fields: [propertySettingsId], references: [id])
+
+    // Custom Alert Settings
+    alertDescription String // Description of the custom alert
+    priority         String // High, medium, low
+    alertHistory     ConfigAlertHistory[] // Link to alert history
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ConfigAlertHistory {
+    id            Int               @id @default(autoincrement())
+    customAlertId Int // Foreign key to CustomAlert
+    customAlert   ConfigCustomAlert @relation(fields: [customAlertId], references: [id])
+
+    alertDate      DateTime
+    resolutionDate DateTime?
+    alertStatus    String // Status of the alert
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ConfigProvider {
+    id      Int    @id @default(autoincrement())
+    name    String // Provider name
+    contact String // Contact information
+
+    createdAt         DateTime            @default(now())
+    updatedAt         DateTime            @updatedAt
+    ConfigMaintenance ConfigMaintenance[]
+}
