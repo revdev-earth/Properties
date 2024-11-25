@@ -128,9 +128,9 @@ export async function getPropertyServicesByPropertyId({ id }: { id: string }) {
   }
 }
 
-export async function getMAintenanceInfoByPropertyId({ id }: { id: string }) {
+export async function getEconomy({ id }: { id: string }) {
   try {
-    return await propertyManager.getMAintenanceInfoByPropertyId({ id });
+    return await propertyManager.getEconomy({ id });
   } catch (error) {
     console.error("Error fetching properties with address:", error);
     throw error;

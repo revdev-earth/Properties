@@ -150,17 +150,12 @@ export class PropertyManager {
     }
   }
 
-  async getMAintenanceInfoByPropertyId({ id }: { id: string }) {
+  async getEconomy({ id }: { id: string }) {
     try {
-      return await this.prisma.property.findUnique({
+      return await this.prisma.property.findFirstOrThrow({
         where: { id },
         include: {
-          maintenanceInfoProperty: {
-            include: {
-              maintenance: true,
-              equipmentMaintenance: true,
-            },
-          },
+          economy: { include: { transactions: true } },
         },
       });
     } catch (error) {
