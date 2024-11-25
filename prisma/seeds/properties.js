@@ -1,16 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-require-imports */
 
 const { PrismaClient } = require("@prisma/client");
+
 const { tenant1, tenant2 } = require("./tenants");
 const { information1, information2 } = require("./information");
 const { legal1, legal2 } = require("./legal");
+
 const {
   propertyInsurance1,
   propertyInsurance2,
   propertyInsurance3,
   propertyInsurance4,
 } = require("./insurance");
+
 const {
   service1,
   service2,
@@ -26,49 +28,60 @@ const {
 
 const {
   pay1Service1,
+  pay2Service1,
+  pay3Service1,
   pay1Service2,
+  pay2Service2,
+  pay3Service2,
   pay1Service3,
+  pay2Service3,
+  pay3Service3,
+  pay1Service4,
+  pay2Service4,
   pay3Service4,
   pay1Service5,
+  pay2Service5,
+  pay3Service5,
   pay1Service6,
+  pay2Service6,
+  pay3Service6,
+  pay1Service7,
+  pay2Service7,
   pay3Service7,
   pay1Service8,
+  pay2Service8,
+  pay3Service8,
+  pay1Service9,
+  pay2Service9,
   pay3Service9,
   pay1Service10,
-  pay3Service5,
-  pay2Service8,
+  pay2Service10,
+  pay3Service10,
 } = require("./services/paymentServices");
-const {
-  maintenance1,
-  maintenance2,
-  maintenance3,
-} = require("./maintenance/maintenances");
-const {
-  maintenanceProperty1,
-  maintenanceProperty2,
-} = require("./maintenance/maintenanceProperty");
-const {
-  provider1,
-  provider2,
-  provider3,
-  provider4,
-} = require("./maintenance/provider");
-const {
-  maintenanceNote1,
-  maintenanceNote2,
-  maintenanceNote3,
-  maintenanceNote4,
-} = require("./maintenance/notes");
-const { equipmentMaintenance1 } = require("./maintenance/equipament");
+
 const {
   incidentService1,
   incidentService2,
   incidentService3,
   incidentService4,
+  incidentService5,
+  incidentService6,
+  incidentService7,
   incidentService8,
-  incidentService10,
   incidentService9,
+  incidentService10,
 } = require("./services/incidentService");
+
+const {
+  economyData,
+  architectureData,
+  equipmentData,
+  maintenance1Data,
+  maintenance2Data,
+  transaction1Data,
+  transaction2Data,
+} = require("./data");
+
 const prisma = new PrismaClient();
 
 async function createProperties() {
@@ -127,42 +140,61 @@ async function createProperties() {
           },
         ],
       },
-      maintenanceInfoProperty: {
-        create: {
-          ...maintenanceProperty1,
-          maintenance: {
-            create: [
-              {
-                ...maintenance1,
-                provider: { create: provider1 },
-                maintenanceNotes: { create: maintenanceNote1 },
-              },
-              {
-                ...maintenance2,
-                provider: { create: provider2 },
-                maintenanceNotes: { create: maintenanceNote2 },
-              },
-              {
-                ...maintenance3,
-                provider: { create: provider3 },
-                maintenanceNotes: { create: maintenanceNote3 },
-              },
-            ],
-          },
-          equipmentMaintenance: {
-            create: [
-              {
-                ...equipmentMaintenance1,
-                provider: { create: provider4 },
-                maintenanceNotes: { create: maintenanceNote4 },
-              },
-            ],
-          },
-        },
-      },
     },
   });
 
+  const economy1 = await prisma.economy.create({
+    data: {
+      ...economyData,
+      propertyId: property1.id,
+    },
+  });
+
+  const architecture1 = await prisma.architecture.create({
+    data: {
+      ...architectureData,
+      propertyId: property1.id,
+    },
+  });
+
+  const equipment1 = await prisma.equipment.create({
+    data: {
+      ...equipmentData,
+      propertyId: property1.id,
+    },
+  });
+
+  const maintenance1 = await prisma.maintenance.create({
+    data: {
+      ...maintenance1Data,
+      architectureId: architecture1.id,
+    },
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const maintenance2 = await prisma.maintenance.create({
+    data: {
+      ...maintenance2Data,
+      equipmentId: equipment1.id,
+    },
+  });
+
+  await prisma.transaction.create({
+    data: {
+      ...transaction1Data,
+      economyId: economy1.id,
+      relatedMaintenanceId: maintenance1.id,
+    },
+  });
+
+  await prisma.transaction.create({
+    data: {
+      ...transaction2Data,
+      economyId: economy1.id,
+    },
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const property2 = await prisma.property.create({
     data: {
       propertyInformation: { create: information2 },
@@ -214,9 +246,6 @@ async function createProperties() {
             },
           },
         ],
-      },
-      maintenanceInfoProperty: {
-        create: maintenanceProperty2,
       },
     },
   });

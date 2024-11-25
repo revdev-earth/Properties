@@ -1,4 +1,4 @@
-pay1Service1 = {
+const pay1Service1 = {
   dueDate: new Date("2024-03-10"),
   paymentStatus: "paid",
   averageAmount: 85.0,
@@ -13,7 +13,7 @@ pay1Service1 = {
 };
 
 // Pago 2 - Electricidad (abril 2024)
-pay2Service1 = {
+const pay2Service1 = {
   dueDate: new Date("2024-04-10"),
   paymentStatus: "paid",
   averageAmount: 85.0,
@@ -28,7 +28,7 @@ pay2Service1 = {
 };
 
 // Pago 3 - Electricidad (mayo 2024)
-pay3Service1 = {
+const pay3Service1 = {
   dueDate: new Date("2024-05-10"),
   paymentStatus: "paid", // Cambio a "paid" para llenar el paymentDate
   averageAmount: 85.0,
@@ -43,7 +43,7 @@ pay3Service1 = {
 };
 
 // Pago 1 - Internet (marzo 2024)
-pay1Service2 = {
+const pay1Service2 = {
   dueDate: new Date("2024-03-05"),
   paymentStatus: "paid",
   averageAmount: 45.0,
@@ -58,7 +58,7 @@ pay1Service2 = {
 };
 
 // Pago 2 - Internet (abril 2024)
-pay2Service2 = {
+const pay2Service2 = {
   dueDate: new Date("2024-04-05"),
   paymentStatus: "paid",
   averageAmount: 45.0,
@@ -73,7 +73,7 @@ pay2Service2 = {
 };
 
 // Pago 3 - Internet (mayo 2024)
-pay3Service2 = {
+const pay3Service2 = {
   dueDate: new Date("2024-05-05"),
   paymentStatus: "paid", // Cambio a "paid" para llenar el paymentDate
   averageAmount: 45.0,
@@ -87,7 +87,7 @@ pay3Service2 = {
   averageConsumption: 45.0,
 };
 
-pay1Service3 = {
+const pay1Service3 = {
   dueDate: new Date("2024-03-15"),
   paymentStatus: "paid",
   averageAmount: 55.0,
@@ -102,7 +102,7 @@ pay1Service3 = {
 };
 
 // Pago 2 - Agua (abril 2024)
-pay2Service3 = {
+const pay2Service3 = {
   dueDate: new Date("2024-04-15"),
   paymentStatus: "paid", // Cambio a "paid" para llenar el paymentDate
   averageAmount: 55.0,
@@ -117,7 +117,7 @@ pay2Service3 = {
 };
 
 // Pago 3 - Agua (mayo 2024)
-pay3Service3 = {
+const pay3Service3 = {
   dueDate: new Date("2024-05-15"),
   paymentStatus: "paid", // Cambio a "paid" para llenar el paymentDate
   averageAmount: 55.0,
@@ -132,7 +132,7 @@ pay3Service3 = {
 };
 
 // Pago 1 - Gas (marzo 2024)
-pay1Service4 = {
+const pay1Service4 = {
   dueDate: new Date("2024-03-25"),
   paymentStatus: "paid",
   averageAmount: 40.0,
@@ -147,7 +147,7 @@ pay1Service4 = {
 };
 
 // Pago 2 - Gas (abril 2024)
-pay2Service4 = {
+const pay2Service4 = {
   dueDate: new Date("2024-04-25"),
   paymentStatus: "paid",
   averageAmount: 40.0,
@@ -162,7 +162,7 @@ pay2Service4 = {
 };
 
 // Pago 3 - Gas (mayo 2024)
-pay3Service4 = {
+const pay3Service4 = {
   dueDate: new Date("2024-05-25"),
   paymentStatus: "paid", // Cambio a "paid" para llenar el paymentDate
   averageAmount: 40.0,
@@ -176,7 +176,7 @@ pay3Service4 = {
   averageConsumption: 65.0,
 };
 // Pago 1 - Teléfono móvil (mayo 2024)
-pay1Service5 = {
+const pay1Service5 = {
   dueDate: new Date("2024-05-25"),
   paymentStatus: "paid",
   averageAmount: 30.0, // Monto promedio mensual
@@ -191,7 +191,7 @@ pay1Service5 = {
 };
 
 // Pago 2 - Teléfono móvil (abril 2024)
-pay2Service5 = {
+const pay2Service5 = {
   dueDate: new Date("2024-04-25"),
   paymentStatus: "paid",
   averageAmount: 30.0, // Monto promedio mensual
@@ -206,7 +206,7 @@ pay2Service5 = {
 };
 
 // Pago 3 - Teléfono móvil (marzo 2024)
-pay3Service5 = {
+const pay3Service5 = {
   dueDate: new Date("2024-03-25"),
   paymentStatus: "paid",
   averageAmount: 30.0, // Monto promedio mensual
@@ -220,7 +220,7 @@ pay3Service5 = {
   averageConsumption: 30.0,
 };
 // Pago 1 - Electricidad (mayo 2024)
-pay1Service6 = {
+const pay1Service6 = {
   dueDate: new Date("2024-05-10"),
   paymentStatus: "paid",
   averageAmount: 85.0, // Monto promedio mensual
@@ -235,7 +235,7 @@ pay1Service6 = {
 };
 
 // Pago 2 - Electricidad (abril 2024)
-pay2Service6 = {
+const pay2Service6 = {
   dueDate: new Date("2024-04-10"),
   paymentStatus: "paid",
   averageAmount: 85.0, // Monto promedio mensual
@@ -250,7 +250,7 @@ pay2Service6 = {
 };
 
 // Pago 3 - Electricidad (marzo 2024)
-pay3Service6 = {
+const pay3Service6 = {
   dueDate: new Date("2024-03-10"),
   paymentStatus: "paid",
   averageAmount: 85.0, // Monto promedio mensual
@@ -265,7 +265,7 @@ pay3Service6 = {
 };
 
 // Pago 1 - Internet (mayo 2024)
-pay1Service7 = {
+const pay1Service7 = {
   dueDate: new Date("2024-05-05"),
   paymentStatus: "paid",
   averageAmount: 45.0, // Monto promedio mensual
@@ -280,7 +280,7 @@ pay1Service7 = {
 };
 
 // Pago 2 - Internet (abril 2024)
-pay2Service7 = {
+const pay2Service7 = {
   dueDate: new Date("2024-04-05"),
   paymentStatus: "paid",
   averageAmount: 45.0, // Monto promedio mensual
@@ -295,7 +295,7 @@ pay2Service7 = {
 };
 
 // Pago 3 - Internet (marzo 2024)
-pay3Service7 = {
+const pay3Service7 = {
   dueDate: new Date("2024-03-05"),
   paymentStatus: "paid",
   averageAmount: 45.0, // Monto promedio mensual
@@ -310,7 +310,7 @@ pay3Service7 = {
 };
 
 // Pago 1 - Agua (mayo 2024)
-pay1Service8 = {
+const pay1Service8 = {
   dueDate: new Date("2024-05-15"),
   paymentStatus: "paid",
   averageAmount: 55.0, // Monto promedio mensual
@@ -325,7 +325,7 @@ pay1Service8 = {
 };
 
 // Pago 2 - Agua (abril 2024)
-pay2Service8 = {
+const pay2Service8 = {
   dueDate: new Date("2024-04-15"),
   paymentStatus: "paid",
   averageAmount: 55.0, // Monto promedio mensual
@@ -340,7 +340,7 @@ pay2Service8 = {
 };
 
 // Pago 3 - Agua (marzo 2024)
-pay3Service8 = {
+const pay3Service8 = {
   dueDate: new Date("2024-03-15"),
   paymentStatus: "paid",
   averageAmount: 55.0, // Monto promedio mensual
@@ -355,7 +355,7 @@ pay3Service8 = {
 };
 
 // Pago 1 - Gas (mayo 2024)
-pay1Service9 = {
+const pay1Service9 = {
   dueDate: new Date("2024-05-15"),
   paymentStatus: "paid",
   averageAmount: 40.0, // Monto promedio mensual
@@ -370,7 +370,7 @@ pay1Service9 = {
 };
 
 // Pago 2 - Gas (abril 2024)
-pay2Service9 = {
+const pay2Service9 = {
   dueDate: new Date("2024-04-15"),
   paymentStatus: "paid",
   averageAmount: 40.0, // Monto promedio mensual
@@ -385,7 +385,7 @@ pay2Service9 = {
 };
 
 // Pago 3 - Gas (marzo 2024)
-pay3Service9 = {
+const pay3Service9 = {
   dueDate: new Date("2024-03-15"),
   paymentStatus: "paid",
   averageAmount: 40.0, // Monto promedio mensual
@@ -399,7 +399,7 @@ pay3Service9 = {
   averageConsumption: 60.0,
 };
 // Pago 1 - TV por cable (mayo 2024)
-pay1Service10 = {
+const pay1Service10 = {
   dueDate: new Date("2024-05-20"),
   paymentStatus: "paid",
   averageAmount: 60.0, // Monto promedio mensual
@@ -414,7 +414,7 @@ pay1Service10 = {
 };
 
 // Pago 2 - TV por cable (abril 2024)
-pay2Service10 = {
+const pay2Service10 = {
   dueDate: new Date("2024-04-20"),
   paymentStatus: "paid",
   averageAmount: 60.0, // Monto promedio mensual
@@ -429,7 +429,7 @@ pay2Service10 = {
 };
 
 // Pago 3 - TV por cable (marzo 2024)
-pay3Service10 = {
+const pay3Service10 = {
   dueDate: new Date("2024-03-20"),
   paymentStatus: "paid",
   averageAmount: 60.0, // Monto promedio mensual

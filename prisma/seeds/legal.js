@@ -75,4 +75,5 @@ const legal2 = {
   localNorms: "Compliance with SF historic property laws",
   environmentalPermits: "Required due to proximity to protected park",
 };
+
 module.exports = { legal1, legal2 };
