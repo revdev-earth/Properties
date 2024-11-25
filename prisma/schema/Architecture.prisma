@@ -1,0 +1,20 @@
+model Architecture {
+    id         String   @id @default(uuid())
+    propertyId String // Relationship with the property
+    property   Property @relation(fields: [propertyId], references: [id])
+
+    name        String // General type of the element (e.g., "wall", "floor", "garden")
+    description String? // Detailed description of the element
+    parentId    String? // To model sub-elements (optional)
+    parent      Architecture?  @relation("ParentChild", fields: [parentId], references: [id])
+    subelements Architecture[] @relation("ParentChild")
+
+    // Geo-referencing
+    mapCoordinates String? // Coordinates for map localization (e.g., GeoJSON or "x,y")
+    areaDimensions String? // Area dimensions (e.g., "5x5 meters")
+
+    maintenances Maintenance[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}

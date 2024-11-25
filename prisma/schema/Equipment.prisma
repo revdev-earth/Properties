@@ -1,0 +1,19 @@
+model Equipment {
+    id         String   @id @default(uuid())
+    propertyId String // Relationship with the property
+    property   Property @relation(fields: [propertyId], references: [id])
+
+    maintenances Maintenance[] // Maintenance history
+
+    name                 String // Equipment name (e.g., "Refrigerator")
+    maintenanceFrequency String // Maintenance frequency
+    lastMaintenanceDate  DateTime // Last maintenance date
+    nextMaintenanceDate  DateTime? // Next scheduled maintenance
+    warrantyPolicy       String? // Warranty policy
+    maintenanceCost      Float? // Maintenance cost
+
+    mapCoordinates String? // Coordinates for map location (optional)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}

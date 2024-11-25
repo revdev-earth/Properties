@@ -3,12 +3,16 @@ model Property {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    propertyInformation     PropertyInformation?
-    propertyLegal           PropertyLegal?
-    propertyTenant          PropertyTenant?
-    propertyInsurance       PropertyInsurance[]
-    basicService            PropertyBasicService[]
-    PaymentTenant           PaymentTenant?
-    maintenanceInfoProperty MaintenanceInfoProperty?
-    settings                PropertySettings?
+    propertyInformation PropertyInformation?
+    propertyLegal       PropertyLegal?
+    propertyTenant      PropertyTenant?
+    propertyInsurance   PropertyInsurance[]
+    basicService        PropertyBasicService[]
+    PaymentTenant       PaymentTenant?
+
+    economy       Economy?
+    architectures Architecture[]
+    equipments    Equipment[]
+
+    settings PropertySettings?
 }
