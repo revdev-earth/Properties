@@ -9,9 +9,12 @@ const navLinks = [
   { path: "tenants", label: "Tenants" },
   { path: "insurance", label: "Insurance" },
   { path: "services", label: "Services" },
-  { path: "maintenance", label: "Maintenance" },
-  { path: "photos-and-architectural", label: "Photos and architectural" },
-  { path: "settings", label: "Settings" },
+
+  { path: "economy", label: "Economy" },
+  { path: "architecture", label: "Architecture" },
+  { path: "equipment", label: "Equipment" },
+
+  // { path: "settings", label: "Settings" },
 ];
 
 export function NavLinks() {
