@@ -80,7 +80,6 @@ export class PropertyManager {
             select: {
               streetAndNumber: true,
               neighborhood: true,
-              cityAndState: true,
             },
           },
         },

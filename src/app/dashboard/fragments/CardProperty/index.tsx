@@ -9,10 +9,9 @@ const labels = [
 ];
 
 export interface PropertyWithAddress extends Property {
-  informationProperty: {
+  propertyInformation: {
     streetAndNumber: string;
     neighborhood: string;
-    cityAndState: string;
   } | null;
 }
 
@@ -21,13 +20,10 @@ interface Props {
 }
 
 export default function CardProperty({ property }: Props) {
-  const { informationProperty } = property;
-  const {
-    streetAndNumber = "streetAndNumber",
-    neighborhood = "neighborhood",
-    cityAndState = "cityAndState",
-  } = informationProperty || {};
-  const address = `${streetAndNumber}, ${neighborhood}, ${cityAndState}`;
+  const { propertyInformation } = property;
+  const { streetAndNumber = "streetAndNumber", neighborhood = "neighborhood" } =
+    propertyInformation || {};
+  const address = `${streetAndNumber}, ${neighborhood}`;
   return (
     <Link
       href={`/dashboard/property/${property.id}/information`}
