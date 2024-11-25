@@ -15,6 +15,7 @@ model Property {
     notifications Notification[]
     Setting       Setting[]
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    createdAt        DateTime          @default(now())
+    updatedAt        DateTime          @updatedAt
+    PropertySettings PropertySettings?
 }
