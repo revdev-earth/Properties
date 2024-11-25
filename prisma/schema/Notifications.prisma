@@ -1,0 +1,14 @@
+model Notification {
+    id         String   @id @default(uuid())
+    propertyId String // Foreign key to Property model
+    property   Property @relation(fields: [propertyId], references: [id])
+
+    title     String // Notification title
+    content   String // Detailed notification content
+    medium    String // Delivery medium: "email", "SMS", "push", etc.
+    startDate DateTime // Start date when the notification becomes active
+    endDate   DateTime // End date when the notification is no longer active
+
+    createdAt DateTime @default(now()) // Creation timestamp
+    updatedAt DateTime @updatedAt // Last update timestamp
+}

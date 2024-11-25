@@ -1,7 +1,5 @@
 model Property {
-    id        String   @id @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id String @id @default(uuid())
 
     propertyInformation PropertyInformation?
     propertyLegal       PropertyLegal?
@@ -14,5 +12,9 @@ model Property {
     architectures Architecture[]
     equipments    Equipment[]
 
-    settings PropertySettings?
+    notifications Notification[]
+    Setting       Setting[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

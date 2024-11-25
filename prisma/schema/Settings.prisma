@@ -1,0 +1,11 @@
+model Setting {
+    id         String   @id @default(uuid())
+    propertyId String // Foreign key to Property model
+    property   Property @relation(fields: [propertyId], references: [id])
+
+    type         String // Type of configuration (e.g., "Notification", "Access", "Maintenance")
+    settingsJson String // Configuration data stored as JSON string
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
