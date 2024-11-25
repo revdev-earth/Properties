@@ -12,7 +12,7 @@ const navLinks = [
 
   { path: "economy", label: "Economy" },
   { path: "architecture", label: "Architecture" },
-  { path: "equipment", label: "Equipment" },
+  { path: "equipments", label: "Equipments" },
 
   // { path: "settings", label: "Settings" },
 ];

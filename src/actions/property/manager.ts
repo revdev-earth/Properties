@@ -162,6 +162,19 @@ export class PropertyManager {
       throw error;
     }
   }
+
+  async getEquipments({ id }: { id: string }) {
+    try {
+      return await this.prisma.property.findFirst({
+        where: { id },
+        include: {
+          equipments: { include: { maintenances: true } },
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export const propertyManager = new PropertyManager(new PrismaClient());

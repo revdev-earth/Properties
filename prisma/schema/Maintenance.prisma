@@ -6,7 +6,7 @@ model Maintenance {
     equipmentId String? // Optional relationship with equipment
     equipment   Equipment? @relation(fields: [equipmentId], references: [id])
 
-    Transaction Transaction[] // Associated transactions
+    transactions Transaction[] // Associated transactions
 
     category            String // "architecture" or "equipment"
     type                String // "preventive", "corrective", or "request"
