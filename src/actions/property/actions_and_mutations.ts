@@ -146,3 +146,13 @@ export async function getEquipments({ id }: { id: string }) {
     throw error;
   }
 }
+
+export async function getArchitectures({ id }: { id: string }) {
+  try {
+    const property = await propertyManager.getArchitectures({ id });
+    return property?.architectures;
+  } catch (error) {
+    console.error("Error fetching properties with address:", error);
+    throw error;
+  }
+}

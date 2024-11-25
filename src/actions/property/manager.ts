@@ -175,6 +175,19 @@ export class PropertyManager {
       throw error;
     }
   }
+
+  async getArchitectures({ id }: { id: string }) {
+    try {
+      return await this.prisma.property.findFirst({
+        where: { id },
+        include: {
+          architectures: { include: { maintenances: true, subelements: true } },
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export const propertyManager = new PropertyManager(new PrismaClient());
