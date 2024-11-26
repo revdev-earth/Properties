@@ -24,7 +24,7 @@ export function NavLinks() {
   const propertyId = pathParts[3]; // The property ID is assumed to be in the 4th position
 
   return (
-    <nav className="flex gap-5">
+    <nav className="flex flex-wrap gap-5">
       {navLinks.map((link) => (
         <Link
           key={link.path}

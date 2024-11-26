@@ -1,57 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useSelector } from " +/redux";
 
-import { Equipment as EquipmentType, Maintenance } from "@prisma/client";
-
-import { PropsJustParams } from "../types";
-import { getEquipments } from " +/actions/property/actions_and_mutations";
-
-type EquipmentWithMaintenance = EquipmentType & {
-  maintenances: Maintenance[];
-};
-
-const Equipments = ({ params }: PropsJustParams) => {
-  const [equipments, setEquipments] = useState<EquipmentWithMaintenance[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchEquipmentData = async () => {
-      try {
-        setLoading(true);
-        const resolvedParams = await params;
-        const id = resolvedParams.id;
-        if (id) {
-          const fetchedEquipments = await getEquipments({ id });
-          if (fetchedEquipments) {
-            setEquipments(fetchedEquipments);
-          } else {
-            throw new Error("No equipment data found.");
-          }
-        }
-      } catch (error) {
-        console.trace({ error });
-        setError("Failed to fetch equipment data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEquipmentData();
-  }, [params]);
-
-  if (loading) {
-    return (
-      <div className="p-6 text-center text-gray-500">
-        Loading equipment data...
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div className="p-6 text-center text-red-500">Error: {error}</div>;
-  }
+const Equipments = () => {
+  const equipments = useSelector((s) => s.property.equipments);
 
   if (!equipments || equipments.length === 0) {
     return (
