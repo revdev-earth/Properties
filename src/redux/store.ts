@@ -1,6 +1,6 @@
 export const initialState = {
-  properties: {},
-}
+  property: {},
+};
 
-export type InitialState = typeof initialState
-export type State = InitialState
+export type InitialState = typeof initialState;
+export type State = InitialState;

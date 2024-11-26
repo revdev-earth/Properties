@@ -156,3 +156,22 @@ export async function getArchitectures({ id }: { id: string }) {
     throw error;
   }
 }
+
+export async function getPropertyForReduxWhenComponentLoad({
+  id,
+}: {
+  id: string;
+}) {
+  try {
+    const property = await propertyManager.getPropertyForReduxWhenComponentLoad(
+      { id }
+    );
+    return property;
+  } catch (error) {
+    console.error(
+      "Error fetching property getPropertyForReduxWhenComponentLoad:",
+      error
+    );
+    throw error;
+  }
+}

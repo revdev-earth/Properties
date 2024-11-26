@@ -138,10 +138,7 @@ export class PropertyManager {
         where: { id },
         include: {
           basicService: {
-            include: {
-              servicePayment: true,
-              incident: true,
-            },
+            include: { servicePayment: true, incident: true },
           },
         },
       });
@@ -181,6 +178,28 @@ export class PropertyManager {
       return await this.prisma.property.findFirst({
         where: { id },
         include: {
+          architectures: { include: { maintenances: true, subelements: true } },
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getPropertyForReduxWhenComponentLoad({ id }: { id: string }) {
+    try {
+      return await this.prisma.property.findUnique({
+        where: { id },
+        include: {
+          propertyInformation: true,
+          propertyLegal: true,
+          propertyInsurance: true,
+          propertyTenant: true,
+          basicService: {
+            include: { servicePayment: true, incident: true },
+          },
+          economy: { include: { transactions: true } },
+          equipments: { include: { maintenances: true } },
           architectures: { include: { maintenances: true, subelements: true } },
         },
       });

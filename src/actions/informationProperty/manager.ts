@@ -1,7 +1,7 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { DefaultArgs } from "@prisma/client/runtime/library";
 
-export class InformationPropertyManager {
+export class PropertyInformationManager {
   prisma: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>;
 
   constructor(
@@ -10,13 +10,13 @@ export class InformationPropertyManager {
     this.prisma = prisma;
   }
 
-  async createInformationProperty({
+  async createpropertyInformation({
     data,
   }: {
-    data: Prisma.InformationPropertyCreateInput;
+    data: Prisma.PropertyInformationCreateInput;
   }) {
     try {
-      const newProperty = await this.prisma.informationProperty.create({
+      const newProperty = await this.prisma.propertyInformation.create({
         data: data,
       });
       return newProperty;
@@ -26,10 +26,10 @@ export class InformationPropertyManager {
   }
 
   async getInformationProperties(props?: {
-    options?: Prisma.InformationPropertyFindManyArgs;
+    options?: Prisma.PropertyInformationFindManyArgs;
   }) {
     try {
-      const properties = await this.prisma.informationProperty.findMany(
+      const properties = await this.prisma.propertyInformation.findMany(
         props?.options
       );
       return properties;
@@ -38,9 +38,9 @@ export class InformationPropertyManager {
     }
   }
 
-  async getInformationPropertyById({ id }: { id: string }) {
+  async getpropertyInformationById({ id }: { id: string }) {
     try {
-      const property = await this.prisma.informationProperty.findUnique({
+      const property = await this.prisma.propertyInformation.findUnique({
         where: { id },
       });
       return property;
@@ -49,15 +49,15 @@ export class InformationPropertyManager {
     }
   }
 
-  async updateInformationProperty({
+  async updatepropertyInformation({
     id,
     data,
   }: {
     id: string;
-    data: Prisma.InformationPropertyUpdateInput;
+    data: Prisma.PropertyInformationUpdateInput;
   }) {
     try {
-      const updatedProperty = await this.prisma.informationProperty.update({
+      const updatedProperty = await this.prisma.propertyInformation.update({
         where: { id },
         data: data,
       });
@@ -67,9 +67,9 @@ export class InformationPropertyManager {
     }
   }
 
-  async deleteInformationProperty({ id }: { id: string }) {
+  async deletepropertyInformation({ id }: { id: string }) {
     try {
-      const deletedProperty = await this.prisma.informationProperty.delete({
+      const deletedProperty = await this.prisma.propertyInformation.delete({
         where: { id },
       });
       return deletedProperty;
@@ -79,6 +79,6 @@ export class InformationPropertyManager {
   }
 }
 
-export const informationPropertyManager = new InformationPropertyManager(
+export const propertyInformationManager = new PropertyInformationManager(
   new PrismaClient()
 );
