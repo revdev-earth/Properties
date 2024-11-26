@@ -1,4 +1,4 @@
-model PropertyInformation {
+model Information {
     id String @id @default(uuid())
 
     propertyId String   @unique

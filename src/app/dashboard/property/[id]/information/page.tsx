@@ -3,7 +3,7 @@
 import { useSelector } from " +/redux";
 
 export default function Information() {
-  const info = useSelector((s) => s.property.propertyInformation);
+  const info = useSelector((s) => s.property.information);
 
   if (!info) {
     return <div>Loading...</div>;

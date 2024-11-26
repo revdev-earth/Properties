@@ -69,88 +69,9 @@ export async function deleteProperty({ id }: { id: string }) {
   }
 }
 
-// Dashboard
 export async function getPropertiesWithAddress() {
   try {
     return await propertyManager.getPropertiesWithAddress();
-  } catch (error) {
-    console.error("Error fetching properties with address:", error);
-    throw error;
-  }
-}
-
-export async function getPropertyInformationByPropertyId({
-  id,
-}: {
-  id: string;
-}) {
-  try {
-    return await propertyManager.getPropertyInformationByPropertyId({ id });
-  } catch (error) {
-    console.error("Error fetching properties with address:", error);
-    throw error;
-  }
-}
-
-export async function getPropertyLegalByPropertyId({ id }: { id: string }) {
-  try {
-    return await propertyManager.getPropertyLegalByPropertyId({ id });
-  } catch (error) {
-    console.error("Error fetching properties with address:", error);
-    throw error;
-  }
-}
-
-export async function getPropertyInsuranceByPropertyId({ id }: { id: string }) {
-  try {
-    return await propertyManager.getPropertyInsuranceByPropertyId({ id });
-  } catch (error) {
-    console.error("Error fetching properties with address:", error);
-    throw error;
-  }
-}
-
-export async function getPropertyTenantByPropertyId({ id }: { id: string }) {
-  try {
-    return await propertyManager.getPropertyTenantByPropertyId({ id });
-  } catch (error) {
-    console.error("Error fetching properties with address:", error);
-    throw error;
-  }
-}
-
-export async function getPropertyServicesByPropertyId({ id }: { id: string }) {
-  try {
-    return await propertyManager.getPropertyServicesByPropertyId({ id });
-  } catch (error) {
-    console.error("Error fetching properties with address:", error);
-    throw error;
-  }
-}
-
-export async function getEconomy({ id }: { id: string }) {
-  try {
-    return await propertyManager.getEconomy({ id });
-  } catch (error) {
-    console.error("Error fetching properties with address:", error);
-    throw error;
-  }
-}
-
-export async function getEquipments({ id }: { id: string }) {
-  try {
-    const property = await propertyManager.getEquipments({ id });
-    return property?.equipments;
-  } catch (error) {
-    console.error("Error fetching properties with address:", error);
-    throw error;
-  }
-}
-
-export async function getArchitectures({ id }: { id: string }) {
-  try {
-    const property = await propertyManager.getArchitectures({ id });
-    return property?.architectures;
   } catch (error) {
     console.error("Error fetching properties with address:", error);
     throw error;

@@ -3,7 +3,7 @@
 import { useSelector } from " +/redux";
 
 export default function Information() {
-  const legal = useSelector((s) => s.property.propertyLegal);
+  const legal = useSelector((s) => s.property.legal);
 
   if (!legal) {
     return <div>Loading...</div>;

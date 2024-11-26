@@ -6,15 +6,12 @@ import Link from "next/link";
 const navLinks = [
   { path: "information", label: "Information" },
   { path: "legal", label: "Legal" },
-  { path: "tenants", label: "Tenants" },
+  { path: "tenant", label: "Tenant" },
   { path: "insurance", label: "Insurance" },
   { path: "services", label: "Services" },
-
   { path: "economy", label: "Economy" },
   { path: "architectures", label: "Architectures" },
   { path: "equipments", label: "Equipments" },
-
-  // { path: "settings", label: "Settings" },
 ];
 
 export function NavLinks() {

@@ -87,11 +87,11 @@ const prisma = new PrismaClient();
 async function createProperties() {
   const property1 = await prisma.property.create({
     data: {
-      propertyInformation: { create: information1 },
-      propertyLegal: { create: legal1 },
-      propertyTenant: { create: tenant1 },
-      propertyInsurance: { create: [propertyInsurance1, propertyInsurance2] },
-      basicService: {
+      information: { create: information1 },
+      legal: { create: legal1 },
+      tenant: { create: tenant1 },
+      insurances: { create: [propertyInsurance1, propertyInsurance2] },
+      services: {
         create: [
           {
             ...service1,
@@ -197,11 +197,11 @@ async function createProperties() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const property2 = await prisma.property.create({
     data: {
-      propertyInformation: { create: information2 },
-      propertyLegal: { create: legal2 },
-      propertyTenant: { create: tenant2 },
-      propertyInsurance: { create: [propertyInsurance3, propertyInsurance4] },
-      basicService: {
+      information: { create: information2 },
+      legal: { create: legal2 },
+      tenant: { create: tenant2 },
+      insurances: { create: [propertyInsurance3, propertyInsurance4] },
+      services: {
         create: [
           {
             ...service6,

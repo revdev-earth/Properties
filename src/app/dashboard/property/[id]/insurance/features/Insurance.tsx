@@ -1,21 +1,15 @@
 "use client";
 
-import { PropertyInsurance } from "@prisma/client";
+import { Insurance } from "@prisma/client";
 
-export default function Insurance({
-  insurance,
-}: {
-  insurance: PropertyInsurance;
-}) {
+export default function InsuranceCard({ insurance }: { insurance: Insurance }) {
   if (!insurance) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="flex flex-col">
-      <h3 className="font-bold text-xl mb-3">
-        Insurance Type: {insurance.insuranceType}
-      </h3>
+      <h3 className="font-bold text-xl mb-3">{insurance.insuranceType}</h3>
 
       <div className="p-5 rounded-lg border">
         <p></p>

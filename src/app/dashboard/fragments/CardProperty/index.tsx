@@ -16,7 +16,7 @@ const labels = [
 ];
 
 export interface PropertyWithAddress extends Property {
-  propertyInformation: {
+  information: {
     streetAndNumber: string;
     neighborhood: string;
   } | null;
@@ -29,9 +29,9 @@ interface Props {
 export default function CardProperty({ property }: Props) {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { propertyInformation } = property;
+  const { information } = property;
   const { streetAndNumber = "streetAndNumber", neighborhood = "neighborhood" } =
-    propertyInformation || {};
+    information || {};
   const address = `${streetAndNumber}, ${neighborhood}`;
 
   const clickHandler = async () => {

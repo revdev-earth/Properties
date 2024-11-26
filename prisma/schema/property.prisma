@@ -1,12 +1,11 @@
 model Property {
     id String @id @default(uuid())
 
-    propertyInformation PropertyInformation?
-    propertyLegal       PropertyLegal?
-    propertyTenant      PropertyTenant?
-    propertyInsurance   PropertyInsurance[]
-    basicService        PropertyBasicService[]
-    PaymentTenant       PaymentTenant?
+    information Information?
+    legal       Legal?
+    tenant      Tenant?
+    insurances  Insurance[]
+    services    Service[]
 
     economy       Economy?
     architectures Architecture[]

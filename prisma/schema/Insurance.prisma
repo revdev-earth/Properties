@@ -1,4 +1,4 @@
-model PropertyInsurance {
+model Insurance {
     id Int @id @default(autoincrement())
 
     // Clave externa sin restricción @unique para permitir varios registros relacionados con un solo Property
@@ -7,7 +7,7 @@ model PropertyInsurance {
 
     // Relación con Tenant
     tenantId Int? // Clave externa opcional para seguro de inquilino
-    tenant   PropertyTenant? @relation(fields: [tenantId], references: [id])
+    tenant   Tenant? @relation(fields: [tenantId], references: [id])
 
     // Información básica del seguro
     insuranceType    String // Tipo de seguro (ej. hogar, incendio, desastre)
@@ -39,14 +39,14 @@ model PropertyInsurance {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    PropertyClaim        PropertyClaim[]
-    PropertyBasicService PropertyBasicService[]
+    PropertyClaim PropertyClaim[]
+    services      Service[]
 }
 
 model PropertyClaim {
-    id                Int               @id @default(autoincrement())
+    id                Int       @id @default(autoincrement())
     insuranceId       Int // Foreign key to Insurance model
-    insurance         PropertyInsurance @relation(fields: [insuranceId], references: [id])
+    insurance         Insurance @relation(fields: [insuranceId], references: [id])
     // Claim Details
     claimDate         DateTime // Date of the claim
     claimReason       String // Reason for the claim (e.g., water damage)
@@ -58,7 +58,7 @@ model PropertyClaim {
     updatedAt DateTime @updatedAt
 }
 
-model PropertyBasicService {
+model Service {
     id         String   @id @default(uuid())
     propertyId String // Foreign key to Property model
     property   Property @relation(fields: [propertyId], references: [id])
@@ -82,20 +82,20 @@ model PropertyBasicService {
     sharedResponsibilities String? // Shared responsibilities between tenant and owner
 
     // Incident History
-    createdAt           DateTime           @default(now())
-    updatedAt           DateTime           @updatedAt
+    createdAt           DateTime          @default(now())
+    updatedAt           DateTime          @updatedAt
     // PropertyInsurance    PropertyInsurance? @relation(fields: [propertyInsuranceId], references: [id])
     // propertyInsuranceId  Int?
     incident            IncidentService[]
     servicePayment      ServicePayment[]
-    PropertyInsurance   PropertyInsurance? @relation(fields: [propertyInsuranceId], references: [id])
+    PropertyInsurance   Insurance?        @relation(fields: [propertyInsuranceId], references: [id])
     propertyInsuranceId Int?
 }
 
 model IncidentService {
-    id             Int                  @id @default(autoincrement())
-    basicServiceId String // Foreign key to BasicService model
-    basicService   PropertyBasicService @relation(fields: [basicServiceId], references: [id])
+    id        Int     @id @default(autoincrement())
+    serviceId String // Foreign key to BasicService model
+    services  Service @relation(fields: [serviceId], references: [id])
 
     incidentDate        DateTime
     incidentDescription String // Description of the service interruption
@@ -107,13 +107,13 @@ model IncidentService {
 }
 
 model ServicePayment {
-    id             String               @id @default(uuid())
-    basicServiceId String // Foreign key to BasicService model
-    basicService   PropertyBasicService @relation(fields: [basicServiceId], references: [id])
+    id            String   @id @default(uuid())
+    serviceId     String // Foreign key to BasicService model
+    services      Service  @relation(fields: [serviceId], references: [id])
     // Billing and Payment Details
-    dueDate        DateTime // Payment due date
-    paymentStatus  String // Status (e.g., paid, pending, in process)
-    averageAmount  Float? // Average monthly or bi-monthly amount
+    dueDate       DateTime // Payment due date
+    paymentStatus String // Status (e.g., paid, pending, in process)
+    averageAmount Float? // Average monthly or bi-monthly amount
 
     // payments
     paymentDate  DateTime

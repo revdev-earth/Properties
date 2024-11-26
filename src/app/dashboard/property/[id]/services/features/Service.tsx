@@ -1,12 +1,8 @@
 "use client";
 
-import { PropertyBasicService } from "@prisma/client";
+import { Service } from "@prisma/client";
 
-export default function Service({
-  service,
-}: {
-  service: PropertyBasicService;
-}) {
+export default function ServiceCard({ service }: { service: Service }) {
   if (!service) {
     return <div>Loading...</div>;
   }

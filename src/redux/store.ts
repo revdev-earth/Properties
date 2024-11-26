@@ -3,25 +3,32 @@ import type {
   Economy,
   Equipment,
   Maintenance,
-  PropertyBasicService,
-  PropertyInformation,
-  PropertyInsurance,
-  PropertyLegal,
-  PropertyTenant,
+  Service as ServicePrisma,
+  Information,
+  Insurance,
+  Legal,
+  Tenant,
   Setting,
   Transaction,
+  ServicePayment,
+  IncidentService,
 } from "@prisma/client";
 
-type EconomyWithTransactions = Economy & {
+export type Service = ServicePrisma & {
+  servicePayment: ServicePayment[];
+  incident: IncidentService[];
+};
+
+export type EconomyWithTransactions = Economy & {
   transactions: Transaction[];
 };
 
-type ArchitectureWithMaintenance = Architecture & {
+export type ArchitectureWithMaintenance = Architecture & {
   maintenances: Maintenance[];
   subelements: Architecture[];
 };
 
-type EquipmentWithMaintenance = Equipment & {
+export type EquipmentWithMaintenance = Equipment & {
   maintenances: Maintenance[];
 };
 
@@ -29,13 +36,13 @@ export const initialState = {
   property: {
     id: undefined as string | undefined,
 
-    propertyInformation: undefined as PropertyInformation | undefined,
+    information: undefined as Information | undefined,
 
-    propertyLegal: undefined as PropertyLegal | undefined,
-    propertyTenant: undefined as PropertyTenant | undefined,
+    legal: undefined as Legal | undefined,
+    tenant: undefined as Tenant | undefined,
 
-    propertyInsurance: [] as PropertyInsurance[],
-    basicService: [] as PropertyBasicService[],
+    insurances: [] as Insurance[],
+    services: [] as Service[],
 
     economy: undefined as EconomyWithTransactions | undefined,
 

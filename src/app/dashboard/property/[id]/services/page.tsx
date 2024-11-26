@@ -4,7 +4,7 @@ import { useSelector } from " +/redux";
 import CardService from "./features/cardService";
 
 export default function Services() {
-  const services = useSelector((s) => s.property.basicService);
+  const services = useSelector((s) => s.property.services);
 
   if (!services) {
     return <div>Loading...</div>;

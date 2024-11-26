@@ -3,7 +3,7 @@
 import { useSelector } from " +/redux";
 
 export default function Tenant() {
-  const tenant = useSelector((s) => s.property.propertyTenant);
+  const tenant = useSelector((s) => s.property.tenant);
 
   if (!tenant) {
     return <div>Loading...</div>;

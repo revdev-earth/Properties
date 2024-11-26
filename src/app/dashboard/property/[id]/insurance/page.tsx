@@ -4,7 +4,7 @@ import Insurance from "./features/Insurance";
 import { useSelector } from " +/redux";
 
 export default function Insurances() {
-  const insurances = useSelector((s) => s.property.propertyInsurance);
+  const insurances = useSelector((s) => s.property.insurances);
 
   if (!insurances) {
     return <div>Loading...</div>;
