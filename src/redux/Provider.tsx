@@ -1,14 +1,43 @@
-"use client"
+"use client";
 
-import { Provider } from "react-redux"
-import { store } from "."
+import { Provider } from "react-redux";
+import { useEffect } from "react";
+import {
+  HYDRATE_ACTION_TYPE,
+  REDUX_KEY_LOCAL_STORAGE,
+  store,
+  useDispatch,
+} from ".";
+import { initialState, State } from "./store";
 
-interface ReduxProviderProps {
-  children: React.ReactNode
+interface Props {
+  children: React.ReactNode;
 }
 
-const ReduxProvider: React.FC<ReduxProviderProps> = ({ children }) => {
-  return <Provider store={store}>{children}</Provider>
-}
+const Hydrate = ({ children }: Props) => {
+  const dispatch = useDispatch();
 
-export default ReduxProvider
+  useEffect(() => {
+    const localStorageState = localStorage.getItem(REDUX_KEY_LOCAL_STORAGE);
+    const persistedState =
+      (localStorageState && (JSON.parse(localStorageState) as State)) ||
+      initialState;
+
+    dispatch({
+      type: HYDRATE_ACTION_TYPE,
+      payload: persistedState,
+    });
+  }, [dispatch]);
+
+  return children;
+};
+
+const ReduxProvider = ({ children }: Props) => {
+  return (
+    <Provider store={store}>
+      <Hydrate>{children} </Hydrate>
+    </Provider>
+  );
+};
+
+export default ReduxProvider;
