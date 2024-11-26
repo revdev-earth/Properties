@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { serialize } from " +/redux/utils";
 
 import { getPropertyForReduxWhenComponentLoad } from " +/actions/property/actions_and_mutations";
-import { setProperty } from " +/redux/slices/properties";
+import { setProperty } from " +/redux/slices/property";
 
 const labels = [
   { src: "/icons/plus.svg", alt: "plus" },

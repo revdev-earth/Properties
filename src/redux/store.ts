@@ -1,5 +1,9 @@
+import { PropertyInformation } from "@prisma/client";
+
 export const initialState = {
-  property: {},
+  property: {
+    propertyInformation: undefined as PropertyInformation | undefined,
+  },
 };
 
 export type InitialState = typeof initialState;

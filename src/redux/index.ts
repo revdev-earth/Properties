@@ -1,3 +1,9 @@
+import {
+  TypedUseSelectorHook,
+  useDispatch as useDispatchRedux,
+  useSelector as useSelectorRedux,
+} from "react-redux";
+
 import { combineReducers, PayloadAction } from "@reduxjs/toolkit";
 
 import { configureStore } from "@reduxjs/toolkit";
@@ -27,3 +33,6 @@ export const store = configureStore({ reducer, devTools });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export const useDispatch = () => useDispatchRedux<AppDispatch>();
+export const useSelector: TypedUseSelectorHook<RootState> = useSelectorRedux;
