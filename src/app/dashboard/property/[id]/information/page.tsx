@@ -1,39 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { PropertyInformation } from "@prisma/client";
+import { useSelector } from " +/redux";
 
-import { PropsJustParams } from "../types";
-import { getPropertyInformationByPropertyId } from " +/actions/property/actions_and_mutations";
-
-export default function Information({ params }: PropsJustParams) {
-  const [id, setId] = useState<string | null>(null);
-  const [info, setInformationProperty] = useState<PropertyInformation | null>(
-    null
-  );
-
-  useEffect(() => {
-    async function resolveParams() {
-      const resolvedParams = await params;
-      setId(resolvedParams.id);
-    }
-    resolveParams();
-  }, [params]);
-
-  useEffect(() => {
-    if (id) {
-      async function fetchInformationProperty() {
-        if (id !== null) {
-          const property = await getPropertyInformationByPropertyId({ id });
-          const { propertyInformation } = property || {
-            propertyInformation: null,
-          };
-          setInformationProperty(propertyInformation);
-        }
-      }
-      fetchInformationProperty();
-    }
-  }, [id]);
+export default function Information() {
+  const info = useSelector((s) => s.property.information);
 
   if (!info) {
     return <div>Loading...</div>;

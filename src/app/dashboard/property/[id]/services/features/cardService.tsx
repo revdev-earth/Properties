@@ -1,16 +1,14 @@
 "use client";
 
-import { PropertyBasicService } from "@prisma/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { Service } from " +/redux/store";
+
 import CardInsident from "./CardInsident";
 import CardPayment from "./CardPayment";
 
-export default function CardService({
-  service,
-}: {
-  service: PropertyBasicService;
-}) {
+export default function CardService({ service }: { service: Service }) {
   const pathname = usePathname();
   const pathParts = pathname.split("/");
   const propertyId = pathParts[3];
@@ -25,9 +23,7 @@ export default function CardService({
         key={service.id}
         className="flex flex-col gap-4 items-center  border-b rounded-lg p-5"
       >
-        <h3 className="font-bold text-xl mb-3">
-          Service Type: {service.serviceType}
-        </h3>
+        <h3 className="font-bold text-xl mb-3">{service.serviceType}</h3>
 
         <div className="p-5 rounded-lg border w-full">
           <p>Provider: {service.provider}</p>

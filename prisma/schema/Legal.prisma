@@ -1,4 +1,4 @@
-model PropertyLegal {
+model Legal {
     id Int @id @default(autoincrement())
 
     propertyId String   @unique // Ahora este campo es único, asegurando la relación uno a uno

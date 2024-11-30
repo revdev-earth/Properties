@@ -1,5 +1,5 @@
-model PropertyInformation {
-    id Int @id @default(autoincrement())
+model Information {
+    id String @id @default(uuid())
 
     propertyId String   @unique
     property   Property @relation(fields: [propertyId], references: [id])

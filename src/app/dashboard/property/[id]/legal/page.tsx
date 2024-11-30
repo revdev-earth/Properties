@@ -1,35 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { PropertyLegal } from "@prisma/client";
+import { useSelector } from " +/redux";
 
-import { PropsJustParams } from "../types";
-import { getPropertyLegalByPropertyId } from " +/actions/property/actions_and_mutations";
-
-export default function Information({ params }: PropsJustParams) {
-  const [id, setId] = useState<string | null>(null);
-  const [legal, setLegal] = useState<PropertyLegal | null>(null);
-
-  useEffect(() => {
-    async function resolveParams() {
-      const resolvedParams = await params;
-      setId(resolvedParams.id);
-    }
-    resolveParams();
-  }, [params]);
-
-  useEffect(() => {
-    if (id) {
-      async function fetchInformationProperty() {
-        if (id !== null) {
-          const property = await getPropertyLegalByPropertyId({ id });
-          const { propertyLegal } = property || { propertyLegal: null };
-          setLegal(propertyLegal);
-        }
-      }
-      fetchInformationProperty();
-    }
-  }, [id]);
+export default function Information() {
+  const legal = useSelector((s) => s.property.legal);
 
   if (!legal) {
     return <div>Loading...</div>;
@@ -37,7 +11,7 @@ export default function Information({ params }: PropsJustParams) {
 
   return (
     <div className="flex flex-col gap-5">
-      <h3 className="font-bold text-xl mb-3">Legal Information</h3>
+      <h3 className="font-bold text-xl mb-3">Legal</h3>
 
       <div className="p-5 rounded-lg border">
         <p>Deed number: {legal.deedNumber}</p>

@@ -1,6 +1,13 @@
-import { Property } from "@prisma/client";
 import Image from "next/image";
-import Link from "next/link";
+import { Property } from "@prisma/client";
+import { useDispatch } from "react-redux";
+
+import { useRouter } from "next/navigation";
+
+import { serialize } from " +/redux/utils";
+
+import { getPropertyForReduxWhenComponentLoad } from " +/actions/property/actions_and_mutations";
+import { setProperty } from " +/redux/slices/property";
 
 const labels = [
   { src: "/icons/plus.svg", alt: "plus" },
@@ -9,7 +16,7 @@ const labels = [
 ];
 
 export interface PropertyWithAddress extends Property {
-  propertyInformation: {
+  information: {
     streetAndNumber: string;
     neighborhood: string;
   } | null;
@@ -20,14 +27,26 @@ interface Props {
 }
 
 export default function CardProperty({ property }: Props) {
-  const { propertyInformation } = property;
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { information } = property;
   const { streetAndNumber = "streetAndNumber", neighborhood = "neighborhood" } =
-    propertyInformation || {};
+    information || {};
   const address = `${streetAndNumber}, ${neighborhood}`;
+
+  const clickHandler = async () => {
+    const propertyForReduxWhenComponentLoad =
+      await getPropertyForReduxWhenComponentLoad({
+        id: property.id,
+      });
+    dispatch(setProperty(serialize(propertyForReduxWhenComponentLoad)));
+    router.push(`/dashboard/property/${property.id}/information`);
+  };
+
   return (
-    <Link
-      href={`/dashboard/property/${property.id}/information`}
+    <button
       className="flex gap-5 p-[10px] border rounded-md w-[401px] h-[100px]"
+      onClick={clickHandler}
     >
       <>
         <Image
@@ -53,6 +72,6 @@ export default function CardProperty({ property }: Props) {
           </div>
         </div>
       </>
-    </Link>
+    </button>
   );
 }

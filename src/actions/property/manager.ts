@@ -76,11 +76,8 @@ export class PropertyManager {
     try {
       return await this.prisma.property.findMany({
         include: {
-          propertyInformation: {
-            select: {
-              streetAndNumber: true,
-              neighborhood: true,
-            },
+          information: {
+            select: { streetAndNumber: true, neighborhood: true },
           },
         },
       });
@@ -89,98 +86,18 @@ export class PropertyManager {
     }
   }
 
-  async getPropertyInformationByPropertyId({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findUnique({
-        where: { id },
-        include: { propertyInformation: true },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getPropertyLegalByPropertyId({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findUnique({
-        where: { id },
-        include: { propertyLegal: true },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getPropertyInsuranceByPropertyId({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findUnique({
-        where: { id },
-        include: { propertyInsurance: true },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-  async getPropertyTenantByPropertyId({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findUnique({
-        where: { id },
-        include: { propertyTenant: true },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getPropertyServicesByPropertyId({ id }: { id: string }) {
+  async getPropertyForReduxWhenComponentLoad({ id }: { id: string }) {
     try {
       return await this.prisma.property.findUnique({
         where: { id },
         include: {
-          basicService: {
-            include: {
-              servicePayment: true,
-              incident: true,
-            },
-          },
-        },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getEconomy({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findFirstOrThrow({
-        where: { id },
-        include: {
+          information: true,
+          legal: true,
+          insurances: true,
+          tenant: true,
+          services: { include: { servicePayment: true, incident: true } },
           economy: { include: { transactions: true } },
-        },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getEquipments({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findFirst({
-        where: { id },
-        include: {
           equipments: { include: { maintenances: true } },
-        },
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getArchitectures({ id }: { id: string }) {
-    try {
-      return await this.prisma.property.findFirst({
-        where: { id },
-        include: {
           architectures: { include: { maintenances: true, subelements: true } },
         },
       });

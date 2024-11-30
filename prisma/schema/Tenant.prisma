@@ -1,4 +1,4 @@
-model PropertyTenant {
+model Tenant {
     id                     Int      @id @default(autoincrement())
     propertyId             String   @unique // Ahora este campo es único, asegurando la relación uno a uno
     property               Property @relation(fields: [propertyId], references: [id])
@@ -50,13 +50,13 @@ model PropertyTenant {
     createdAt                DateTime @default(now())
     updatedAt                DateTime @updatedAt
 
-    PropertyInsurance PropertyInsurance[]
+    PropertyInsurance Insurance[]
 }
 
 model PropertyAdditionalResident {
-    id                     Int            @id @default(autoincrement())
+    id                     Int       @id @default(autoincrement())
     tenantId               Int // Foreign key to Tenant model
-    tenant                 PropertyTenant @relation(fields: [tenantId], references: [id])
+    tenant                 Tenant    @relation(fields: [tenantId], references: [id])
     // Basic Information for Each Additional Person
     fullName               String
     relationshipToTenant   String // Relationship to primary tenant
@@ -78,14 +78,14 @@ model PropertyAdditionalResident {
     // Incidents and Relevant Notes
     notableIncidents       String? // Record of any incidents involving this person
     additionalComments     String? // Additional notes for records
-    createdAt              DateTime       @default(now())
-    updatedAt              DateTime       @updatedAt
+    createdAt              DateTime  @default(now())
+    updatedAt              DateTime  @updatedAt
 }
 
 model PaymentTenant {
-    id       String         @id @default(uuid())
+    id       String @id @default(uuid())
     tenantId Int // Foreign key to Tenant model
-    tenant   PropertyTenant @relation(fields: [tenantId], references: [id])
+    tenant   Tenant @relation(fields: [tenantId], references: [id])
 
     // Payment Details
     paymentDate            DateTime
@@ -95,6 +95,4 @@ model PaymentTenant {
     discountsOrAdjustments String? // Adjustments if any
     createdAt              DateTime @default(now())
     updatedAt              DateTime @updatedAt
-    propertyId             String   @unique // Ahora este campo es único, asegurando la relación uno a uno
-    property               Property @relation(fields: [propertyId], references: [id])
 }

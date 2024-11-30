@@ -1,35 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { PropertyTenant } from "@prisma/client";
+import { useSelector } from " +/redux";
 
-import { PropsJustParams } from "../types";
-import { getPropertyTenantByPropertyId } from " +/actions/property/actions_and_mutations";
-
-export default function Tenant({ params }: PropsJustParams) {
-  const [id, setId] = useState<string | null>(null);
-  const [tenant, setTenant] = useState<PropertyTenant | null>(null);
-
-  useEffect(() => {
-    async function resolveParams() {
-      const resolvedParams = await params;
-      setId(resolvedParams.id);
-    }
-    resolveParams();
-  }, [params]);
-
-  useEffect(() => {
-    if (id) {
-      async function fetchInformationProperty() {
-        if (id !== null) {
-          const property = await getPropertyTenantByPropertyId({ id });
-          const { propertyTenant } = property || { propertyTenant: null };
-          setTenant(propertyTenant);
-        }
-      }
-      fetchInformationProperty();
-    }
-  }, [id]);
+export default function Tenant() {
+  const tenant = useSelector((s) => s.property.tenant);
 
   if (!tenant) {
     return <div>Loading...</div>;

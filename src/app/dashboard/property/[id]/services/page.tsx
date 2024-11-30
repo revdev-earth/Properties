@@ -1,36 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { PropertyBasicService } from "@prisma/client";
-
-import { PropsJustParams } from "../types";
-import { getPropertyServicesByPropertyId } from " +/actions/property/actions_and_mutations";
+import { useSelector } from " +/redux";
 import CardService from "./features/cardService";
 
-export default function Services({ params }: PropsJustParams) {
-  const [id, setId] = useState<string | null>(null);
-  const [services, setServices] = useState<PropertyBasicService[] | null>(null);
-
-  useEffect(() => {
-    async function resolveParams() {
-      const resolvedParams = await params;
-      setId(resolvedParams.id);
-    }
-    resolveParams();
-  }, [params]);
-
-  useEffect(() => {
-    if (id) {
-      async function fetchServicesProperty() {
-        if (id !== null) {
-          const property = await getPropertyServicesByPropertyId({ id });
-          const { basicService } = property || { basicService: null };
-          setServices(basicService);
-        }
-      }
-      fetchServicesProperty();
-    }
-  }, [id]);
+export default function Services() {
+  const services = useSelector((s) => s.property.services);
 
   if (!services) {
     return <div>Loading...</div>;

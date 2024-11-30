@@ -1,60 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useSelector } from " +/redux";
 
-import { Architecture as ArchitectureType, Maintenance } from "@prisma/client";
-
-import { PropsJustParams } from "../types";
-import { getArchitectures } from " +/actions/property/actions_and_mutations";
-
-type ArchitectureWithMaintenance = ArchitectureType & {
-  maintenances: Maintenance[];
-  subelements: ArchitectureType[];
-};
-
-const Architectures = ({ params }: PropsJustParams) => {
-  const [architectures, setArchitectures] = useState<
-    ArchitectureWithMaintenance[]
-  >([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchArchitectureData = async () => {
-      try {
-        setLoading(true);
-        const resolvedParams = await params;
-        const id = resolvedParams.id;
-        if (id) {
-          const fetchedArchitectures = await getArchitectures({ id });
-          if (fetchedArchitectures) {
-            setArchitectures(fetchedArchitectures);
-          } else {
-            throw new Error("No architecture data found.");
-          }
-        }
-      } catch (error) {
-        console.trace({ error });
-        setError("Failed to fetch architecture data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchArchitectureData();
-  }, [params]);
-
-  if (loading) {
-    return (
-      <div className="p-6 text-center text-gray-500">
-        Loading architecture data...
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div className="p-6 text-center text-red-500">Error: {error}</div>;
-  }
+const Architectures = () => {
+  const architectures = useSelector((s) => s.property.architectures);
 
   if (!architectures || architectures.length === 0) {
     return (

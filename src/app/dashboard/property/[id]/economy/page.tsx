@@ -1,69 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useSelector } from " +/redux";
 
-import { getEconomy } from " +/actions/property/actions_and_mutations";
-import { Economy as EconomyType, Transaction } from "@prisma/client";
+const Economy = () => {
+  const economy = useSelector((s) => s.property.economy);
 
-import { PropsJustParams } from "../types";
-
-type EconomyWithTransactions =
-  | (EconomyType & {
-      transactions: Transaction[];
-    })
-  | null;
-
-const Economy = ({ params }: PropsJustParams) => {
-  const [economyData, setEconomyData] = useState<EconomyWithTransactions>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const [id, setId] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function resolveParams() {
-      const resolvedParams = await params;
-      setId(resolvedParams.id);
-    }
-    resolveParams();
-  }, [params]);
-
-  useEffect(() => {
-    const fetchEconomyData = async () => {
-      try {
-        setLoading(true);
-        if (id !== null) {
-          const property = await getEconomy({ id });
-          if (property && property.economy) {
-            setEconomyData(property.economy);
-          } else {
-            throw new Error("Economy data not found in property.");
-          }
-        }
-      } catch (error) {
-        console.trace({ error });
-        setError("Failed to fetch economy data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEconomyData();
-  }, [id]);
-
-  if (loading) {
-    return (
-      <div className="p-6 text-center text-gray-500">
-        Loading economy data...
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div className="p-6 text-center text-red-500">Error: {error}</div>;
-  }
-
-  if (!economyData) {
+  if (!economy) {
     return (
       <div className="p-6 text-center text-gray-500">
         No economy data available.
@@ -72,7 +14,7 @@ const Economy = ({ params }: PropsJustParams) => {
   }
 
   const { annualBudget, accumulatedCosts, costDistribution, transactions } =
-    economyData;
+    economy;
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">

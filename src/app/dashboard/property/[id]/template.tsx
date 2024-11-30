@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
-import { NavLinks } from "./fragments/navLinks";
-import BackButton from "../fragments/BackButton";
+
+import { NavLinks } from "../fragments/navLinks";
+import BackButton from "../../fragments/BackButton";
 
 export default function PropertyLayout({
   children,

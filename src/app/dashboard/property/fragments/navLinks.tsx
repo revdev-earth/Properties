@@ -6,15 +6,12 @@ import Link from "next/link";
 const navLinks = [
   { path: "information", label: "Information" },
   { path: "legal", label: "Legal" },
-  { path: "tenants", label: "Tenants" },
+  { path: "tenant", label: "Tenant" },
   { path: "insurance", label: "Insurance" },
   { path: "services", label: "Services" },
-
   { path: "economy", label: "Economy" },
   { path: "architectures", label: "Architectures" },
   { path: "equipments", label: "Equipments" },
-
-  // { path: "settings", label: "Settings" },
 ];
 
 export function NavLinks() {
@@ -24,7 +21,7 @@ export function NavLinks() {
   const propertyId = pathParts[3]; // The property ID is assumed to be in the 4th position
 
   return (
-    <nav className="flex gap-5">
+    <nav className="flex flex-wrap gap-5">
       {navLinks.map((link) => (
         <Link
           key={link.path}
