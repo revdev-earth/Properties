@@ -1,0 +1,73 @@
+model User {
+    id        String    @id @default(uuid())
+    name      String
+    lastName  String
+    email     String    @unique
+    phone     String?
+    birthDate DateTime?
+    address   String?
+
+    owner     Owner?
+    tenant    Tenant?
+    subTenant SubTenant?
+    worker    Worker?
+    admin     Admin?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    ownerId   Int?
+}
+
+model Owner {
+    id Int @id @default(autoincrement())
+
+    legalId String
+    legal   Legal  @relation(fields: [legalId], references: [id])
+
+    userId String @unique
+    user   User   @relation(fields: [userId], references: [id])
+}
+
+model Tenant {
+    id String @id @default(uuid())
+
+    userId String @unique
+    user   User   @relation(fields: [userId], references: [id])
+
+    transactions Transaction[]
+    insurances   Insurance[]
+    contracts    Contract[]
+}
+
+model SubTenant {
+    id String @id @default(uuid())
+
+    userId String @unique
+    user   User   @relation(fields: [userId], references: [id])
+
+    contracts Contract[]
+}
+
+model Worker {
+    id String @id @default(uuid())
+
+    userId String @unique
+    user   User   @relation(fields: [userId], references: [id])
+
+    specialty      String // Worker specialty (e.g., electrician, painter)
+    certifications String? // Optional certifications or licenses
+    availability   String? // Optional availability or schedule
+
+    maintenances Maintenance[]
+}
+
+model Admin {
+    id String @id @default(uuid())
+
+    userId String @unique
+    user   User   @relation(fields: [userId], references: [id])
+
+    permissions String // Permissions level (e.g., "FULL_ACCESS", "LIMITED_ACCESS")
+
+    properties Property[]
+}

@@ -6,7 +6,7 @@ model Insurance {
     property   Property @relation(fields: [propertyId], references: [id])
 
     // Relación con Tenant
-    tenantId Int? // Clave externa opcional para seguro de inquilino
+    tenantId String? // Clave externa opcional para seguro de inquilino
     tenant   Tenant? @relation(fields: [tenantId], references: [id])
 
     // Información básica del seguro
@@ -60,7 +60,7 @@ model PropertyClaim {
 
 model Service {
     id         String   @id @default(uuid())
-    propertyId String // Foreign key to Property model
+    propertyId String
     property   Property @relation(fields: [propertyId], references: [id])
 
     // Service Information

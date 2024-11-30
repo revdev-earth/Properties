@@ -2,9 +2,9 @@
 
 const { PrismaClient } = require("@prisma/client");
 
-const { tenant1, tenant2 } = require("./tenants");
+// const { tenant1, tenant2 } = require("./tenants");
 const { information1, information2 } = require("./information");
-const { legal1, legal2 } = require("./legal");
+const { legalSeed, createReusableContract } = require("./legal");
 
 const {
   propertyInsurance1,
@@ -88,8 +88,6 @@ async function createProperties() {
   const property1 = await prisma.property.create({
     data: {
       information: { create: information1 },
-      legal: { create: legal1 },
-      tenant: { create: tenant1 },
       insurances: { create: [propertyInsurance1, propertyInsurance2] },
       services: {
         create: [
@@ -179,13 +177,13 @@ async function createProperties() {
     },
   });
 
-  await prisma.transaction.create({
-    data: {
-      ...transaction1Data,
-      economyId: economy1.id,
-      relatedMaintenanceId: maintenance1.id,
-    },
-  });
+  // await prisma.transaction.create({
+  //   data: {
+  //     ...transaction1Data,
+  //     economyId: economy1.id,
+  //     relatedMaintenanceId: maintenance1.id,
+  //   },
+  // });
 
   await prisma.transaction.create({
     data: {
@@ -194,61 +192,61 @@ async function createProperties() {
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const property2 = await prisma.property.create({
-    data: {
-      information: { create: information2 },
-      legal: { create: legal2 },
-      tenant: { create: tenant2 },
-      insurances: { create: [propertyInsurance3, propertyInsurance4] },
-      services: {
-        create: [
-          {
-            ...service6,
-            servicePayment: {
-              create: [pay1Service6, pay2Service6, pay3Service6],
-            },
-            incident: {
-              create: [incidentService5],
-            },
-          },
-          {
-            ...service7,
-            servicePayment: {
-              create: [pay1Service7, pay2Service7, pay3Service7],
-            },
-            incident: {
-              create: [incidentService6],
-            },
-          },
-          {
-            ...service8,
-            servicePayment: {
-              create: [pay1Service8, pay2Service8, pay3Service8],
-            },
-            incident: {
-              create: [incidentService7],
-            },
-          },
-          {
-            ...service9,
-            servicePayment: {
-              create: [pay1Service9, pay2Service9, pay3Service9],
-            },
-            incident: {
-              create: [incidentService8],
-            },
-          },
-          {
-            ...service10,
-            servicePayment: {
-              create: [pay1Service10, pay2Service10, pay3Service10],
-            },
-          },
-        ],
-      },
-    },
-  });
+  legalSeed({ propertyId: property1.id });
+
+  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // const property2 = await prisma.property.create({
+  //   data: {
+  //     information: { create: information2 },
+  //     insurances: { create: [propertyInsurance3, propertyInsurance4] },
+  //     services: {
+  //       create: [
+  //         {
+  //           ...service6,
+  //           servicePayment: {
+  //             create: [pay1Service6, pay2Service6, pay3Service6],
+  //           },
+  //           incident: {
+  //             create: [incidentService5],
+  //           },
+  //         },
+  //         {
+  //           ...service7,
+  //           servicePayment: {
+  //             create: [pay1Service7, pay2Service7, pay3Service7],
+  //           },
+  //           incident: {
+  //             create: [incidentService6],
+  //           },
+  //         },
+  //         {
+  //           ...service8,
+  //           servicePayment: {
+  //             create: [pay1Service8, pay2Service8, pay3Service8],
+  //           },
+  //           incident: {
+  //             create: [incidentService7],
+  //           },
+  //         },
+  //         {
+  //           ...service9,
+  //           servicePayment: {
+  //             create: [pay1Service9, pay2Service9, pay3Service9],
+  //           },
+  //           incident: {
+  //             create: [incidentService8],
+  //           },
+  //         },
+  //         {
+  //           ...service10,
+  //           servicePayment: {
+  //             create: [pay1Service10, pay2Service10, pay3Service10],
+  //           },
+  //         },
+  //       ],
+  //     },
+  //   },
+  // });
 }
 
 createProperties()

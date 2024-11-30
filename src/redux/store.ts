@@ -6,12 +6,23 @@ import type {
   Service as ServicePrisma,
   Information,
   Insurance,
-  Legal,
-  Tenant,
+  Legal as LegalPrisma,
+  Tenant as TenantPrisma,
   Setting,
   Transaction,
   ServicePayment,
   IncidentService,
+  Contract as ContractPrisma,
+  FiscalDetail,
+  LegalHistory,
+  Owner as OwnerPrisma,
+  PolicyAndWarranty,
+  RegulationAndNorm,
+  TitleDocument,
+  Usage,
+  Unit as UnitPrisma,
+  SubTenant as SubTenantPrisma,
+  User,
 } from "@prisma/client";
 
 export type Service = ServicePrisma & {
@@ -32,6 +43,39 @@ export type EquipmentWithMaintenance = Equipment & {
   maintenances: Maintenance[];
 };
 
+export type Unit = UnitPrisma & {
+  contracts: Contract[];
+};
+
+export type Contract = ContractPrisma & {
+  tenants: Tenant[];
+  subTenants: SubTenant[];
+};
+
+export type Owner = OwnerPrisma & {
+  user: User;
+};
+
+export type Tenant = TenantPrisma & {
+  user: User;
+};
+
+export type SubTenant = SubTenantPrisma & {
+  user: User;
+};
+
+export type Legal = LegalPrisma & {
+  contracts: Contract[];
+  fiscalDetails: FiscalDetail[];
+  legalHistories: LegalHistory[];
+  owners: Owner[];
+  policiesAndWarranties: PolicyAndWarranty[];
+  regulationsAndNorms: RegulationAndNorm[];
+  titleDocuments: TitleDocument[];
+  usages: Usage[];
+  units: Unit[];
+};
+
 export const initialState = {
   property: {
     id: undefined as string | undefined,
@@ -39,7 +83,6 @@ export const initialState = {
     information: undefined as Information | undefined,
 
     legal: undefined as Legal | undefined,
-    tenant: undefined as Tenant | undefined,
 
     insurances: [] as Insurance[],
     services: [] as Service[],

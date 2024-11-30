@@ -18,8 +18,11 @@ model Transaction {
     economyId String // Relationship with the economy model
     economy   Economy @relation(fields: [economyId], references: [id])
 
-    relatedMaintenanceId String? // Optional: Relationship with a maintenance record
-    relatedMaintenance   Maintenance? @relation(fields: [relatedMaintenanceId], references: [id])
+    maintenanceId      String? // Optional: Relationship with a maintenance record
+    relatedMaintenance Maintenance? @relation(fields: [maintenanceId], references: [id])
+
+    TenantId String? // Optional: Relationship with a Tenant record
+    Tenant   Tenant? @relation(fields: [TenantId], references: [id])
 
     type        String // Type: "expense" or "income"
     description String // Description of the transaction

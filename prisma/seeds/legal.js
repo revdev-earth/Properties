@@ -1,79 +1,176 @@
-const legal1 = {
-  deedNumber: "D-123456789",
-  notary: "Notary John Doe, Reg. #001, New York",
-  deedDate: new Date("2015-08-15"),
-  publicRegistry: "PR-0987654321",
+/* eslint-disable @typescript-eslint/no-require-imports */
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
-  ownerName: "Alice Johnson",
-  ownerID: "US123456789",
-  ownerAddress: "456 Different St, New York, NY",
-  ownerContact: "123-456-7890",
+async function legalSeed({ propertyId }) {
+  const legal = await prisma.legal.create({
+    data: {
+      propertyId,
+      titleDocuments: {
+        create: [
+          {
+            deedNumber: "67890",
+            notary: "Lic. María García",
+            deedDate: new Date("2022-05-20"),
+            publicRegistry: "Registry Code: 1234567890",
+            documentLink: "https://example.com/documents/title-1.pdf",
+            isCurrent: true,
+          },
+        ],
+      },
+      owners: {
+        create: [
+          {
+            user: {
+              create: {
+                name: "Owner Name",
+                lastName: "Owner Last Name",
+                email: "owner@example.com",
+                phone: "+123456789",
+                birthDate: new Date("1980-05-20"),
+                address: "Owner Address",
+              },
+            },
+          },
+        ],
+      },
+      usages: {
+        create: [
+          {
+            zoning: "Residential",
+            usageRestrictions: "No commercial activity allowed",
+            permitsAndLicenses: "Construction Permit: 2021-XYZ",
+            zoningHistory: "Changed from agricultural to residential in 1990",
+            documentLink: "https://example.com/documents/usage-1.pdf",
+          },
+        ],
+      },
+      units: {
+        create: [
+          {
+            unitType: "Apartment",
+            unitNumber: "101",
+            isAvailable: true,
+            contracts: {
+              create: [
+                {
+                  contractType: "Lease Agreement",
+                  contractName: "Lease Agreement with Tenants",
+                  contractDuration: "2023-01-01 to 2025-01-01",
+                  isActive: true,
+                  tenantResponsibilities:
+                    "Maintain the property, pay utilities",
+                  ownerResponsibilities: "Ensure property is habitable",
+                  documentLink: "https://example.com/documents/contract-1.pdf",
+                  tenants: {
+                    create: [
+                      {
+                        user: {
+                          create: {
+                            name: "Tenant 1 Name",
+                            lastName: "Tenant 1 Last Name",
+                            email: "tenant1@example.com",
+                            phone: "+123456789",
+                            birthDate: new Date("1990-06-15"),
+                            address: "Tenant 1 Address",
+                          },
+                        },
+                      },
+                      {
+                        user: {
+                          create: {
+                            name: "Tenant 2 Name",
+                            lastName: "Tenant 2 Last Name",
+                            email: "tenant2@example.com",
+                            phone: "+987654321",
+                            birthDate: new Date("1992-07-10"),
+                            address: "Tenant 2 Address",
+                          },
+                        },
+                      },
+                    ],
+                  },
+                  subTenants: {
+                    create: [
+                      {
+                        user: {
+                          create: {
+                            name: "SubTenant 1 Name",
+                            lastName: "SubTenant 1 Last Name",
+                            email: "subtenant1@example.com",
+                            phone: "+123456789",
+                            birthDate: new Date("1995-08-25"),
+                            address: "SubTenant 1 Address",
+                          },
+                        },
+                      },
+                      {
+                        user: {
+                          create: {
+                            name: "SubTenant 2 Name",
+                            lastName: "SubTenant 2 Last Name",
+                            email: "subtenant2@example.com",
+                            phone: "+987654321",
+                            birthDate: new Date("1998-09-30"),
+                            address: "SubTenant 2 Address",
+                          },
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      legalHistories: {
+        create: [
+          {
+            ownershipChanges:
+              "Transferred from Luis Martínez to Juan Pérez on 2015-07-01",
+            mortgagesOrLiens: "None",
+            legalDisputes: "None",
+            auctionHistory: "None",
+            documentLink: "https://example.com/documents/legal-history-1.pdf",
+          },
+        ],
+      },
+      fiscalDetails: {
+        create: [
+          {
+            propertyTax: "Cadastral Account: 123456789, Status: Up-to-date",
+            specialTaxesOrFees: "Waste Management Fee: Paid",
+            debtFreeCertificates: "Issued: 2023-10-15",
+            documentLink: "https://example.com/documents/fiscal-detail-1.pdf",
+          },
+        ],
+      },
+      policiesAndWarranties: {
+        create: [
+          {
+            constructionWarranty: "10 years (expires 2031)",
+            equipmentWarranties: "HVAC warranty valid until 2026",
+            structuralSafetyCerts: "Seismic safety certificate issued in 2021",
+            documentLink: "https://example.com/documents/warranty-1.pdf",
+          },
+        ],
+      },
+      regulationsAndNorms: {
+        create: [
+          {
+            internalRegulations:
+              "Condominium rules: Noise restrictions, parking limits",
+            localNorms: "Height restriction: 3 floors",
+            environmentalPermits: "None required",
+            documentLink: "https://example.com/documents/regulation-1.pdf",
+          },
+        ],
+      },
+    },
+  });
 
-  zoning: "Residential",
-  usageRestrictions: "No commercial activities allowed",
-  permitsAndLicenses: "Construction permit #56789",
-  zoningHistory: "Originally residential",
+  console.log("Seed Legal completed successf:", legal);
+}
 
-  leaseContract: null,
-  contractDuration: null,
-  tenantResponsibilities: null,
-  ownerResponsibilities: "Maintenance of exterior structure",
-
-  ownershipChanges: "Transferred from Smith Family in 2015",
-  mortgagesOrLiens: "No current liens",
-  legalDisputes: "No active disputes",
-  auctionHistory: null,
-
-  propertyTax: "CT-123456789",
-  specialTaxesOrFees: null,
-  debtFreeCertificates: "Certificate issued 2021",
-
-  constructionWarranty: "Expires 2025",
-  equipmentWarranties: "HVAC warranty until 2023",
-  structuralSafetyCerts: "Seismic safety certified",
-
-  internalRegulations: "Community HOA regulations apply",
-  localNorms: "Compliance with NY state property laws",
-  environmentalPermits: null,
-};
-
-const legal2 = {
-  deedNumber: "D-987654321",
-  notary: "Notary Jane Smith, Reg. #002, San Francisco",
-  deedDate: new Date("2010-06-01"),
-  publicRegistry: "PR-1234567890",
-
-  ownerName: "Bob Martinez",
-  ownerID: "CA987654321",
-  ownerAddress: null,
-  ownerContact: "987-654-3210",
-
-  zoning: "Residential",
-  usageRestrictions: "No alterations to historical facade",
-  permitsAndLicenses: "Occupancy permit #12345",
-  zoningHistory: "Originally commercial, converted in 2005",
-
-  leaseContract: "Lease agreement active with tenant",
-  contractDuration: "2 years, starting from 2022",
-  tenantResponsibilities: "Interior maintenance",
-  ownerResponsibilities: "Structural maintenance and repairs",
-
-  ownershipChanges: "Inherited from Martinez Family in 2005",
-  mortgagesOrLiens: "Mortgage active, details confidential",
-  legalDisputes: "No active legal disputes",
-  auctionHistory: null,
-
-  propertyTax: "CT-987654321",
-  specialTaxesOrFees: "Historical building fee",
-  debtFreeCertificates: "Certificate issued 2022",
-
-  constructionWarranty: null,
-  equipmentWarranties: "Elevator warranty until 2024",
-  structuralSafetyCerts: "Seismic retrofit certified",
-
-  internalRegulations: "Condominium regulations apply",
-  localNorms: "Compliance with SF historic property laws",
-  environmentalPermits: "Required due to proximity to protected park",
-};
-
-module.exports = { legal1, legal2 };
+module.exports = { legalSeed };

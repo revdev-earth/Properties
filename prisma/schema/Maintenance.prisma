@@ -6,6 +6,9 @@ model Maintenance {
     equipmentId String? // Optional relationship with equipment
     equipment   Equipment? @relation(fields: [equipmentId], references: [id])
 
+    Worker   Worker? @relation(fields: [workerId], references: [id])
+    workerId String?
+
     transactions Transaction[] // Associated transactions
 
     category            String // "architecture" or "equipment"

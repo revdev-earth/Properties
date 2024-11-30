@@ -92,9 +92,28 @@ export class PropertyManager {
         where: { id },
         include: {
           information: true,
-          legal: true,
+          legal: {
+            include: {
+              fiscalDetails: true,
+              legalHistories: true,
+              owners: { include: { user: true } },
+              policiesAndWarranties: true,
+              regulationsAndNorms: true,
+              titleDocuments: true,
+              usages: true,
+              units: {
+                include: {
+                  contracts: {
+                    include: {
+                      tenants: { include: { user: true } },
+                      subTenants: { include: { user: true } },
+                    },
+                  },
+                },
+              },
+            },
+          },
           insurances: true,
-          tenant: true,
           services: { include: { servicePayment: true, incident: true } },
           economy: { include: { transactions: true } },
           equipments: { include: { maintenances: true } },

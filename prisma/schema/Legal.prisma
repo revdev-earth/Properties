@@ -1,51 +1,123 @@
 model Legal {
-    id Int @id @default(autoincrement())
-
-    propertyId String   @unique // Ahora este campo es único, asegurando la relación uno a uno
+    id         String   @id @default(uuid())
+    propertyId String   @unique
     property   Property @relation(fields: [propertyId], references: [id])
 
-    // Property Title
-    deedNumber     String // Identification number for the deed
-    notary         String // Name of the notary, registration number, and location
-    deedDate       DateTime // Date when the deed was registered
-    publicRegistry String // Folio number or registry code in the Public Property Registry
+    titleDocuments        TitleDocument[]
+    owners                Owner[]
+    usages                Usage[]
+    legalHistories        LegalHistory[]
+    fiscalDetails         FiscalDetail[]
+    policiesAndWarranties PolicyAndWarranty[]
+    regulationsAndNorms   RegulationAndNorm[]
+    units                 Unit[]
+}
 
-    // Registered Owner
-    ownerName    String
-    ownerID      String // Official ID of the owner (e.g., passport number, etc.)
-    ownerAddress String? // Contact address if different from the property
-    ownerContact String? // Contact number for legal or emergency issues
+model Unit {
+    id      String @id @default(uuid())
+    legalId String
+    legal   Legal  @relation(fields: [legalId], references: [id])
 
-    // Property Usage
-    zoning             String // Zoning classification (residential, commercial, etc.)
-    usageRestrictions  String? // Details of any restrictions on usage
-    permitsAndLicenses String? // Necessary permits for current usage
-    zoningHistory      String? // History of zoning changes, if any
+    contracts Contract[]
 
-    // Active Contracts
-    leaseContract          String? // Summary or copy of the current lease agreement
-    contractDuration       String? // Contract duration, start and end date, renewal terms
-    tenantResponsibilities String? // Legal responsibilities of the tenant
-    ownerResponsibilities  String? // Legal obligations of the owner
+    unitType    String // Unit type: floor, room, office, etc.
+    unitNumber  String // Identifier for the unit (e.g., "Floor 1", "Room 101")
+    isAvailable Boolean @default(true) // Indicates if the unit is available for rent
 
-    // Legal History of the Property
-    ownershipChanges String? // History of ownership transfers with dates
-    mortgagesOrLiens String? // Information about mortgages, liens, or encumbrances
-    legalDisputes    String? // Information on past or pending legal disputes
-    auctionHistory   String? // History of auctions or bank repossessions
+    // TODO: add structural details
+}
 
-    // Taxes and Fiscal Obligations
-    propertyTax          String // Cadastral account number and status of property tax
-    specialTaxesOrFees   String? // Additional taxes or service fees applicable
-    debtFreeCertificates String? // Documentation certifying no fiscal debts
+model TitleDocument {
+    id Int @id @default(autoincrement())
 
-    // Property Policies and Warranties
-    constructionWarranty  String? // Construction warranty details if newly built
-    equipmentWarranties   String? // Warranties for appliances, HVAC, electrical or plumbing systems
-    structuralSafetyCerts String? // Structural safety certificates, e.g., seismic certifications
+    legalId String
+    legal   Legal  @relation(fields: [legalId], references: [id])
 
-    // Regulations and Norms
-    internalRegulations  String? // Regulations if part of a condominium or gated community
-    localNorms           String? // Summary of specific local norms affecting the property
-    environmentalPermits String? // Permits required if located in a protected environmental area
+    deedNumber     String // Number or identifier for the property title
+    notary         String // Notary responsible for issuing the title
+    deedDate       DateTime // Date the title was issued
+    publicRegistry String // Registry number or code in the public registry
+    documentLink   String // Link to the digital file of the title
+    isCurrent      Boolean  @default(false) // Indicates if this title is the current one
+}
+
+model Usage {
+    id Int @id @default(autoincrement())
+
+    zoning             String // Zoning classification (e.g., residential, commercial)
+    usageRestrictions  String? // Restrictions on property usage (optional)
+    permitsAndLicenses String? // Permits or licenses required (optional)
+    zoningHistory      String? // Historical zoning changes (optional)
+    documentLink       String? // Link to the zoning certificate or related document (optional)
+
+    legalId String
+    legal   Legal  @relation(fields: [legalId], references: [id])
+}
+
+model Contract {
+    id String @id @default(uuid())
+
+    unitId String
+    unit   Unit   @relation(fields: [unitId], references: [id])
+
+    tenants    Tenant[]
+    subTenants SubTenant[]
+
+    contractType           String
+    contractName           String
+    contractDuration       String
+    isActive               Boolean
+    tenantResponsibilities String?
+    ownerResponsibilities  String?
+    pets                   String?
+    documentLink           String?
+}
+
+model LegalHistory {
+    id Int @id @default(autoincrement())
+
+    legalId String
+    legal   Legal  @relation(fields: [legalId], references: [id])
+
+    ownershipChanges String? // Details of ownership transfers (optional)
+    mortgagesOrLiens String? // Information about mortgages or liens (optional)
+    legalDisputes    String? // Past or current legal disputes (optional)
+    auctionHistory   String? // Auction or foreclosure history (optional)
+    documentLink     String? // Link to related legal history file (optional)
+}
+
+model FiscalDetail {
+    id Int @id @default(autoincrement())
+
+    legalId String
+    legal   Legal  @relation(fields: [legalId], references: [id])
+
+    propertyTax          String // Cadastral account number and property tax status
+    specialTaxesOrFees   String? // Additional taxes or fees (optional)
+    debtFreeCertificates String? // Certificates of no fiscal debts (optional)
+    documentLink         String? // Link to the fiscal detail file (optional)
+}
+
+model PolicyAndWarranty {
+    id Int @id @default(autoincrement())
+
+    legalId String
+    legal   Legal  @relation(fields: [legalId], references: [id])
+
+    constructionWarranty  String? // Warranty details for the construction (optional)
+    equipmentWarranties   String? // Warranties for equipment or appliances (optional)
+    structuralSafetyCerts String? // Structural safety certifications (optional)
+    documentLink          String? // Link to the warranty or certification file (optional)
+}
+
+model RegulationAndNorm {
+    id Int @id @default(autoincrement())
+
+    legalId String
+    legal   Legal  @relation(fields: [legalId], references: [id])
+
+    internalRegulations  String? // Regulations within a condominium or community (optional)
+    localNorms           String? // Local norms or restrictions (optional)
+    environmentalPermits String? // Required environmental permits (optional)
+    documentLink         String? // Link to the regulation or norm file (optional)
 }

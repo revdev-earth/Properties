@@ -1,13 +1,16 @@
 model Property {
     id String @id @default(uuid())
 
-    information Information?
-    legal       Legal?
-    tenant      Tenant?
-    insurances  Insurance[]
-    services    Service[]
+    Admin   Admin?  @relation(fields: [adminId], references: [id])
+    adminId String?
 
-    economy       Economy?
+    information Information?
+    economy     Economy?
+    legal       Legal?
+
+    insurances Insurance[]
+    services   Service[]
+
     architectures Architecture[]
     equipments    Equipment[]
 
