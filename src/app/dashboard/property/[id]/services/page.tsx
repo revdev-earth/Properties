@@ -1,9 +1,9 @@
 "use client";
 
 import { useSelector } from " +/redux";
-import CardService from "./features/cardService";
+import Services from "../fragments/Services";
 
-export default function Services() {
+export default function ServicesPage() {
   const services = useSelector((s) => s.property.services);
 
   if (!services) {
@@ -12,9 +12,7 @@ export default function Services() {
 
   return (
     <div className="flex flex-col gap-5">
-      {services.map((service) => (
-        <CardService key={service.id} service={service} />
-      ))}
+      <Services services={services} />
     </div>
   );
 }

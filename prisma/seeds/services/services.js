@@ -1,6 +1,6 @@
 const service1 = {
   // Service Information
-  serviceType: "Electricity",
+  type: "Electricity",
   provider: "Electricidad Global S.A.",
   accountNumber: "1234567890",
   paymentResponsible: "Property Owner",
@@ -21,7 +21,7 @@ const service1 = {
 
 const service2 = {
   // Service Information
-  serviceType: "Internet",
+  type: "Internet",
   provider: "FiberNet",
   accountNumber: "9876543210",
   paymentResponsible: "Tenant",
@@ -44,7 +44,7 @@ const service2 = {
 
 const service3 = {
   // Service Information
-  serviceType: "Water",
+  type: "Water",
   provider: "Aguas del Norte",
   accountNumber: "1122334455",
   paymentResponsible: "Property Owner",
@@ -66,7 +66,7 @@ const service3 = {
 
 const service4 = {
   // Service Information
-  serviceType: "Gas",
+  type: "Gas",
   provider: "Gas Natural S.A.",
   accountNumber: "6677889900",
   paymentResponsible: "Tenant",
@@ -89,7 +89,7 @@ const service4 = {
 
 const service5 = {
   // Service Information
-  serviceType: "Cable TV",
+  type: "Cable TV",
   provider: "VisionCable",
   accountNumber: "5566778899",
   paymentResponsible: "Property Owner",
@@ -111,7 +111,7 @@ const service5 = {
 };
 const service6 = {
   // Service Information
-  serviceType: "Electricity",
+  type: "Electricity",
   provider: "EnergiaVerde S.A.",
   accountNumber: "5432167890",
   paymentResponsible: "Tenant",
@@ -134,7 +134,7 @@ const service6 = {
 
 const service7 = {
   // Service Information
-  serviceType: "Internet",
+  type: "Internet",
   provider: "UltraNet",
   accountNumber: "2345678901",
   paymentResponsible: "Property Owner",
@@ -157,7 +157,7 @@ const service7 = {
 
 const service8 = {
   // Service Information
-  serviceType: "Water",
+  type: "Water",
   provider: "Aguas Urbanas",
   accountNumber: "2233445566",
   paymentResponsible: "Tenant",
@@ -180,7 +180,7 @@ const service8 = {
 
 const service9 = {
   // Service Information
-  serviceType: "Gas",
+  type: "Gas",
   provider: "GasPlus S.A.",
   accountNumber: "9988776655",
   paymentResponsible: "Property Owner",
@@ -203,7 +203,7 @@ const service9 = {
 
 const service10 = {
   // Service Information
-  serviceType: "Cable TV",
+  type: "Cable TV",
   provider: "VisionCable",
   accountNumber: "7766554433",
   paymentResponsible: "Tenant",

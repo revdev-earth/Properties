@@ -1,17 +1,26 @@
-const transaction1Data = {
+const transactionMaintenanceCrackRepair = {
   type: "expense",
-  description: "Payment for crack repair",
+  description: "Payment for crack repair in the main wall",
   amount: 150.0,
-  date: new Date("2024-02-16"),
+  paymentDate: new Date("2024-02-16"),
+  dueDate: new Date("2024-02-15"),
   category: "maintenance",
+  paymentStatus: "paid",
+  paymentNotes: "Payment made for structural repair in property #101.",
 };
 
-const transaction2Data = {
+const transactionRentalMarch2024 = {
   type: "income",
-  description: "Monthly rent",
+  description: "Monthly rent payment from tenant John Doe",
   amount: 1000.0,
-  date: new Date("2024-03-01"),
-  category: "income",
+  paymentDate: new Date("2024-03-01"),
+  dueDate: new Date("2024-03-01"),
+  category: "rental",
+  paymentStatus: "paid",
+  paymentNotes: "Full payment received for March 2024.",
 };
 
-module.exports = { transaction1Data, transaction2Data };
+module.exports = {
+  transactionMaintenanceCrackRepair,
+  transactionRentalMarch2024,
+};

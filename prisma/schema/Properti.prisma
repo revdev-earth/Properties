@@ -10,8 +10,8 @@ model Property {
 
     units Unit[]
 
-    insurances Insurance[]
     services   Service[]
+    insurances Insurance[]
 
     architectures Architecture[]
     equipments    Equipment[]

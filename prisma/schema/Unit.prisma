@@ -4,6 +4,7 @@ model Unit {
     Property   Property? @relation(fields: [propertyId], references: [id])
 
     contracts Contract[]
+    services  Service[]
 
     unitType    String // Unit type: floor, room, office, etc.
     unitNumber  String // Identifier for the unit (e.g., "Floor 1", "Room 101")

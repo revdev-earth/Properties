@@ -81,7 +81,9 @@ async function unitSeed({ propertyId }) {
     },
   });
 
-  console.log("Seed completed successfully:", unit);
+  console.log("Seed Unit completed successfully:", unit);
+
+  return unit;
 }
 
 module.exports = { unitSeed };

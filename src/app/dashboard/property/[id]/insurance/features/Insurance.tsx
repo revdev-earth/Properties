@@ -9,11 +9,11 @@ export default function InsuranceCard({ insurance }: { insurance: Insurance }) {
 
   return (
     <div className="flex flex-col">
-      <h3 className="font-bold text-xl mb-3">{insurance.insuranceType}</h3>
+      <h3 className="font-bold text-xl mb-3">{insurance.type}</h3>
 
       <div className="p-5 rounded-lg border">
         <p></p>
-        <p>Insurance Company: {insurance.insuranceCompany}</p>
+        <p>Insurance Company: {insurance.company}</p>
         <p>Policy Number: {insurance.policyNumber}</p>
         <p>Start Date: {new Date(insurance.startDate).toLocaleDateString()}</p>
         <p>

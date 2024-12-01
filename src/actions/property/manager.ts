@@ -103,13 +103,14 @@ export class PropertyManager {
               usages: true,
             },
           },
-          insurances: true,
-          services: { include: { servicePayment: true, incident: true } },
+          // insurances: true,
+          services: true,
           economy: { include: { transactions: true } },
           equipments: { include: { maintenances: true } },
           architectures: { include: { maintenances: true, subelements: true } },
           units: {
             include: {
+              services: true,
               contracts: {
                 include: {
                   tenants: { include: { user: true } },
@@ -118,6 +119,22 @@ export class PropertyManager {
               },
             },
           },
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getService({ id }: { id: string }) {
+    try {
+      return await this.prisma.service.findUnique({
+        where: { id },
+        include: {
+          consumptionAndMeasurements: true,
+          incidents: true,
+          insurances: true,
+          transactions: true,
         },
       });
     } catch (error) {

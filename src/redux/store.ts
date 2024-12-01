@@ -10,7 +10,6 @@ import type {
   Tenant as TenantPrisma,
   Setting,
   Transaction,
-  ServicePayment,
   IncidentService,
   Contract as ContractPrisma,
   FiscalDetail,
@@ -23,11 +22,14 @@ import type {
   Unit as UnitPrisma,
   SubTenant as SubTenantPrisma,
   User,
+  ConsumptionAndMeasurement,
 } from "@prisma/client";
 
 export type Service = ServicePrisma & {
-  servicePayment: ServicePayment[];
-  incident: IncidentService[];
+  consumptionAndMeasurements: ConsumptionAndMeasurement[];
+  incidents: IncidentService[];
+  insurances: Insurance[];
+  transactions: Transaction[];
 };
 
 export type EconomyWithTransactions = Economy & {
@@ -45,6 +47,7 @@ export type EquipmentWithMaintenance = Equipment & {
 
 export type Unit = UnitPrisma & {
   contracts: Contract[];
+  services: Service[];
 };
 
 export type Contract = ContractPrisma & {

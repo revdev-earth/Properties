@@ -1,13 +1,12 @@
 "use client";
 
 import { useSelector } from " +/redux";
+import Services from "../fragments/Services";
 
 export default function UnitsInformation() {
   const units = useSelector((state) => state.property.units);
 
-  if (!units) {
-    return <div>Loading...</div>;
-  }
+  if (!units) return <div>Loading...</div>;
 
   return (
     <div className="flex flex-col gap-5">
@@ -27,6 +26,8 @@ export default function UnitsInformation() {
             <p>
               <strong>Available:</strong> {unit.isAvailable ? "Yes" : "No"}
             </p>
+
+            <Services services={unit.services} />
 
             {/* Contracts */}
             {unit.contracts?.length > 0 && (

@@ -96,3 +96,13 @@ export async function getPropertyForReduxWhenComponentLoad({
     throw error;
   }
 }
+
+export async function getService({ id }: { id: string }) {
+  try {
+    const property = await propertyManager.getService({ id });
+    return property;
+  } catch (error) {
+    console.error("Error fetching property service:", error);
+    throw error;
+  }
+}

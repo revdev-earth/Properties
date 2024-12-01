@@ -1,51 +1,50 @@
 model Insurance {
     id Int @id @default(autoincrement())
 
-    // Clave externa sin restricción @unique para permitir varios registros relacionados con un solo Property
-    propertyId String // Campo de relación para la clave externa
+    propertyId String
     property   Property @relation(fields: [propertyId], references: [id])
 
-    // Relación con Tenant
-    tenantId String? // Clave externa opcional para seguro de inquilino
-    tenant   Tenant? @relation(fields: [tenantId], references: [id])
+    tenantId  String?
+    tenant    Tenant?  @relation(fields: [tenantId], references: [id])
+    serviceId String?
+    Service   Service? @relation(fields: [serviceId], references: [id])
 
-    // Información básica del seguro
-    insuranceType    String // Tipo de seguro (ej. hogar, incendio, desastre)
-    insuranceCompany String // Nombre del proveedor del seguro
-    policyNumber     String // ID o código de póliza
-    startDate        DateTime // Fecha de inicio del seguro
-    expirationDate   DateTime // Fecha de vencimiento del seguro
-    insuredAmount    Float // Valor asegurado o indemnización máxima
-    premiumCost      Float // Costo de la prima (ej. anual o periódico)
+    PropertyClaim PropertyClaim[]
 
-    // Cobertura y exclusiones
-    mainCoverage          String // Principales coberturas (ej. incendio, robo)
-    thirdPartyCoverage    String? // Cobertura de responsabilidad civil a terceros
-    equipmentCoverage     String? // Cobertura para electrodomésticos, HVAC, etc.
-    coverageExclusions    String? // Lista de exclusiones de cobertura
-    applicableDeductibles String? // Deducibles según tipo de riesgo
+    // Basic insurance information
+    type           String // Type of insurance (e.g., home, fire, disaster)
+    company        String // Name of the insurance provider
+    policyNumber   String // Policy ID or code
+    insuredAmount  Float // Insured value or maximum indemnity
+    premiumCost    Float // Premium cost (e.g., annual or periodic)
+    startDate      DateTime // Insurance start date
+    expirationDate DateTime // Insurance expiration date
 
-    // Información de contacto de emergencia
-    emergencyContact      String? // Contacto de emergencia o de siniestros
-    insuranceAgentName    String? // Nombre del agente de seguros
-    insuranceAgentContact String? // Información de contacto del agente (teléfono, correo)
-    claimProcedures       String? // Resumen de procedimientos de siniestro
+    // Coverage and exclusions
+    mainCoverage          String // Main coverage (e.g., fire, theft)
+    thirdPartyCoverage    String? // Third-party liability coverage
+    equipmentCoverage     String? // Coverage for appliances, HVAC, etc.
+    coverageExclusions    String? // List of coverage exclusions
+    applicableDeductibles String? // Deductibles based on the type of risk
 
-    // Renovación y condiciones especiales
-    renewalConditions String? // Términos de renovación (automática o manual)
-    coverageReviews   String? // Información sobre revisiones o inspecciones periódicas de cobertura
-    specialClauses    String? // Cláusulas especiales que impactan la cobertura
+    // Emergency contact information
+    emergencyContact      String? // Emergency or claim contact
+    insuranceAgentName    String? // Insurance agent's name
+    insuranceAgentContact String? // Agent's contact information (phone, email)
+    claimProcedures       String? // Summary of claim procedures
+
+    // Renewal and special conditions
+    renewalConditions String? // Terms for renewal (automatic or manual)
+    coverageReviews   String? // Information on periodic coverage reviews or inspections
+    specialClauses    String? // Special clauses impacting coverage
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    PropertyClaim PropertyClaim[]
-    services      Service[]
 }
 
 model PropertyClaim {
     id                Int       @id @default(autoincrement())
-    insuranceId       Int // Foreign key to Insurance model
+    insuranceId       Int
     insurance         Insurance @relation(fields: [insuranceId], references: [id])
     // Claim Details
     claimDate         DateTime // Date of the claim
@@ -56,74 +55,4 @@ model PropertyClaim {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-}
-
-model Service {
-    id         String   @id @default(uuid())
-    propertyId String
-    property   Property @relation(fields: [propertyId], references: [id])
-
-    // Service Information
-    serviceType        String // E.g., water, electricity, gas, internet, etc.
-    provider           String // Name of the service provider
-    accountNumber      String // Unique service identifier (e.g., meter number)
-    paymentResponsible String // Tenant or Property owner
-
-    // Emergency and Support Contacts
-    emergencyNumber     String // Emergency contact number
-    supportContactName  String // Name of the technical support contact
-    supportContactPhone String
-    supportContactEmail String?
-    supportHours        String // Customer support hours
-
-    // Conditions and Specific Clauses
-    disconnectionClause    String? // Details about disconnection/reconnection terms
-    contractConditions     String? // Contract terms, penalties for early cancellation
-    sharedResponsibilities String? // Shared responsibilities between tenant and owner
-
-    // Incident History
-    createdAt           DateTime          @default(now())
-    updatedAt           DateTime          @updatedAt
-    // PropertyInsurance    PropertyInsurance? @relation(fields: [propertyInsuranceId], references: [id])
-    // propertyInsuranceId  Int?
-    incident            IncidentService[]
-    servicePayment      ServicePayment[]
-    PropertyInsurance   Insurance?        @relation(fields: [propertyInsuranceId], references: [id])
-    propertyInsuranceId Int?
-}
-
-model IncidentService {
-    id        Int     @id @default(autoincrement())
-    serviceId String // Foreign key to BasicService model
-    services  Service @relation(fields: [serviceId], references: [id])
-
-    incidentDate        DateTime
-    incidentDescription String // Description of the service interruption
-    actionsTaken        String // Actions taken during the incident
-    compensation        Float? // Any compensation or discount offered
-    compensationNotes   String?
-    createdAt           DateTime @default(now())
-    updatedAt           DateTime @updatedAt
-}
-
-model ServicePayment {
-    id            String   @id @default(uuid())
-    serviceId     String // Foreign key to BasicService model
-    services      Service  @relation(fields: [serviceId], references: [id])
-    // Billing and Payment Details
-    dueDate       DateTime // Payment due date
-    paymentStatus String // Status (e.g., paid, pending, in process)
-    averageAmount Float? // Average monthly or bi-monthly amount
-
-    // payments
-    paymentDate  DateTime
-    amount       Float
-    paymentNotes String?
-
-    // Consumption and Measurement
-    measurementMethod  String? // E.g., water meter, electricity in kWh, gas tank
-    readingDate        DateTime
-    readingValue       Float
-    readingNotes       String?
-    averageConsumption Float? // Average consumption for a given period
 }
