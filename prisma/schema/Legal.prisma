@@ -10,21 +10,6 @@ model Legal {
     fiscalDetails         FiscalDetail[]
     policiesAndWarranties PolicyAndWarranty[]
     regulationsAndNorms   RegulationAndNorm[]
-    units                 Unit[]
-}
-
-model Unit {
-    id      String @id @default(uuid())
-    legalId String
-    legal   Legal  @relation(fields: [legalId], references: [id])
-
-    contracts Contract[]
-
-    unitType    String // Unit type: floor, room, office, etc.
-    unitNumber  String // Identifier for the unit (e.g., "Floor 1", "Room 101")
-    isAvailable Boolean @default(true) // Indicates if the unit is available for rent
-
-    // TODO: add structural details
 }
 
 model TitleDocument {
@@ -52,25 +37,6 @@ model Usage {
 
     legalId String
     legal   Legal  @relation(fields: [legalId], references: [id])
-}
-
-model Contract {
-    id String @id @default(uuid())
-
-    unitId String
-    unit   Unit   @relation(fields: [unitId], references: [id])
-
-    tenants    Tenant[]
-    subTenants SubTenant[]
-
-    contractType           String
-    contractName           String
-    contractDuration       String
-    isActive               Boolean
-    tenantResponsibilities String?
-    ownerResponsibilities  String?
-    pets                   String?
-    documentLink           String?
 }
 
 model LegalHistory {

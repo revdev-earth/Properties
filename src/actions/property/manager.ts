@@ -101,16 +101,6 @@ export class PropertyManager {
               regulationsAndNorms: true,
               titleDocuments: true,
               usages: true,
-              units: {
-                include: {
-                  contracts: {
-                    include: {
-                      tenants: { include: { user: true } },
-                      subTenants: { include: { user: true } },
-                    },
-                  },
-                },
-              },
             },
           },
           insurances: true,
@@ -118,6 +108,16 @@ export class PropertyManager {
           economy: { include: { transactions: true } },
           equipments: { include: { maintenances: true } },
           architectures: { include: { maintenances: true, subelements: true } },
+          units: {
+            include: {
+              contracts: {
+                include: {
+                  tenants: { include: { user: true } },
+                  subTenants: { include: { user: true } },
+                },
+              },
+            },
+          },
         },
       });
     } catch (error) {

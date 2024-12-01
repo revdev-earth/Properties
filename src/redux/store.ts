@@ -65,7 +65,6 @@ export type SubTenant = SubTenantPrisma & {
 };
 
 export type Legal = LegalPrisma & {
-  contracts: Contract[];
   fiscalDetails: FiscalDetail[];
   legalHistories: LegalHistory[];
   owners: Owner[];
@@ -73,7 +72,6 @@ export type Legal = LegalPrisma & {
   regulationsAndNorms: RegulationAndNorm[];
   titleDocuments: TitleDocument[];
   usages: Usage[];
-  units: Unit[];
 };
 
 export const initialState = {
@@ -94,6 +92,8 @@ export const initialState = {
 
     notifications: [] as Notification[],
     Setting: [] as Setting[],
+
+    units: [] as Unit[],
 
     createdAt: undefined as string | undefined,
     updatedAt: undefined as string | undefined,

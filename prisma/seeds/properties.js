@@ -4,7 +4,8 @@ const { PrismaClient } = require("@prisma/client");
 
 // const { tenant1, tenant2 } = require("./tenants");
 const { information1, information2 } = require("./information");
-const { legalSeed, createReusableContract } = require("./legal");
+const { legalSeed } = require("./legal");
+const { unitSeed } = require("./units");
 
 const {
   propertyInsurance1,
@@ -193,6 +194,8 @@ async function createProperties() {
   });
 
   legalSeed({ propertyId: property1.id });
+
+  unitSeed({ propertyId: property1.id });
 
   // // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // const property2 = await prisma.property.create({

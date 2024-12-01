@@ -8,6 +8,8 @@ model Property {
     economy     Economy?
     legal       Legal?
 
+    units Unit[]
+
     insurances Insurance[]
     services   Service[]
 

@@ -6,6 +6,7 @@ import Link from "next/link";
 const navLinks = [
   { path: "information", label: "Information" },
   { path: "legal", label: "Legal" },
+  { path: "units", label: "Units" },
   { path: "insurance", label: "Insurance" },
   { path: "services", label: "Services" },
   { path: "economy", label: "Economy" },

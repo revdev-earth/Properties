@@ -1,0 +1,32 @@
+model Unit {
+    id         String    @id @default(uuid())
+    propertyId String?
+    Property   Property? @relation(fields: [propertyId], references: [id])
+
+    contracts Contract[]
+
+    unitType    String // Unit type: floor, room, office, etc.
+    unitNumber  String // Identifier for the unit (e.g., "Floor 1", "Room 101")
+    isAvailable Boolean @default(true) // Indicates if the unit is available for rent
+
+    // TODO: add structural details
+}
+
+model Contract {
+    id String @id @default(uuid())
+
+    unitId String
+    unit   Unit   @relation(fields: [unitId], references: [id])
+
+    tenants    Tenant[]
+    subTenants SubTenant[]
+
+    contractType           String
+    contractName           String
+    contractDuration       String
+    isActive               Boolean
+    tenantResponsibilities String?
+    ownerResponsibilities  String?
+    pets                   String?
+    documentLink           String?
+}
